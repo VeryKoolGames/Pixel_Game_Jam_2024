@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using KBCore.Refs;
 using UnityEngine;
 
-public class Flock : MonoBehaviour
+public class Flock : ValidatedMonoBehaviour
 {
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
@@ -34,20 +35,6 @@ public class Flock : MonoBehaviour
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius = squareNeighborRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
-
-        // for(int i = 0; i < startingCount; i++)
-        // {
-        //     FlockAgent newAgent = Instantiate(
-        //         agentPrefab,
-        //         Random.insideUnitCircle * startingCount * AgentDensity,
-        //         Quaternion.Euler(Vector3.forward * Random.Range(0f,360f)),
-        //         transform
-        //     );
-
-        //     newAgent.name = "Agent" + i;
-        //     newAgent.Initialize(this);
-        //     agents.Add(newAgent);
-        // }
     }
 
 
@@ -56,14 +43,13 @@ public class Flock : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            
             SpawnAgent();
         }
 
         foreach(FlockAgent agent in agents)
         {
             List<Transform> context = GetNearbyObjects(agent);
-            Vector2 move = behavior.CalculateMove(agent, context, this);
+            Vector2 move = behavior.CalculateMove(agent, context, this, agent.GetComponent<FishReproductionManager>().getHasEaten());
             move *= DriveFactor;
             if(move.sqrMagnitude > squareMaxSpeed)
             {

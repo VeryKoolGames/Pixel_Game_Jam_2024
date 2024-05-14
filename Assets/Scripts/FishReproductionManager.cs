@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class FishReproductionManager : MonoBehaviour
 {
-    [SerializeField] private float fishHunger = 40;
-    private bool canHaveSex = false;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
+    [SerializeField] private float fishHunger = 100;
+    private bool hasEaten = true;
+    
+    public bool getHasEaten()
+    {
+        return hasEaten;
+    }
     void Update()
     {
         FeedFish();
@@ -18,33 +20,31 @@ public class FishReproductionManager : MonoBehaviour
     private void FeedFish()
     {
         fishHunger -= Time.deltaTime;
-        if (fishHunger <= 0)
+        if (fishHunger <= 50)
         {
-            Destroy(gameObject);
-        }
-        else if (fishHunger <= 50)
-        {
-            canHaveSex = false;
+            hasEaten = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Food"))
+        Debug.Log("Entered trigger " + other.tag);
+        if (other.CompareTag("FoodEat"))
         {
             fishHunger += 10;
-            Destroy(other.gameObject);
+            hasEaten = true;
+            Destroy(other.transform.parent.gameObject);
         }
-        else if (other.CompareTag("Fish"))
-        {
-            if (fishHunger > 50)
-            {
-                canHaveSex = true;
-                if (other.GetComponent<FishReproductionManager>().canHaveSex)
-                {
-                    Debug.Log("Fish can have sex");
-                }
-            }
-        }
+        // else if (other.CompareTag("Fish"))
+        // {
+        //     if (fishHunger > 50)
+        //     {
+        //         canHaveSex = true;
+        //         if (other.GetComponent<FishReproductionManager>().canHaveSex)
+        //         {
+        //             Debug.Log("Fish can have sex");
+        //         }
+        //     }
+        // }
     }
 }

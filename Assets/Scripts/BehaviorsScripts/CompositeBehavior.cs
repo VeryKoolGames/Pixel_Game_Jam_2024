@@ -5,23 +5,33 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Composite")]
 public class CompositeBehavior : FlockBehavior
 {
-
+    
     public FlockBehavior[] behaviors;
     public float[] weights;
 
-    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector2 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock, bool hasEaten)
    {
-        if(weights.Length != behaviors.Length)
+        if (weights.Length != behaviors.Length)
         {
             Debug.LogError("Data mismatch in" + name, this);
             return Vector2.zero;
         }
-
+    
         Vector2 move = Vector2.zero;
+        Debug.Log(hasEaten);
 
-        for(int i = 0; i < behaviors.Length; i++)
+        for (int i = 0; i < behaviors.Length; i++)
         {
-            Vector2 partialMove = behaviors[i].CalculateMove(agent, context, flock) * weights[i];
+            float weight = weights[i];
+            if (behaviors[i] is SeekFoodBehavior && hasEaten == false)
+            {
+                weight *= 2; // Increase the weight if the agent is hungry
+            }
+            else if (behaviors[i] is SeekFoodBehavior && hasEaten)
+            {
+                weight = 0; // Set the weight to 0 if the agent is not hungry
+            }
+            Vector2 partialMove = behaviors[i].CalculateMove(agent, context, flock, hasEaten) * weight;
 
             if(partialMove != Vector2.zero)
             {
