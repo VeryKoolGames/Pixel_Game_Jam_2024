@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(OnFishDeathListener))]
 public class Flock : ValidatedMonoBehaviour
 {
     public FlockAgent agentPrefab;
@@ -27,8 +30,12 @@ public class Flock : ValidatedMonoBehaviour
     float squareNeighborRadius;
     float squareAvoidanceRadius;
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;} }
+    [SerializeField, Self] private OnFishDeathListener onFishDeathListener;
 
-
+    private void Awake()
+    {
+        onFishDeathListener.Response.AddListener(RemoveAgent);
+    }
 
     void Start()
     {
@@ -88,5 +95,11 @@ public class Flock : ValidatedMonoBehaviour
             }
         }
         return context;
+    }
+    
+    public void RemoveAgent(FlockAgent agent)
+    {
+        agents.Remove(agent);
+        Destroy(agent.gameObject);
     }
 }
