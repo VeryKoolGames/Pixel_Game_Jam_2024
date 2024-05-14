@@ -25,11 +25,11 @@ public class CompositeBehavior : FlockBehavior
             float weight = weights[i];
             if (behaviors[i] is SeekFoodBehavior && hasEaten == false)
             {
-                weight *= 2; // Increase the weight if the agent is hungry
+                weight *= 2;
             }
             else if (behaviors[i] is SeekFoodBehavior && hasEaten)
             {
-                weight = 0; // Set the weight to 0 if the agent is not hungry
+                weight = 0;
             }
             Vector2 partialMove = behaviors[i].CalculateMove(agent, context, flock, hasEaten) * weight;
 

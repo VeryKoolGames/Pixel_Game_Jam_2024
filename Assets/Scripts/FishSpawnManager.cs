@@ -6,9 +6,8 @@ using UnityEngine;
 public class FishSpawnManager : MonoBehaviour
 {
     [SerializeField] private OnFishSpawn onFishSpawn;
-    public void SpawnFish()
+    public void SetFish(Fish fish)
     {
-        Fish fish = CreateFish();
         onFishSpawn.Raise(fish);
     }
     

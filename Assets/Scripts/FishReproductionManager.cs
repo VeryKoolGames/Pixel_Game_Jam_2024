@@ -1,26 +1,80 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FishReproductionManager : MonoBehaviour
 {
-    [SerializeField] private float fishHunger = 100;
+    [SerializeField] private float maxFishHunger;
+    [SerializeField] private float fishLifeSpan;
+    [SerializeField] private float fishReproductionCooldown;
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private SpriteRenderer fishSpriteRenderer;
+    [SerializeField] private OnFishDeath onFishDeath;
+    private Color fuckColor = Color.magenta;
+    private Color baseColor;
+    private float currentLifeSpan;
+    private float currentHunger;
+    private float currentReproductionRate;
+    private bool canReproduce;
+    private Fish fish;
     private bool hasEaten = true;
+    
+    private void Start()
+    {
+        InvokeRepeating("CheckNearbyFish", 0f, 5f);
+        baseColor = fishSpriteRenderer.color;
+    }
+    
+    void Update()
+    {
+        FishFeedHandler();
+        FishLifeHandler();
+        FishSexHandler();
+    }
     
     public bool getHasEaten()
     {
         return hasEaten;
     }
-    void Update()
+    
+    public void SetFish(Fish fish)
     {
-        FeedFish();
+        this.fish = fish;
     }
     
-    private void FeedFish()
+    public bool CanReproduce()
     {
-        fishHunger -= Time.deltaTime;
-        if (fishHunger <= 50)
+        // return currentHunger >= 50 && canReproduce;
+        return canReproduce;
+    }
+
+    private void FishSexHandler()
+    {
+        currentReproductionRate += Time.deltaTime;
+        if (currentReproductionRate >= fishReproductionCooldown)
+        {
+            fishSpriteRenderer.color = fuckColor;
+            canReproduce = true;
+        }
+    }
+
+    private void FishLifeHandler()
+    {
+        currentLifeSpan += Time.deltaTime;
+        if (currentLifeSpan >= fishLifeSpan)
+        {
+            onFishDeath.Raise(gameObject.GetComponent<FlockAgent>());
+        }
+    }
+    
+
+    private void FishFeedHandler()
+    {
+        currentHunger -= Time.deltaTime;
+        if (currentHunger <= 50)
         {
             hasEaten = false;
         }
@@ -28,23 +82,35 @@ public class FishReproductionManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Entered trigger " + other.tag);
         if (other.CompareTag("FoodEat"))
         {
-            fishHunger += 10;
+            currentHunger = maxFishHunger;
             hasEaten = true;
             Destroy(other.transform.parent.gameObject);
         }
-        // else if (other.CompareTag("Fish"))
-        // {
-        //     if (fishHunger > 50)
-        //     {
-        //         canHaveSex = true;
-        //         if (other.GetComponent<FishReproductionManager>().canHaveSex)
-        //         {
-        //             Debug.Log("Fish can have sex");
-        //         }
-        //     }
-        // }
+    }
+    
+    void CheckNearbyFish()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Fish") && hit.gameObject != this.gameObject)
+            {
+                FishReproductionManager otherFish = hit.GetComponent<FishReproductionManager>();
+                if (otherFish != null && canReproduce && otherFish.CanReproduce())
+                {
+                    FishCreator.Instance.CreateFish(fish, otherFish.fish);
+                    currentReproductionRate = 0;
+                    canReproduce = false;
+                    otherFish.currentReproductionRate = 0;
+                    otherFish.canReproduce = false;
+                    fishSpriteRenderer.color = baseColor;
+                    otherFish.fishSpriteRenderer.color = baseColor;
+                    break;
+                }
+            }
+        }
     }
 }

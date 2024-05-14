@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4640068049021992558}
   m_Layer: 0
   m_Name: Fish Bleu
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c634337f2af44db5b1eded99c2206ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishHunger: 55
+  maxFishHunger: 55
+  fishLifeSpan: 50
+  fishReproductionCooldown: 2
+  detectionRadius: 10
+  fishSpriteRenderer: {fileID: 7584002201268824043}
+  onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
 --- !u!1 &8893754762551968558
 GameObject:
   m_ObjectHideFlags: 0
