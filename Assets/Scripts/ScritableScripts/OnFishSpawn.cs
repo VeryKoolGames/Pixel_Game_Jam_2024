@@ -9,7 +9,7 @@ public class OnFishSpawn : ScriptableObject
     // A list of responses to the event
     private List<OnFishSpawnListener> listeners = new List<OnFishSpawnListener>();
 
-    public void Raise(Fish fish) {
+    public void Raise(GameObject fish) {
         for(int i = listeners.Count - 1; i >= 0; i--) {
             listeners[i].OnEventRaised(fish);
         }

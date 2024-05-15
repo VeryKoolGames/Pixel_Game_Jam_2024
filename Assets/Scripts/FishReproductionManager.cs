@@ -19,12 +19,12 @@ public class FishReproductionManager : MonoBehaviour
     private float currentHunger;
     private float currentReproductionRate;
     private bool canReproduce;
-    private Fish fish;
+    public Fish fish;
     private bool hasEaten = true;
     
     private void Start()
     {
-        InvokeRepeating("CheckNearbyFish", 0f, 5f);
+        InvokeRepeating("CheckNearbyFishForSex", 0f, 5f);
         baseColor = fishSpriteRenderer.color;
     }
     
@@ -90,7 +90,7 @@ public class FishReproductionManager : MonoBehaviour
         }
     }
     
-    void CheckNearbyFish()
+    void CheckNearbyFishForSex()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
 

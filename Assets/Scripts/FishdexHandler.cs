@@ -16,8 +16,9 @@ public class FishdexHandler : ValidatedMonoBehaviour
         onFishSpawnListener.Response.AddListener(AddFish);
     }
 
-    public void AddFish(Fish fish)
+    public void AddFish(GameObject fishObj)
     {
+        Fish fish = fishObj.GetComponent<FishReproductionManager>().fish;
         if (!fishdex.Contains(fish))
         {
             Debug.Log("Added " + fish + " to fishdex");
