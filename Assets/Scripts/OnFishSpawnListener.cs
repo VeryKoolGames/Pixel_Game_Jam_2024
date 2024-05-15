@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class OnFishSpawnListener : MonoBehaviour
 {
     public OnFishSpawn Event;
-    public UnityEvent<Fish> Response;
+    public UnityEvent<GameObject> Response;
 
     private void OnEnable() {
         Event.RegisterListener(this);
@@ -15,7 +15,7 @@ public class OnFishSpawnListener : MonoBehaviour
         Event.UnregisterListener(this);
     }
 
-    public void OnEventRaised(Fish fish) {
+    public void OnEventRaised(GameObject fish) {
         Response.Invoke(fish);
     }
 }
