@@ -6,6 +6,7 @@ public class VacuumManager : MonoBehaviour
     [SerializeField] private float vacuumRange = 1f; // The range within which objects are affected
     [SerializeField] private float vacuumSpeed = 1f; // The range within which objects are affected
     [SerializeField] private float destroyDistance = .1f; 
+    [SerializeField] private OnFilthRemoved onFilthRemoved; 
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -17,6 +18,7 @@ public class VacuumManager : MonoBehaviour
             float distanceToVacuum = Vector2.Distance(transform.position, other.transform.position);
             if (distanceToVacuum <= destroyDistance)
             {
+                onFilthRemoved.Raise();
                 Destroy(other.gameObject);
             }
         }

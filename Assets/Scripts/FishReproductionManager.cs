@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using KBCore.Refs;
 using UnityEngine;
 
-public class FishReproductionManager : MonoBehaviour
+public class FishReproductionManager : ValidatedMonoBehaviour
 {
     [SerializeField] private float maxFishHunger;
     [SerializeField] private float fishLifeSpan;
@@ -15,25 +16,49 @@ public class FishReproductionManager : MonoBehaviour
     public GameObject loveParticle;
     private float currentLifeSpan;
     private float currentHunger;
-    private float currentReproductionRate;
+    public float currentReproductionRate;
     private bool hasEaten = true;
-    [SerializeField, Self] private FlockAgent _flockAgent;
+    private float checkSexTimer;
+    private float checkSexInterval = 5f;
+    [SerializeField, Self] public FlockAgent _flockAgent;
+    [SerializeField, Self] private OnFilthCleanListener onFilthCleanListener;
+    [SerializeField, Self] private OnFilthInvasionListener onFilthInvasionListener;
     public Fish fish;
 
     [SerializeField] private StateMachine stateMachine;
+
+    private void OnEnable()
+    {
+        onFilthCleanListener.Response.AddListener(OnAquariumClean);
+        onFilthInvasionListener.Response.AddListener(OnAquariumDirty);
+    }
+
+    private void OnDisable()
+    {
+        onFilthCleanListener.Response.RemoveListener(OnAquariumClean);
+        onFilthInvasionListener.Response.RemoveListener(OnAquariumDirty);
+    }
 
     private void Start()
     {
         currentHunger = maxFishHunger;
         stateMachine = new StateMachine();
         stateMachine.ChangeState(new IdleState(this));
-        InvokeRepeating("CheckNearbyFishForSex", 0f, 5f);
     }
 
     private void Update()
     {
         stateMachine.Update();
-        Debug.Log("Current State: " + stateMachine.CurrentState);
+    }
+
+    private void OnAquariumClean()
+    {
+        stateMachine.ChangeState(new IdleState(this));
+    }
+    
+    private void OnAquariumDirty()
+    {
+        stateMachine.ChangeState(new AquariumDirtyState(this));
     }
     
     public bool getHasEaten()
@@ -70,7 +95,6 @@ public class FishReproductionManager : MonoBehaviour
         currentReproductionRate += Time.deltaTime;
         if (currentReproductionRate >= fishReproductionCooldown)
         {
-            Debug.Log("Fish is ready to reproduce!");
             stateMachine.ChangeState(new ReadyToReproduceState(this));
         }
     }
@@ -84,8 +108,18 @@ public class FishReproductionManager : MonoBehaviour
             Destroy(other.transform.parent.gameObject);
         }
     }
+    
+    public void UpdateCheckSexTimer()
+    {
+        checkSexTimer += Time.deltaTime;
+        if (checkSexTimer >= checkSexInterval)
+        {
+            CheckNearbyFishForSex();
+            checkSexTimer = 0f;
+        }
+    }
 
-    public void CheckNearbyFishForSex()
+    private void CheckNearbyFishForSex()
     {
         if (!(stateMachine.CurrentState is ReadyToReproduceState)) return;
 
@@ -98,38 +132,20 @@ public class FishReproductionManager : MonoBehaviour
                 FishReproductionManager otherFish = hit.GetComponent<FishReproductionManager>();
                 if (otherFish != null && otherFish.stateMachine.CurrentState is ReadyToReproduceState)
                 {
-                    stateMachine.ChangeState(new ReproducingState(this, otherFish));
-                    otherFish.stateMachine.ChangeState(new ReproducingState(otherFish, this));
                     Vector2 middlePoint = (transform.position + otherFish.transform.position) / 2;
-                    SetFishesForSex(middlePoint, otherFish);
+                    stateMachine.ChangeState(new ReproducingState(this, otherFish, middlePoint));
+                    otherFish.stateMachine.ChangeState(new ReproducingState(otherFish, this, middlePoint));
                     break;
                 }
             }
         }
     }
 
-    public void SetFishesForSex(Vector2 position, FishReproductionManager otherFish)
-    {
-        _flockAgent.sexSpot = position;
-        otherFish._flockAgent.sexSpot = position;
-        _flockAgent.isHavingSex = true;
-        otherFish._flockAgent.isHavingSex = true;
-    }
-
-    public void ResetFishAfterSex(FishReproductionManager otherFish)
-    {
-        _flockAgent.isHavingSex = false;
-        otherFish._flockAgent.isHavingSex = false;
-        stateMachine.ChangeState(new IdleState(this));
-        otherFish.stateMachine.ChangeState(new IdleState(otherFish));
-    }
-
     public IEnumerator WaitForSex(FishReproductionManager otherFish)
     {
         yield return new WaitForSeconds(3);
         FishCreator.Instance.CreateFish(fish, otherFish.fish);
-        currentReproductionRate = 0;
-        otherFish.currentReproductionRate = 0;
-        ResetFishAfterSex(otherFish);
+        stateMachine.ChangeState(new IdleState(this));
+        otherFish.stateMachine.ChangeState(new IdleState(otherFish));
     }
 }
