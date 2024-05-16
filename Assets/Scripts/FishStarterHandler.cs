@@ -11,6 +11,8 @@ public class FishStarterHandler : MonoBehaviour
     public void OnFishChoice()
     {
         FishCreator.Instance.CreateFish(_fishSo);
+        FishCreator.Instance.CreateFish(_fishSo);
+        FishCreator.Instance.CreateFish(_fishSo);
         canvas.SetActive(false);
     }
 }

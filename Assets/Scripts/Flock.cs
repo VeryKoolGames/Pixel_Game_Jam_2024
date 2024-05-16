@@ -31,6 +31,7 @@ public class Flock : ValidatedMonoBehaviour
     float squareMaxSpeed;
     float squareNeighborRadius;
     float squareAvoidanceRadius;
+    public string FlockName;
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;} }
     [SerializeField, Self] private OnFishDeathListener onFishDeathListener;
     [SerializeField, Self] private OnFishSpawnListener onFishSpawnListener;
@@ -46,6 +47,7 @@ public class Flock : ValidatedMonoBehaviour
         FlockAgent newAgent = arg0.GetComponent<FlockAgent>();
         newAgent.Initialize(this);
         newAgent.name = "Agent" + i++;
+        Debug.Log("Added agent " + newAgent.name + " to " + FlockName);
         agents.Add(newAgent); 
     }
 
@@ -61,10 +63,15 @@ public class Flock : ValidatedMonoBehaviour
     {
         foreach(FlockAgent agent in agents)
         {
+            if (agent.isHavingSex)
+            {
+                agent.Move(agent.sexSpot - (Vector2)agent.transform.position);
+                continue;
+            }
             List<Transform> context = GetNearbyObjects(agent);
             Vector2 move = behavior.CalculateMove(agent, context, this, agent.GetComponent<FishReproductionManager>().getHasEaten());
             move *= DriveFactor;
-            if(move.sqrMagnitude > squareMaxSpeed)
+            if (move.sqrMagnitude > squareMaxSpeed)
             {
                 move = move.normalized * maxSpeed;
             }

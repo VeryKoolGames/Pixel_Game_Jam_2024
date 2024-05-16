@@ -6,6 +6,8 @@ using UnityEngine;
 public class FlockAgent : MonoBehaviour
 {
     Flock agentFlock;
+    public bool isHavingSex = false;
+    public Vector2 sexSpot;
     public Flock AgentFlock { get { return agentFlock; } }
 
     Collider2D agentCollider;
