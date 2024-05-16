@@ -9,6 +9,8 @@ TagManager:
   - Fish
   - FallingObject
   - Water
+  - Vacuumable
+  - Kelp
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - MouseCollision
   - Dots
   - KelpBG
-  - 
+  - FoodDetection
   - 
   - 
   - 

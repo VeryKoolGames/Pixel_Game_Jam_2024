@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class LarryBehavior : MonoBehaviour
 {
+    [SerializeField] private OnFishSpawn onFishSpawn;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        onFishSpawn.Raise(gameObject);
     }
 }
