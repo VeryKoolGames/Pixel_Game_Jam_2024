@@ -25,16 +25,30 @@ public class Flock : ValidatedMonoBehaviour
     public float neighborRadius = 1.5f;
     [Range(0f,1f)]
     public float avoidanceRadiusMultiplier = 0.5f;
+    
+    private int i = 0;
 
     float squareMaxSpeed;
     float squareNeighborRadius;
     float squareAvoidanceRadius;
+    public string FlockName;
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;} }
     [SerializeField, Self] private OnFishDeathListener onFishDeathListener;
+    [SerializeField, Self] private OnFishSpawnListener onFishSpawnListener;
 
     private void Awake()
     {
         onFishDeathListener.Response.AddListener(RemoveAgent);
+        onFishSpawnListener.Response.AddListener(AddAgent);
+    }
+
+    private void AddAgent(GameObject arg0)
+    {
+        FlockAgent newAgent = arg0.GetComponent<FlockAgent>();
+        newAgent.Initialize(this);
+        newAgent.name = "Agent" + i++;
+        Debug.Log("Added agent " + newAgent.name + " to " + FlockName);
+        agents.Add(newAgent); 
     }
 
     void Start()
@@ -47,40 +61,22 @@ public class Flock : ValidatedMonoBehaviour
 
     void Update()
     {
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            SpawnAgent();
-        }
-
         foreach(FlockAgent agent in agents)
         {
+            if (agent.isHavingSex)
+            {
+                agent.Move(agent.sexSpot - (Vector2)agent.transform.position);
+                continue;
+            }
             List<Transform> context = GetNearbyObjects(agent);
             Vector2 move = behavior.CalculateMove(agent, context, this, agent.GetComponent<FishReproductionManager>().getHasEaten());
             move *= DriveFactor;
-            if(move.sqrMagnitude > squareMaxSpeed)
+            if (move.sqrMagnitude > squareMaxSpeed)
             {
                 move = move.normalized * maxSpeed;
             }
             agent.Move(move);
         }
-    }
-
-    void SpawnAgent()
-    {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        int i = 0;
-
-        FlockAgent newAgent = Instantiate(
-                agentPrefab,
-                mousePos,
-                Quaternion.Euler(Vector3.forward * Random.Range(0f,360f)),
-                transform
-            );
-            i = i + 1;
-            newAgent.name = "Agent" + i;
-            newAgent.Initialize(this);
-            agents.Add(newAgent);
     }
 
     List<Transform> GetNearbyObjects(FlockAgent agent)
@@ -102,4 +98,5 @@ public class Flock : ValidatedMonoBehaviour
         agents.Remove(agent);
         Destroy(agent.gameObject);
     }
+    
 }
