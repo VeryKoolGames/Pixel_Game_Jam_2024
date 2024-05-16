@@ -10,6 +10,7 @@ namespace DefaultNamespace
         public static FishCreator Instance { get; private set; }
         [SerializeField] private List<FishSO> fishList = new List<FishSO>();
         [SerializeField] private OnFishSpawn onFishSpawn;
+        [SerializeField] private OnFishSpawn onFishSpawnOtherFlock;
         private Dictionary<int, List<FishSO>> fishDictionary = new Dictionary<int, List<FishSO>>();
         [SerializeField] private Transform spawnPoint;
         private void Awake()
@@ -43,6 +44,7 @@ namespace DefaultNamespace
         {
             int rarity = GetFishRarity(fishOne.FishRarety, fishTwo.FishRarety);
             FishSO fishSO = GetFishSO(rarity);
+            Debug.Log(fishSO + " of rarity: " + rarity);
             SpawnFish(fishSO);
         }
         
@@ -55,11 +57,20 @@ namespace DefaultNamespace
         {
             if (fishSO != null)
             {
-                Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description);
+                Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
                 GameObject obj = Instantiate(fishSO.prefab, spawnPoint.position, Quaternion.identity);
                 obj.GetComponent<FishReproductionManager>().SetFish(fish);
-                onFishSpawn.Raise(obj);
+                GetRandomEvent().Raise(obj);
             }
+        }
+        
+        private OnFishSpawn GetRandomEvent()
+        {
+            if (Random.Range(0f, 1f) < 0.5f)
+            {
+                return onFishSpawnOtherFlock;
+            }
+            return onFishSpawn;
         }
         
         public void CreateFish(int rarity)
@@ -81,7 +92,7 @@ namespace DefaultNamespace
         {
             if (rarityOne == rarityTwo)
             {
-                if (Random.Range(0f, 1f) < 0.2f)
+                if (Random.Range(0f, 1f) < 0.8f)
                 {
                     return rarityOne;
                 }

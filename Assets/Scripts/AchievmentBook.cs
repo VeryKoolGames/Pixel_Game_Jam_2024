@@ -2,63 +2,63 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using KBCore.Refs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BookPage
+[Serializable]
+public class FishCard
 {
-    public string fishDescription;
-    public Sprite fishSprite;
     public string fishName;
+    public Sprite fishSprite;
+    public string fishDescription;
     
-    public BookPage(string fishDescription, Sprite fishSprite, string fishName)
+    public FishCard(string fishName, Sprite fishSprite, string fishDescription)
     {
-        this.fishDescription = fishDescription;
-        this.fishSprite = fishSprite;
         this.fishName = fishName;
+        this.fishSprite = fishSprite;
+        this.fishDescription = fishDescription;
     }
 }
 
-public class AchievmentBook : MonoBehaviour
+[Serializable]
+public class FishCardUI
 {
-    private Dictionary<int, BookPage> bookPages = new Dictionary<int, BookPage>();
-    private int currentPage = 0;
-    private int currentIndex = 0;
     public TextMeshProUGUI fishDescription;
     public Image fishSprite;
     public TextMeshProUGUI fishName;
+}
 
-    public void OnPageOpen()
-    {
-        if (bookPages.ContainsKey(currentPage))
-        {
-            BookPage bookPage = bookPages[currentPage];
-            fishDescription.text = bookPage.fishDescription;
-            fishSprite.sprite = bookPage.fishSprite;
-            fishName.text = bookPage.fishName;
-        }
-    }
-    
-    public void OnNextPage()
-    {
-        if (currentPage < bookPages.Count - 1)
-        {
-            currentPage++;
-            OnPageOpen();
-        }
-    }
-    
+public class AchievmentBook : ValidatedMonoBehaviour
+{
+    [SerializeField] private OnRewardUnlocked onRewardUnlocked;
+    [SerializeField] private List<FishCard> fishCards;
+    [SerializeField] private List<FishCardUI> fishCarsdUI;
     
     public void OnAchievmentUnlocked(Fish fish)
     {
-        CreateBookPage(fish);
+        CreateFishCard(fish);
     }
     
-    private void CreateBookPage(Fish fish)
+    private void CreateFishCard(Fish fish)
     {
-        BookPage bookPage = new BookPage(fish.FishName, null, fish.FishName);
-        bookPages.Add(currentIndex, bookPage);
-        currentIndex++;
+        FishCard bookPage = new FishCard(fish.FishName, fish.FishSprite, fish.FishName);
+        fishCards.Add(bookPage);
+        SetFishCardOnUi();
+        if (fishCards.Count % 3 == 0)
+        {
+            onRewardUnlocked.Raise();
+        }
+    }
+
+    private void SetFishCardOnUi()
+    {
+        FishCardUI fishCardUi = fishCarsdUI[fishCards.Count - 1];
+        FishCard fishCard = fishCards[fishCards.Count - 1];
+        
+        fishCardUi.fishSprite.sprite = fishCard.fishSprite;
+        fishCardUi.fishName.text = fishCard.fishName;
+        fishCardUi.fishDescription.text = fishCard.fishDescription;
     }
 }
