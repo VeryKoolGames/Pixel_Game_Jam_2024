@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705401077790631086}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 2278015071206544155}
   - component: {fileID: 6065115914862394921}
   - component: {fileID: 4640068049021992558}
-  m_Layer: 12
-  m_Name: Fish Test
+  m_Layer: 0
+  m_Name: Fish Test 2
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6589182013943137269}
   - component: {fileID: 7584002201268824043}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
