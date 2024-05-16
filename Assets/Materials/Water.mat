@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BG
-  m_Shader: {fileID: -6465566751694194690, guid: da63e89c16e7647de80744d297cf6e23, type: 3}
+  m_Name: Water
+  m_Shader: {fileID: -6465566751694194690, guid: e9b4f6886f26f474bab3375ade6b2b61, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 01038bfd1aeef4edba2c475c019e9341, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -37,6 +37,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _mainTex:
+        m_Texture: {fileID: 2800000, guid: 01038bfd1aeef4edba2c475c019e9341, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _tex:
@@ -58,16 +62,19 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _LineHeight: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _alpha: 0.595
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _color1: {r: 0.63529414, g: 0.654902, b: 0.7568628, a: 1}
     - _color2: {r: 0.63857245, g: 0.6610745, b: 0.7735849, a: 1}
+    - _offset: {r: 0.5, g: 0.48, b: 0, a: 0}
     - _speed: {r: -0.5, g: 0.4, b: 0, a: 0}
-    - _tiling: {r: 72.8, g: 36.4, b: 0, a: 0}
+    - _tiling: {r: 0.605, g: 1.28, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1100525994585115592
 MonoBehaviour:
