@@ -40,6 +40,14 @@ namespace DefaultNamespace
             }
         }
 
+        void Update()
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                CreateFish(0);
+            }
+        }
+
         public void CreateFish(Fish fishOne, Fish fishTwo)
         {
             int rarity = GetFishRarity(fishOne.FishRarety, fishTwo.FishRarety);

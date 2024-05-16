@@ -19,7 +19,7 @@ TagManager:
   - Obstacle
   - Camera
   - Managers
-  - MouseCollision
+  - WaterCollision
   - Dots
   - KelpBG
   - Fish
