@@ -65,7 +65,7 @@ Material:
     - _LineHeight: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alpha: 0.595
+    - _alpha: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
