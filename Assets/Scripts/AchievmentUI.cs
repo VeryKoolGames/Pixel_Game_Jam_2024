@@ -26,7 +26,7 @@ public class AchievmentUI : MonoBehaviour
 
     private void UpdateUIContent(Fish fish)
     {
-        textFishName.text = fish.FishName;
+        textFishName.text = fish.FishName + " unlocked!";
     }
 
     private void UpdateUIPosition()
