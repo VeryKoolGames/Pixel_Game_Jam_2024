@@ -1,7 +1,5 @@
 public class IdleState : FishState
 {
-    public IdleState(FishReproductionManager fishManager) : base(fishManager) { }
-
     public override void Enter() { }
     
     public override void Update()

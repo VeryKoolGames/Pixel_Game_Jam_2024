@@ -6,7 +6,8 @@ public class VacuumManager : MonoBehaviour
     [SerializeField] private float vacuumRange = 1f; // The range within which objects are affected
     [SerializeField] private float vacuumSpeed = 1f; // The range within which objects are affected
     [SerializeField] private float destroyDistance = .1f; 
-    [SerializeField] private OnFilthRemoved onFilthRemoved; 
+    [SerializeField] private OnFilthRemoved onFilthRemoved;
+    [SerializeField] private ObjectPool filthPool;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -19,7 +20,8 @@ public class VacuumManager : MonoBehaviour
             if (distanceToVacuum <= destroyDistance)
             {
                 onFilthRemoved.Raise();
-                Destroy(other.gameObject);
+                filthPool.ReturnObject(other.gameObject);
+                // Destroy(other.gameObject);
             }
         }
         else if (other.CompareTag("Kelp"))

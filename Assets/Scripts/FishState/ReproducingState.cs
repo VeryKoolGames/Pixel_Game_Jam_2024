@@ -5,7 +5,7 @@ public class ReproducingState : FishState
     private FishReproductionManager otherFish;
     private Vector2 position;
 
-    public ReproducingState(FishReproductionManager fishManager, FishReproductionManager otherFish, Vector2 position) : base(fishManager)
+    public void SetVariables(FishReproductionManager otherFish, Vector2 position) 
     {
         this.otherFish = otherFish;
         this.position = position;

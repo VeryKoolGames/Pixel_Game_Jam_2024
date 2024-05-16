@@ -2,7 +2,7 @@ public abstract class FishState
 {
     protected FishReproductionManager fishManager;
 
-    public FishState(FishReproductionManager fishManager)
+    public void Initialize(FishReproductionManager fishManager)
     {
         this.fishManager = fishManager;
     }
