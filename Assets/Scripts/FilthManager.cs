@@ -12,7 +12,7 @@ public class FilthManager : ValidatedMonoBehaviour
     [SerializeField] private Cooldown filthCooldown;
     
     [Header("Filth Settings")]
-    [SerializeField] private GameObject filthPrefab;
+    [SerializeField] private ObjectPool filthPool;
     [SerializeField] private Collider2D filthZone;
     
     [Header("Events")]
@@ -41,11 +41,11 @@ public class FilthManager : ValidatedMonoBehaviour
 
     private void CreateFilth()
     {
-        Instantiate(filthPrefab, GetRandomPointInCollider(), Quaternion.identity);
+        GameObject filth = filthPool.GetObject();
+        filth.transform.position = GetRandomPointInCollider();
         _filthCount++;
-        if (_filthCount >= filthTreshold.counter && !_isFilthInvasion)
+        if (_filthCount >= filthTreshold.counter)
         {
-            _isFilthInvasion = true;
             onFilthInvasion.Raise();
         }
     }
@@ -62,7 +62,6 @@ public class FilthManager : ValidatedMonoBehaviour
         _filthCount--;
         if (_filthCount < filthTreshold.counter)
         {
-            _isFilthInvasion = false;
             onFilthClean.Raise();
         }
     }

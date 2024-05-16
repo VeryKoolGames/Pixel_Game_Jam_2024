@@ -24,8 +24,14 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     [SerializeField, Self] private OnFilthCleanListener onFilthCleanListener;
     [SerializeField, Self] private OnFilthInvasionListener onFilthInvasionListener;
     public Fish fish;
-
-    [SerializeField] private StateMachine stateMachine;
+    
+    // STATES
+    private StateMachine stateMachine;
+    private IdleState idleState;
+    private AquariumDirtyState aquariumDirtyState;
+    private ReadyToReproduceState readyToReproduceState;
+    private ReproducingState reproducingState;
+    private DeadState deadState;
 
     private void OnEnable()
     {
@@ -43,7 +49,23 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     {
         currentHunger = maxFishHunger;
         stateMachine = new StateMachine();
-        stateMachine.ChangeState(new IdleState(this));
+
+        idleState = new IdleState();
+        idleState.Initialize(this);
+
+        aquariumDirtyState = new AquariumDirtyState();
+        aquariumDirtyState.Initialize(this);
+
+        readyToReproduceState = new ReadyToReproduceState();
+        readyToReproduceState.Initialize(this);
+
+        reproducingState = new ReproducingState();
+        reproducingState.Initialize(this);
+
+        deadState = new DeadState();
+        deadState.Initialize(this);
+
+        stateMachine.ChangeState(idleState);
     }
 
     private void Update()
@@ -53,12 +75,12 @@ public class FishReproductionManager : ValidatedMonoBehaviour
 
     private void OnAquariumClean()
     {
-        stateMachine.ChangeState(new IdleState(this));
+        stateMachine.ChangeState(idleState);
     }
     
     private void OnAquariumDirty()
     {
-        stateMachine.ChangeState(new AquariumDirtyState(this));
+        stateMachine.ChangeState(aquariumDirtyState);
     }
     
     public bool getHasEaten()
@@ -77,7 +99,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         if (currentHunger <= 50)
         {
             hasEaten = false;
-            stateMachine.ChangeState(new IdleState(this));
+            // stateMachine.ChangeState(idleState);
         }
     }
 
@@ -86,7 +108,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         currentLifeSpan += Time.deltaTime;
         if (currentLifeSpan >= fishLifeSpan)
         {
-            stateMachine.ChangeState(new DeadState(this));
+            stateMachine.ChangeState(deadState);
         }
     }
 
@@ -95,7 +117,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         currentReproductionRate += Time.deltaTime;
         if (currentReproductionRate >= fishReproductionCooldown)
         {
-            stateMachine.ChangeState(new ReadyToReproduceState(this));
+            stateMachine.ChangeState(readyToReproduceState);
         }
     }
 
@@ -133,8 +155,10 @@ public class FishReproductionManager : ValidatedMonoBehaviour
                 if (otherFish != null && otherFish.stateMachine.CurrentState is ReadyToReproduceState)
                 {
                     Vector2 middlePoint = (transform.position + otherFish.transform.position) / 2;
-                    stateMachine.ChangeState(new ReproducingState(this, otherFish, middlePoint));
-                    otherFish.stateMachine.ChangeState(new ReproducingState(otherFish, this, middlePoint));
+                    reproducingState.SetVariables(otherFish, middlePoint);
+                    stateMachine.ChangeState(reproducingState);
+                    otherFish.reproducingState.SetVariables(this, middlePoint);
+                    otherFish.stateMachine.ChangeState(reproducingState);
                     break;
                 }
             }
@@ -145,7 +169,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     {
         yield return new WaitForSeconds(3);
         FishCreator.Instance.CreateFish(fish, otherFish.fish);
-        stateMachine.ChangeState(new IdleState(this));
-        otherFish.stateMachine.ChangeState(new IdleState(otherFish));
+        stateMachine.ChangeState(idleState);
+        otherFish.stateMachine.ChangeState(idleState);
     }
 }
