@@ -56,7 +56,7 @@ public class AchievmentBook : ValidatedMonoBehaviour
     {
         FishCardUI fishCardUi = fishCarsdUI[fishCards.Count - 1];
         FishCard fishCard = fishCards[fishCards.Count - 1];
-        
+            
         fishCardUi.fishSprite.sprite = fishCard.fishSprite;
         fishCardUi.fishName.text = fishCard.fishName;
         fishCardUi.fishDescription.text = fishCard.fishDescription;
