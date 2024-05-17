@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class OnRewardUnlockedListener : MonoBehaviour
 {
     public OnRewardUnlocked Event;
-    public UnityEvent Response;
+    public UnityEvent<int> Response;
 
     private void OnEnable() {
         Event.RegisterListener(this);
@@ -15,7 +15,7 @@ public class OnRewardUnlockedListener : MonoBehaviour
         Event.UnregisterListener(this);
     }
 
-    public void OnEventRaised() {
-        Response.Invoke();
+    public void OnEventRaised(int rarety) {
+        Response.Invoke(rarety);
     }
 }

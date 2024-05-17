@@ -9,9 +9,9 @@ public class OnRewardUnlocked : ScriptableObject
     // A list of responses to the event
     private List<OnRewardUnlockedListener> listeners = new List<OnRewardUnlockedListener>();
 
-    public void Raise() {
+    public void Raise(int rarety) {
         for(int i = listeners.Count - 1; i >= 0; i--) {
-            listeners[i].OnEventRaised();
+            listeners[i].OnEventRaised(rarety);
         }
     }
 
