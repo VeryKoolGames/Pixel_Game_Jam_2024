@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using KBCore.Refs;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
     private Vector3 offset;
     [SerializeField, Self] private Collider2D itemCollider;
     [SerializeField, Self] private SpriteRenderer spriteRenderer;
+
+    public List<GameObject> tuyaux= new List<GameObject>();
+    public Transform stillPointTuyaux;
+    public Transform stillPointHead;
 
 
     void Update()
@@ -40,6 +45,25 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         {
             OnMouseUp();
         }
+
+        if(isDragging == false)
+        {
+            GoToStillPoint();
+        }
+    }
+
+    void GoToStillPoint()
+    {
+        foreach(GameObject tuyau in tuyaux)
+        {
+            Rigidbody2D rb = tuyau.GetComponent<Rigidbody2D>();
+            Vector2 dir =  stillPointTuyaux.transform.position - tuyau.transform.position;
+            rb.velocity = dir * 3;
+        }
+
+        Rigidbody2D thisRb = gameObject.GetComponent<Rigidbody2D>();
+        Vector2 thisDir =  stillPointHead.transform.position - transform.position;
+        thisRb.velocity = thisDir * 10;
     }
 
     void OnMouseDown()
@@ -57,11 +81,24 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         Vector3 newPosition = mousePosition + offset;
+        Rigidbody2D vacuumRB = gameObject.GetComponent<Rigidbody2D>();
+        Vector2 dir = (Vector2)mousePosition - (Vector2)gameObject.transform.position;
 
         // Constrain the new position within the drag zone
         if (dragZone.OverlapPoint(new Vector2(newPosition.x, newPosition.y)))
         {
-            transform.position = newPosition;
+            //transform.position = newPosition;
+            vacuumRB.velocity += dir;
+            RotateToFaceDirection(dir);
+        }
+    }
+
+    public void RotateToFaceDirection(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
         }
     }
 

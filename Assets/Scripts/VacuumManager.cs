@@ -24,11 +24,7 @@ public class VacuumManager : MonoBehaviour
                 // Destroy(other.gameObject);
             }
         }
-        else if (other.CompareTag("Kelp"))
-        {
-            Debug.Log("Detected Kelp");
-            //other.transform.position = Vector2.MoveTowards(other.transform.position, transform.position, vacuumSpeed * Time.deltaTime);
-        }
+
     }
 
     private void OnDrawGizmosSelected()
