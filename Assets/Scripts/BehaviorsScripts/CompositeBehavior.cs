@@ -18,7 +18,6 @@ public class CompositeBehavior : FlockBehavior
         }
     
         Vector2 move = Vector2.zero;
-        Debug.Log(hasEaten);
 
         for (int i = 0; i < behaviors.Length; i++)
         {

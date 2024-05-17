@@ -15,6 +15,42 @@ MonoBehaviour:
   rarity: 0
   name: Fish two
   sprite: {fileID: 0}
-  description: Fish two description
-  prefab: {fileID: 5877730983461625971, guid: 750ae9530927447f691f76bdc2497baf, type: 3}
-  fishType: 0
+  description: Clown Fish
+  prefab: {fileID: 5877730983461625971, guid: b2c2d5d6f025f43fbb1968836702e889, type: 3}
+  fishType: 1
+  bodyColors:
+  - {r: 0.8018868, g: 0.15508187, b: 0.15508187, a: 1}
+  - {r: 0.32133624, g: 0.6509434, b: 0.26713246, a: 1}
+  - {r: 0.12896048, g: 0.3675536, b: 0.3962264, a: 1}
+  otherColors:
+  - {r: 0.60816234, g: 0.6698113, b: 0.26223743, a: 1}
+  - {r: 0.3773585, g: 0.1263795, b: 0.3045954, a: 1}
+  - {r: 0.3070488, g: 0.5660378, b: 0.56130564, a: 1}
+  patternColors:
+  - {r: 0.277768, g: 0.04926131, b: 0.38679248, a: 1}
+  - {r: 0.6603774, g: 0.31461376, b: 0.31461376, a: 1}
+  - {r: 0.34749907, g: 0.5377358, b: 0.40525335, a: 1}
+  topFins:
+  - {fileID: 21300000, guid: 15b7fbeebc52f4097b3cb4532505983d, type: 3}
+  - {fileID: 21300000, guid: 8b968f86ea9054afa8af039057150ef0, type: 3}
+  - {fileID: 21300000, guid: 872ee39e81408407489e1b5c36521003, type: 3}
+  - {fileID: 21300000, guid: 94bc34afc5c584c63ba7fe656f7482f4, type: 3}
+  - {fileID: 21300000, guid: 9a894e4917b6a4017a0472d723d7a7be, type: 3}
+  bodyPatterns:
+  - {fileID: 21300000, guid: c652da98be1a94304a91ae2d8d83926f, type: 3}
+  - {fileID: 21300000, guid: 3f9adf5161f7846478cdcaba7710391e, type: 3}
+  - {fileID: 21300000, guid: b5c35a3cd76464c478cda1cb9e4447eb, type: 3}
+  - {fileID: 21300000, guid: adab9e84a87ea4f7baab5b9c5a2c5b60, type: 3}
+  tails:
+  - {fileID: 21300000, guid: d9170d728712d4e2f9115828f3360a17, type: 3}
+  - {fileID: 21300000, guid: 80374904a9c704985bdda17f95a98bbd, type: 3}
+  - {fileID: 21300000, guid: 39a23808fd1cb43d3abf60cf394cacdb, type: 3}
+  - {fileID: 21300000, guid: 29b62fba5d689455d8aa3f46b43b1e74, type: 3}
+  - {fileID: 21300000, guid: d820da47a259545b38685521ca2629ca, type: 3}
+  eyes:
+  - {fileID: 21300000, guid: 2a112c3ad3a914c1ab53f936c9edf985, type: 3}
+  - {fileID: 21300000, guid: 6ba808fd109bd486a9e4ca2f02197271, type: 3}
+  - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
+  - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
+  - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
+  - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}

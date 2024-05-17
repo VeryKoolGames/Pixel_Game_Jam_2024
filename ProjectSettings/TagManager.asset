@@ -12,6 +12,7 @@ TagManager:
   - Vacuumable
   - Kelp
   - Vacuume
+  - Bubble
   layers:
   - Default
   - TransparentFX

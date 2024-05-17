@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(OnFishDeathListener))]
 public class Flock : ValidatedMonoBehaviour
 {
-    public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehavior behavior;
 
@@ -28,9 +27,9 @@ public class Flock : ValidatedMonoBehaviour
     
     private int i = 0;
 
-    float squareMaxSpeed;
-    float squareNeighborRadius;
-    float squareAvoidanceRadius;
+    protected float squareMaxSpeed;
+    protected float squareNeighborRadius;
+    protected float squareAvoidanceRadius;
     public string FlockName;
     public float SquareAvoidanceRadius {get {return squareAvoidanceRadius;} }
     [SerializeField, Self] private OnFishDeathListener onFishDeathListener;
@@ -47,7 +46,6 @@ public class Flock : ValidatedMonoBehaviour
         FlockAgent newAgent = arg0.GetComponent<FlockAgent>();
         newAgent.Initialize(this);
         newAgent.name = "Agent" + i++;
-        Debug.Log("Added agent " + newAgent.name + " to " + FlockName);
         agents.Add(newAgent); 
     }
 
@@ -69,7 +67,15 @@ public class Flock : ValidatedMonoBehaviour
                 continue;
             }
             List<Transform> context = GetNearbyObjects(agent);
-            Vector2 move = behavior.CalculateMove(agent, context, this, agent.GetComponent<FishReproductionManager>().getHasEaten());
+            Vector2 move = Vector2.zero;
+            if (agent.isLarry)
+            {
+                move = behavior.CalculateMove(agent, context, this, true);
+            }
+            else
+            {
+                move = behavior.CalculateMove(agent, context, this, agent.GetComponent<FishReproductionManager>().getHasEaten());
+            }
             move *= DriveFactor;
             if (move.sqrMagnitude > squareMaxSpeed)
             {

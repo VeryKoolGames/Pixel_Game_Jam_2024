@@ -58,12 +58,27 @@ namespace DefaultNamespace
             if (fishSO != null)
             {
                 Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
+                FishCustomization fishAttributes = GetFishAttributes(fishSO);
                 GameObject obj = Instantiate(fishSO.prefab, spawnPoint.position, Quaternion.identity);
+                // obj.SetActive(false);
+                obj.GetComponent<FishCustomizeManager>().CustomizeFish(fishAttributes);
                 obj.GetComponent<FishReproductionManager>().SetFish(fish);
                 GetRandomEvent().Raise(obj);
             }
         }
-        
+
+        private FishCustomization GetFishAttributes(FishSO fishSo)
+        {
+            Sprite eyeSprite = fishSo.eyes[Random.Range(0, fishSo.eyes.Length)];
+            Sprite topFinSprite = fishSo.topFins[Random.Range(0, fishSo.topFins.Length)];
+            Sprite bodyPatternSprite = fishSo.bodyPatterns[Random.Range(0, fishSo.bodyPatterns.Length)];
+            Sprite tailSprite = fishSo.tails[Random.Range(0, fishSo.tails.Length)];
+            Color bodyColor = fishSo.bodyColors[Random.Range(0, fishSo.bodyColors.Length)];
+            Color otherColor = fishSo.otherColors[Random.Range(0, fishSo.otherColors.Length)];
+            Color patternColor = fishSo.patternColors[Random.Range(0, fishSo.patternColors.Length)];
+            return new FishCustomization(bodyPatternSprite, tailSprite, topFinSprite, eyeSprite, bodyColor, otherColor, patternColor);
+        }
+
         private OnFishSpawn GetRandomEvent()
         {
             if (Random.Range(0f, 1f) < 0.5f)

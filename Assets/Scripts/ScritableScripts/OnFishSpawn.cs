@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using DefaultNamespace;
 
-[CreateAssetMenu(fileName = "FishEvent", menuName = "Events/FishEvent")]
+[CreateAssetMenu(fileName = "OnFishSpawn", menuName = "Events/OnFishSpawn")]
 public class OnFishSpawn : ScriptableObject
 {
     // A list of responses to the event

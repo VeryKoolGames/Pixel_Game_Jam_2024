@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 1046991721517760973}
   - component: {fileID: 2351279398988009014}
   - component: {fileID: 6026053349301304584}
+  - component: {fileID: 6426913257597098486}
   m_Layer: 0
   m_Name: FilthManager
   m_TagString: Untagged
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filthTreshold: {fileID: 11400000, guid: 12c600b2b8be14ab295b947ef533e827, type: 2}
   filthCooldown: {fileID: 11400000, guid: d9f3898d3b6464aa6bd3dfd52653b528, type: 2}
-  filthPrefab: {fileID: 6207813161269690038, guid: 3b50589756684467483046eca877a24b, type: 3}
+  filthPool: {fileID: 6426913257597098486}
   filthZone: {fileID: 1551234766924028095}
   onFilthInvasion: {fileID: 11400000, guid: a6dc81177e2214eabbc732754d79dba1, type: 2}
   onFilthClean: {fileID: 11400000, guid: 5cd5740cfd9e54e2c9ede1eef0ca35b4, type: 2}
@@ -293,6 +294,20 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6426913257597098486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652629138832257181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e66c2c018894712994dc751cb34cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6207813161269690038, guid: 3b50589756684467483046eca877a24b, type: 3}
+  initialSize: 20
 --- !u!1 &8213228710510199254
 GameObject:
   m_ObjectHideFlags: 0
