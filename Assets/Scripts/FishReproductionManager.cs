@@ -114,8 +114,9 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void FishSexHandler()
     {
         currentReproductionRate += Time.deltaTime;
-        if (currentReproductionRate >= fishReproductionCooldown)
+        if (currentReproductionRate >= fishReproductionCooldown && stateMachine.CurrentState != reproducingState)
         {
+            Debug.Log("Ready to reproduce");
             stateMachine.ChangeState(readyToReproduceState);
         }
     }
@@ -149,7 +150,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
 
     private void CheckNearbyFishForSex()
     {
-        if (!(stateMachine.CurrentState is ReadyToReproduceState)) return;
+        if (stateMachine.CurrentState != readyToReproduceState) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
 
@@ -158,7 +159,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
             if (hit.CompareTag("Fish") && hit.gameObject != this.gameObject)
             {
                 FishReproductionManager otherFish = hit.GetComponent<FishReproductionManager>();
-                if (otherFish != null && otherFish.stateMachine.CurrentState is ReadyToReproduceState)
+                if (otherFish != null && otherFish.stateMachine.CurrentState == otherFish.readyToReproduceState)
                 {
                     Vector2 middlePoint = (transform.position + otherFish.transform.position) / 2;
                     reproducingState.SetVariables(otherFish, middlePoint);

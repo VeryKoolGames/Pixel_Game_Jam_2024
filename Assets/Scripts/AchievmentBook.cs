@@ -8,34 +8,33 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class FishCard
-{
-    public string fishName;
-    public Sprite fishSprite;
-    public string fishDescription;
-    
-    public FishCard(string fishName, Sprite fishSprite, string fishDescription)
-    {
-        this.fishName = fishName;
-        this.fishSprite = fishSprite;
-        this.fishDescription = fishDescription;
-    }
-}
-
-[Serializable]
 public class FishCardUI
 {
     public TextMeshProUGUI fishDescription;
     public Image fishSprite;
     public TextMeshProUGUI fishName;
+    public FishTypes fishType;
 }
 
 public class AchievmentBook : ValidatedMonoBehaviour
 {
     [SerializeField] private OnRewardUnlocked onRewardUnlocked;
-    [SerializeField] private List<FishCard> fishCards;
-    [SerializeField] private List<FishCardUI> fishCarsdUI;
-    
+    [SerializeField] private List<FishCardUI> fishCarsdUILigneOne;
+    [SerializeField] private List<FishCardUI> fishCarsdUILigneTwo;
+    [SerializeField] private List<FishCardUI> fishCarsdUILigneThree;
+    private Dictionary<int, List<FishCardUI>> fishCardsUi;
+    private int cardUnlockedCounter;
+
+    private void Start()
+    {
+        fishCardsUi = new Dictionary<int, List<FishCardUI>>
+        {
+            {0, fishCarsdUILigneOne},
+            {1, fishCarsdUILigneTwo},
+            {2, fishCarsdUILigneThree}
+        };
+    }
+
     public void OnAchievmentUnlocked(Fish fish)
     {
         CreateFishCard(fish);
@@ -43,22 +42,30 @@ public class AchievmentBook : ValidatedMonoBehaviour
     
     private void CreateFishCard(Fish fish)
     {
-        FishCard bookPage = new FishCard(fish.FishName, fish.FishSprite, fish.FishName);
-        fishCards.Add(bookPage);
-        SetFishCardOnUi();
-        if (fishCards.Count % 3 == 0)
-        {
-            onRewardUnlocked.Raise();
-        }
+        SetFishCardOnUi(fish);
     }
 
-    private void SetFishCardOnUi()
+    private void SetFishCardOnUi(Fish fish)
     {
-        FishCardUI fishCardUi = fishCarsdUI[fishCards.Count - 1];
-        FishCard fishCard = fishCards[fishCards.Count - 1];
-            
-        fishCardUi.fishSprite.sprite = fishCard.fishSprite;
-        fishCardUi.fishName.text = fishCard.fishName;
-        fishCardUi.fishDescription.text = fishCard.fishDescription;
+        List<FishCardUI> fishCards = fishCardsUi[fish.FishRarety];
+        if (fishCards.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var card in fishCards)
+        {
+            if (card.fishType == fish.FishType)
+            {
+                card.fishSprite.sprite = fish.FishSprite;
+                card.fishName.text = fish.FishName;
+                card.fishDescription.text = fish.FishDescription;
+                fishCardsUi[fish.FishRarety].Remove(card);
+                if (fishCardsUi[fish.FishRarety].Count == 0)
+                {
+                    onRewardUnlocked.Raise(fish.FishRarety);
+                }
+            }
+        }
     }
 }

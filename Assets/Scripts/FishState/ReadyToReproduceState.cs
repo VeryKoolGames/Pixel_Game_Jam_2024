@@ -2,16 +2,18 @@ public class ReadyToReproduceState : FishState
 {
     public override void Enter()
     {
-        fishManager.loveParticle.SetActive(true);
+        if (fishManager)
+            fishManager.loveParticle.SetActive(true);
     }
     
     public override void Update()
     {
-        fishManager.FishSexHandler();
+        fishManager.UpdateCheckSexTimer();
     }
     
     public override void Exit()
     {
-        fishManager.loveParticle.SetActive(false);
+        if (fishManager)
+            fishManager.loveParticle.SetActive(false);
     }
 }

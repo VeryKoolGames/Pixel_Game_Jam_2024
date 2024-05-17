@@ -13,7 +13,6 @@ public class CompositeBehavior : FlockBehavior
    {
         if (weights.Length != behaviors.Length)
         {
-            Debug.LogError("Data mismatch in" + name, this);
             return Vector2.zero;
         }
     
@@ -32,9 +31,9 @@ public class CompositeBehavior : FlockBehavior
             }
             Vector2 partialMove = behaviors[i].CalculateMove(agent, context, flock, hasEaten) * weight;
 
-            if(partialMove != Vector2.zero)
+            if (partialMove != Vector2.zero)
             {
-                if(partialMove.sqrMagnitude > weights[i] * weights[i])
+                if (partialMove.sqrMagnitude > weights[i] * weights[i])
                 {
                     partialMove.Normalize();
                     partialMove *= weights[i];
