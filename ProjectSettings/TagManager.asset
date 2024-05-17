@@ -13,6 +13,7 @@ TagManager:
   - Kelp
   - Vacuume
   - Bubble
+  - Limit
   layers:
   - Default
   - TransparentFX

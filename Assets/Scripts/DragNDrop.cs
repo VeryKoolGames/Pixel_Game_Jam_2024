@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DragNDrop : ValidatedMonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DragNDrop : ValidatedMonoBehaviour
     [SerializeField, Self] private Collider2D itemCollider;
     [SerializeField, Self] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite upsideDownSprite;
+    [SerializeField] private Sprite highlightSprite;
     private Sprite baseSprite;
 
     private void Start()
@@ -40,7 +42,6 @@ public class DragNDrop : ValidatedMonoBehaviour
             shakeTimer -= Time.deltaTime;
         }
 
-        // Handle mouse down manually with raycasting
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mouseWorldPosition = GetMouseWorldPosition();
@@ -56,10 +57,27 @@ public class DragNDrop : ValidatedMonoBehaviour
             }
         }
 
-        // Handle mouse up manually
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             OnMouseUp();
+        }
+        
+        if (isDragging)
+        {
+            return;
+        }
+        
+        Vector3 mouseWorldPositionForOver = GetMouseWorldPosition();
+        RaycastHit2D[] hitsForOver = Physics2D.RaycastAll(mouseWorldPositionForOver, Vector2.zero);
+
+        foreach (var hit in hitsForOver)
+        {
+            if (hit.collider != null && hit.collider == itemCollider)
+            {
+                OnMouseOver();
+                break;
+            }
+            OnMouseExit();
         }
     }
 
@@ -78,6 +96,11 @@ public class DragNDrop : ValidatedMonoBehaviour
         transform.DOMove(startPosition, 1f).SetEase(Ease.OutQuad);
         spriteRenderer.sprite = baseSprite;
         isDragging = false;
+    }
+
+    void OnMouseOver()
+    {
+        spriteRenderer.sprite = highlightSprite;
     }
 
     void Drag()
@@ -121,4 +144,10 @@ public class DragNDrop : ValidatedMonoBehaviour
 
         Instantiate(spawnObject, spawnPosition, Quaternion.identity);
     }
+    
+    void OnMouseExit()
+    {
+        spriteRenderer.sprite = baseSprite;
+    }
+    
 }
