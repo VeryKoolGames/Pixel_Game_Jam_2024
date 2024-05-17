@@ -5262,6 +5262,9 @@ GameObject:
   - component: {fileID: 2278015071206544155}
   - component: {fileID: 6065115914862394921}
   - component: {fileID: 4640068049021992558}
+  - component: {fileID: 8544980805672918288}
+  - component: {fileID: 3649689053338992084}
+  - component: {fileID: 4042183317295969344}
   m_Layer: 0
   m_Name: Fish3
   m_TagString: Fish
@@ -5335,6 +5338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHavingSex: 0
   sexSpot: {x: 0, y: 0}
+  isLarry: 0
 --- !u!114 &4640068049021992558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5351,13 +5355,61 @@ MonoBehaviour:
   fishLifeSpan: 50
   fishReproductionCooldown: 2
   detectionRadius: 10
-  fishSpriteRenderer: {fileID: 0}
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
   currentReproductionRate: 0
   _flockAgent: {fileID: 6065115914862394921}
-  onFilthCleanListener: {fileID: 0}
-  onFilthInvasionListener: {fileID: 0}
+  onFilthCleanListener: {fileID: 8544980805672918288}
+  onFilthInvasionListener: {fileID: 3649689053338992084}
+--- !u!114 &8544980805672918288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877730983461625971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42370890ca4d476796a580a584423df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5cd5740cfd9e54e2c9ede1eef0ca35b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3649689053338992084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877730983461625971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9869965f7bc7454198dce8780550b8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a6dc81177e2214eabbc732754d79dba1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4042183317295969344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877730983461625971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b5a27a8708142acb79dcfb44bd0ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyRenderer: {fileID: 1009840324396587460}
+  tailRenderer: {fileID: 1472209761711265179}
+  finRenderer: {fileID: 1788989915477415126}
+  eyeRenderer: {fileID: 4950338070067366010}
+  patternRenderer: {fileID: 208090277425096384}
 --- !u!1 &7995379668983099222
 GameObject:
   m_ObjectHideFlags: 0

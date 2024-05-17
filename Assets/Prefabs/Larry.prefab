@@ -45,10 +45,10 @@ GameObject:
   - component: {fileID: 6403083935264905897}
   - component: {fileID: 8164176401949909474}
   - component: {fileID: 2486070667684336325}
-  - component: {fileID: 3410592001477634467}
+  - component: {fileID: 4083439618421217746}
   m_Layer: 0
   m_Name: Larry
-  m_TagString: Fish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,11 +63,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6871839385828640314}
   - {fileID: 8705401077790631086}
+  - {fileID: 1520408994235864788}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2278015071206544155
@@ -125,6 +125,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae62ec77052784768b090f82d1182d95, type: 2}
   - {fileID: 11400000, guid: 1dea5a86eefac45579f164ca99288519, type: 2}
   - {fileID: 11400000, guid: e507a839507604ebe870538975715182, type: 2}
+  onFishSpawn: {fileID: 11400000, guid: dfaa93cc00a354964a014af3664d1c54, type: 2}
 --- !u!114 &8164176401949909474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +158,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3410592001477634467
+--- !u!114 &4083439618421217746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,14 +167,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5877730983461625971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bc3cdfac25f436db95914ee8ecc31d, type: 3}
+  m_Script: {fileID: 11500000, guid: 10b269079c23147b8ad23b1d62b14cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimSpeed: 1
-  swimFrequency: 1
-  swimAmplitude: 0.5
-  swimZone: {fileID: 8965383450918309713}
---- !u!1 &5880736864580280841
+  isHavingSex: 0
+  sexSpot: {x: 0, y: 0}
+  isLarry: 1
+--- !u!1 &6626012810239654260
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,22 +181,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6871839385828640314}
-  - component: {fileID: 8965383450918309713}
+  - component: {fileID: 1520408994235864788}
+  - component: {fileID: 5164963033834450203}
+  - component: {fileID: 4964809240619581325}
+  - component: {fileID: 3938396924480327128}
   m_Layer: 0
-  m_Name: SwimZone
+  m_Name: LarryFlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6871839385828640314
+--- !u!4 &1520408994235864788
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5880736864580280841}
+  m_GameObject: {fileID: 6626012810239654260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -205,51 +207,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5578310304757704649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8965383450918309713
-BoxCollider2D:
+--- !u!114 &5164963033834450203
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5880736864580280841}
+  m_GameObject: {fileID: 6626012810239654260}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.045969278, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.0593798, y: 1}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2968debdd5a4a38acb6cca3f22d20b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4964809240619581325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626012810239654260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db23c9df0add4498096b343c80a73176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behavior: {fileID: 11400000, guid: 0e600cc8b3d34495a80f3b27ce739920, type: 2}
+  startingCount: 20
+  DriveFactor: 10
+  maxSpeed: 0.3
+  neighborRadius: 0.44
+  avoidanceRadiusMultiplier: 0.5
+  FlockName: 
+  onFishDeathListener: {fileID: 5164963033834450203}
+  onFishSpawnListener: {fileID: 3938396924480327128}
+--- !u!114 &3938396924480327128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626012810239654260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa08f6d02bd438ba407f91b0fc2847b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: dfaa93cc00a354964a014af3664d1c54, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8893754762551968558
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,8 +333,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2496413b97e254866aa299fd42fd0e59, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5faf203c8cbde43379b549a7de4ad33f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
