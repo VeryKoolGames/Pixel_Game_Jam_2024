@@ -11,6 +11,7 @@ public class FlockAgent : MonoBehaviour
     public Flock AgentFlock { get { return agentFlock; } }
 
     Collider2D agentCollider;
+    public bool isLarry;
     public Collider2D AgentCollider { get { return agentCollider; } }
 
     void Start()

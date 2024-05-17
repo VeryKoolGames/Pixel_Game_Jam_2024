@@ -11,7 +11,6 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     [SerializeField] private float fishLifeSpan;
     [SerializeField] private float fishReproductionCooldown;
     [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private SpriteRenderer fishSpriteRenderer;
     public OnFishDeath onFishDeath;
     public GameObject loveParticle;
     private float currentLifeSpan;
@@ -26,11 +25,11 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public Fish fish;
     
     // STATES
-    private StateMachine stateMachine;
+    public StateMachine stateMachine;
     private IdleState idleState;
     private AquariumDirtyState aquariumDirtyState;
     private ReadyToReproduceState readyToReproduceState;
-    private ReproducingState reproducingState;
+    public ReproducingState reproducingState;
     private DeadState deadState;
 
     private void OnEnable()
@@ -139,6 +138,13 @@ public class FishReproductionManager : ValidatedMonoBehaviour
             CheckNearbyFishForSex();
             checkSexTimer = 0f;
         }
+    }
+
+    public void OnBubblePop()
+    {
+        currentHunger = maxFishHunger;
+        hasEaten = true;
+        stateMachine.ChangeState(readyToReproduceState);
     }
 
     private void CheckNearbyFishForSex()

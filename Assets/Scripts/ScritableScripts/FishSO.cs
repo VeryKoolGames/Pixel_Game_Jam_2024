@@ -12,4 +12,12 @@ public class FishSO : ScriptableObject
     public string description;
     public GameObject prefab;
     public FishTypes fishType;
+    public Color[] bodyColors;
+    public Color[] otherColors;
+    public Color[] patternColors;
+    [Header("Possible Fish Sprites")]
+    public Sprite[] topFins;
+    public Sprite[] bodyPatterns;
+    public Sprite[] tails;
+    public Sprite[] eyes;
 }
