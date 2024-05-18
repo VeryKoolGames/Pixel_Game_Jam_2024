@@ -16,7 +16,7 @@ public class PillBoxHandler : ValidatedMonoBehaviour
     [SerializeField] private LayerMask waterLayerMask;
     [SerializeField] private Transform couvercleObject;
     private Vector2 couvercleBasePosition;
-    private bool isOpen;
+    private bool wasOnCollider;
 
     private void Start()
     {
@@ -36,9 +36,10 @@ public class PillBoxHandler : ValidatedMonoBehaviour
         }
         if (selfCollider.OverlapPoint(mousePosition))
         {
+            wasOnCollider = true;
             OnMouseOver();
         }
-        else
+        else if (wasOnCollider)
         {
             OnMouseExit();
         }
@@ -51,21 +52,23 @@ public class PillBoxHandler : ValidatedMonoBehaviour
         {
             Vector2 newPosition = couvercleBasePosition;
             newPosition.x += 0.2f;
-            couvercleObject.DOMove(newPosition, 1f);
+            couvercleObject.DOMove(newPosition, .2f);
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.pillPotOpen, transform.position);
         }
         spriteRenderer.sprite = highlightSprite;
     }
 
     private void OnMouseExit()
     {
-        couvercleObject.DOMove(couvercleBasePosition, .2f);
+        couvercleObject.DOMove(couvercleBasePosition, .5f);
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.pillPotClose, transform.position);
         spriteRenderer.sprite = baseSprite;
+        wasOnCollider = false;
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("Hit Pill Box");
-        // spriteRenderer.sprite = baseSprite;
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.shortShakeSound, transform.position);
         Instantiate(pillPrefab, transform.position, Quaternion.identity);
     }
 }

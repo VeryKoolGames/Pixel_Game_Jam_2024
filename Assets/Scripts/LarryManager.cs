@@ -10,8 +10,9 @@ using UnityEngine.UI;
 
 public class LarryManager : ValidatedMonoBehaviour
 {
-    [SerializeField, Self] private OnFilthCleanListener onFilthCleanListener;
-    [SerializeField, Self] private OnFilthInvasionListener onFilthInvasionListener;
+    [SerializeField] private OnFilthCleanListener onFilthCleanListener;
+    [SerializeField] private OnFilthInvasionListener onFilthInvasionListener;
+    [SerializeField] private OnFilthCleanListener onWaterColorClean; 
     [SerializeField] private Cooldown coolDownBeforeSpeaking;
     private float timeSinceLastSpeak = 0;
     
@@ -21,6 +22,7 @@ public class LarryManager : ValidatedMonoBehaviour
     private HappyState happyState;
     private EarlyGameState earlyGameState;
     private LarryIdleState idleState;
+    private InHouseState inHouseState;
     
     private DialogueTypes currentDialogueType;
     [SerializeField] Dialogue[] originalDialogues;
@@ -31,17 +33,26 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image labelText;
+    [SerializeField, Self] private OnLarryHouseSpawnListener onLarryHouseSpawn;
+    [SerializeField] private Flock flock;
+    [SerializeField] private OnFilthInvasionListener onWaterDirty; 
 
     private void OnEnable()
     {
         onFilthCleanListener.Response.AddListener(OnAquariumClean);
         onFilthInvasionListener.Response.AddListener(OnAquariumDirty);
+        onLarryHouseSpawn.Response.AddListener(OnLarryHouseSpawned);
+        onWaterDirty.Response.AddListener(OnAquariumDirty);
+        onWaterColorClean.Response.AddListener(OnAquariumClean);
     }
 
     private void OnDisable()
     {
         onFilthCleanListener.Response.RemoveListener(OnAquariumClean);
         onFilthInvasionListener.Response.RemoveListener(OnAquariumDirty);
+        onLarryHouseSpawn.Response.RemoveListener(OnLarryHouseSpawned);
+        onWaterDirty.Response.RemoveListener(OnAquariumDirty);
+        onWaterColorClean.Response.RemoveListener(OnAquariumClean);
     }
 
     private void Start()
@@ -64,6 +75,9 @@ public class LarryManager : ValidatedMonoBehaviour
         
         earlyGameState = new EarlyGameState();
         earlyGameState.Initialize(this);
+        
+        inHouseState = new InHouseState();
+        inHouseState.Initialize(this);
 
         stateMachine.ChangeState(earlyGameState);
         onFishSpawn.Raise(gameObject);
@@ -129,12 +143,30 @@ public class LarryManager : ValidatedMonoBehaviour
         {
             if (dialogue.dialogueType == currentDialogueType && dialogue.sentences.Count > 0)
             {
-                string randomSentence = dialogue.sentences[UnityEngine.Random.Range(0, dialogue.sentences.Count)];
-                dialogue.sentences.Remove(randomSentence);
+                string randomSentence;
+                if (stateMachine.CurrentState != grumpyState)
+                {
+                    randomSentence = dialogue.sentences[0];
+                    dialogue.sentences.Remove(randomSentence);
+                }
+                else
+                {
+                    randomSentence = dialogue.sentences[UnityEngine.Random.Range(0, dialogue.sentences.Count)];
+                }
                 return randomSentence;
             }
         }
 
         return null;
+    }
+    
+    private void OnLarryHouseSpawned(Transform housePosition)
+    {
+        flock.RemoveAgentWithoutDestroy(GetComponent<FlockAgent>());
+        transform.DOMove(housePosition.position, 4f).SetEase(Ease.OutQuad).OnComplete(() =>
+        {
+            transform.localScale = Vector2.zero;
+            stateMachine.ChangeState(inHouseState);
+        });
     }
 }

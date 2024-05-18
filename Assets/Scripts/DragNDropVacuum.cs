@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using FMOD.Studio;
 using KBCore.Refs;
 using UnityEngine;
 
@@ -8,14 +9,21 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
 {
     [SerializeField] private Collider2D dragZone; // Collider2D to define the drag area
 
-    private bool isDragging = false;
+    private bool isDragging;
     private Vector3 offset;
     [SerializeField, Self] private Collider2D itemCollider;
     [SerializeField, Self] private SpriteRenderer spriteRenderer;
 
-    public List<GameObject> tuyaux= new List<GameObject>();
+    public List<GameObject> tuyaux = new List<GameObject>();
     public Transform stillPointTuyaux;
     public Transform stillPointHead;
+    private EventInstance aspiSound;
+    [SerializeField] private GameObject particleEffect;
+
+    private void Start()
+    {
+        aspiSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.aspiNoise);
+    }
 
 
     void Update()
@@ -44,6 +52,7 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             OnMouseUp();
+            stopSound();
         }
 
         if(isDragging == false)
@@ -68,13 +77,31 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
 
     void OnMouseDown()
     {
+        playSound();
         isDragging = true;
         offset = transform.position - GetMouseWorldPosition();
+        particleEffect.SetActive(true);
     }
 
     void OnMouseUp()
     {
         isDragging = false;
+        particleEffect.SetActive(false);
+    }
+    
+    private void playSound()
+    {
+        PLAYBACK_STATE playbackState;
+        aspiSound.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+        {
+            aspiSound.start();
+        }
+    }
+
+    private void stopSound()
+    {
+        aspiSound.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
     void Drag()

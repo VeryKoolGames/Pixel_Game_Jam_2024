@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueType: 2
   sentences:
-  - Grumpy 1
-  - Grumpy 2
-  - Grumpy 3
+  - At least keep this place clean ...
+  - The water is disgusting
+  - I can't breath in this dirt

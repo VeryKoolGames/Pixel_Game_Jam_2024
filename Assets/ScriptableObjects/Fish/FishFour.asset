@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
   m_Name: FishFour
   m_EditorClassIdentifier: 
-  rarity: 1
+  rarity: 0
   name: Fish four
   sprite: {fileID: 0}
   description: Clown Fish

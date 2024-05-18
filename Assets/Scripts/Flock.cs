@@ -105,4 +105,9 @@ public class Flock : ValidatedMonoBehaviour
         Destroy(agent.gameObject);
     }
     
+    public void RemoveAgentWithoutDestroy(FlockAgent agent)
+    {
+        agents.Remove(agent);
+    }
+    
 }
