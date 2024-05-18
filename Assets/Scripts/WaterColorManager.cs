@@ -14,6 +14,7 @@ public class WaterColorManager : ValidatedMonoBehaviour
     [SerializeField] private OnFilthInvasion onFilthInvasion;
     [SerializeField, Self] private OnFilthRemovedListener onFilthRemovedListener;
     [SerializeField] private Cooldown waterCooldown;
+    private Tween currentTween;
 
     private Color baseColor;
     // Start is called before the first frame update
@@ -26,19 +27,19 @@ public class WaterColorManager : ValidatedMonoBehaviour
 
     public void SetDirtyWaterColor()
     {
-        waterMaterial.material.DOColor(dirtyWaterColor, waterCooldown.cooldownTime).OnComplete(() =>
+        currentTween = waterMaterial.material.DOColor(dirtyWaterColor, waterCooldown.cooldownTime).OnComplete(() =>
         {
-            // onFilthInvasion.Raise();
-            SetCleanWaterColor();
             smellParticles.SetActive(true);
         });
     }
     
     public void SetCleanWaterColor()
     {
+        currentTween?.Kill();
         waterMaterial.material.DOColor(baseColor, 5f).OnComplete(() =>
         {
             smellParticles.SetActive(false);
+            SetDirtyWaterColor();
         });
     }
 }

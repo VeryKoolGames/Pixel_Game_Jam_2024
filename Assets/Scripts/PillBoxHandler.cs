@@ -15,35 +15,31 @@ public class PillBoxHandler : ValidatedMonoBehaviour
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private LayerMask waterLayerMask;
     [SerializeField] private Transform couvercleObject;
-    private Transform couvercleBasePosition;
+    private Vector2 couvercleBasePosition;
     private bool isOpen;
 
     private void Start()
     {
-        couvercleBasePosition = couvercleObject.transform;
+        couvercleBasePosition = couvercleObject.transform.position;
     }
 
     void Update()
     {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.down, Mathf.Infinity, waterLayerMask);
-            if (hit != null)
+            // Check if the mouse is directly over this object's collider
+            if (selfCollider.OverlapPoint(mousePosition))
             {
-                if (hit.collider != null && hit.collider == selfCollider)
-                {
-                    OnMouseDown();
-                }
+                OnMouseDown();
             }
         }
-        RaycastHit2D hit2 = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.down, Mathf.Infinity, waterLayerMask);
-        if (hit2 != null)
+        if (selfCollider.OverlapPoint(mousePosition))
         {
-            if (hit2.collider != null && hit2.collider == selfCollider)
-            {
-                OnMouseOver();
-                return;
-            }
+            OnMouseOver();
+        }
+        else
+        {
             OnMouseExit();
         }
     }
@@ -51,14 +47,18 @@ public class PillBoxHandler : ValidatedMonoBehaviour
     private void OnMouseOver()
     {
         // move the coucercleObject left
-        if (couvercleObject.transform == couvercleBasePosition.transform)
-            couvercleObject.DOMoveX(.1f, 1f);
+        if ((Vector2)couvercleObject.transform.position == couvercleBasePosition)
+        {
+            Vector2 newPosition = couvercleBasePosition;
+            newPosition.x += 0.2f;
+            couvercleObject.DOMove(newPosition, 1f);
+        }
         spriteRenderer.sprite = highlightSprite;
     }
-    
+
     private void OnMouseExit()
     {
-        couvercleObject.DOMove(couvercleBasePosition.position, 1f);
+        couvercleObject.DOMove(couvercleBasePosition, .2f);
         spriteRenderer.sprite = baseSprite;
     }
 
