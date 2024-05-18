@@ -5266,7 +5266,7 @@ GameObject:
   - component: {fileID: 3178519523308840820}
   - component: {fileID: 625646975647408201}
   m_Layer: 0
-  m_Name: Fish1
+  m_Name: Fish1StartMenu
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5353,7 +5353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFishHunger: 55
   fishLifeSpan: 50
-  fishReproductionCooldown: 10
+  fishReproductionCooldown: 20000
   detectionRadius: 10
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
