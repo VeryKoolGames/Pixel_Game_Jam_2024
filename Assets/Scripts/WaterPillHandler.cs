@@ -41,16 +41,24 @@ public class WaterPillHandler : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasHitWater && other.CompareTag("Water"))
         {
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.waterDrop, transform.position);
             Invoke("activateParticleEffect", 0.2f);
-            transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.OutQuad).OnComplete(() => Destroy(gameObject));
+            transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.OutQuad).OnComplete(OnObjectDestroyed);
             float gravity = GetComponent<Rigidbody2D>().gravityScale;
             GetComponent<Rigidbody2D>().gravityScale = gravity * 0.05f;
             onWaterClean.Raise();
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.effervecense, transform.position);
         }
+    }
+
+    private void OnObjectDestroyed()
+    {
+        particleEffect.GetComponent<ParticleSystem>().Stop();
+        Destroy(gameObject, 2f);
     }
     
     private void activateParticleEffect()

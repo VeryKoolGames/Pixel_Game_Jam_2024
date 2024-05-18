@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4e5ce80e-42fc-41a8-92e1-58a7ac8fd238}">
+		<property name="assetPath">
+			<value>effervescenceProcessed.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.2304535147392288</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{02740b3f-2bbe-41e7-be4b-4cfc89e8b5a1}</destination>
+		</relationship>
+	</object>
+</objects>

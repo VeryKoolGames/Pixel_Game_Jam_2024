@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueType: 0
   sentences:
-  - Nice to Meet you
-  - Test Early Game Long Dialogue
-  - Test Early Game Long Dialogue
+  - Another one "helping us" ?
+  - Where did they find you this time ?
+  - The last one lasted 2 days

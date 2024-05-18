@@ -6,6 +6,7 @@ namespace DefaultNamespace
         HAPPY,
         GRUMPY,
         IDLE,
-        SAD,
+        INHOUSE,
+        DIRTY,
     }
 }
