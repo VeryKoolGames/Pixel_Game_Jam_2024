@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DG.Tweening;
 using KBCore.Refs;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LarryManager : ValidatedMonoBehaviour
 {
@@ -23,6 +26,11 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] Dialogue[] originalDialogues;
     private Dialogue[] dialogues;
     [SerializeField] private OnFishSpawn onFishSpawn;
+    
+    [Header("Dialogue UI")]
+    [SerializeField] private GameObject dialogueUI;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private Image labelText;
 
     private void OnEnable()
     {
@@ -38,7 +46,11 @@ public class LarryManager : ValidatedMonoBehaviour
 
     private void Start()
     {
-        dialogues = originalDialogues;
+        dialogues = new Dialogue[originalDialogues.Length];
+        for (int i = 0; i < originalDialogues.Length; i++)
+        {
+            dialogues[i] = originalDialogues[i].Clone();
+        }
         stateMachine = new LarryStateMachine();
 
         grumpyState = new GrumpyState();
@@ -87,7 +99,26 @@ public class LarryManager : ValidatedMonoBehaviour
         string dialogue = GetDialogue();
         if (dialogue != null)
         {
-            Debug.Log("Larry: " + dialogue);
+            dialogueUI.SetActive(true);
+            Color color = labelText.color;
+            color.a = 0;
+            labelText.color = color;
+            
+            color = dialogueText.color;
+            color.a = 0;
+            dialogueText.color = color;
+            dialogueText.text = dialogue;
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(labelText.DOFade(1f, 1f));
+            sequence.Append(dialogueText.DOFade(1f, 1f));
+            sequence.AppendInterval(2f);
+            sequence.Append(labelText.DOFade(0f, 1f));
+            sequence.Join(dialogueText.DOFade(0f, 1f));
+            sequence.OnComplete(() =>
+            {
+                dialogueUI.SetActive(false);
+            });
+            sequence.Play();
         }
         timeSinceLastSpeak = 0;
     }

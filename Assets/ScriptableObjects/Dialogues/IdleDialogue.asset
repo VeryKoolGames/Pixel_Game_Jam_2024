@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: IdleDialogue
   m_EditorClassIdentifier: 
   dialogueType: 3
-  sentences: []
+  sentences:
+  - Idle 1
+  - Idle 2
+  - Idle 3

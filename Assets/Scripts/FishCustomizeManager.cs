@@ -16,8 +16,11 @@ public class FishCustomizeManager : MonoBehaviour
         tailRenderer.sprite = fishCustomization.tailSprite;
         finRenderer.sprite = fishCustomization.finSprite;
         eyeRenderer.sprite = fishCustomization.eyeSprite;
-        patternRenderer.sprite = fishCustomization.patternSprite;
-        patternRenderer.color = fishCustomization.patternColor;
+        if (patternRenderer)
+        {
+            patternRenderer.sprite = fishCustomization.patternSprite;
+            patternRenderer.color = fishCustomization.patternColor;
+        }
         finRenderer.color = fishCustomization.otherColor;
         tailRenderer.color = fishCustomization.otherColor;
     }

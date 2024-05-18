@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: EarlyGameDialogue
   m_EditorClassIdentifier: 
   dialogueType: 0
-  sentences: []
+  sentences:
+  - Nice to Meet you
+  - Test Early Game Long Dialogue
+  - Test Early Game Long Dialogue
