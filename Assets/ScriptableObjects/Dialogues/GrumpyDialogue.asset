@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: GrumpyDialogue
   m_EditorClassIdentifier: 
   dialogueType: 2
-  sentences: []
+  sentences:
+  - Grumpy 1
+  - Grumpy 2
+  - Grumpy 3

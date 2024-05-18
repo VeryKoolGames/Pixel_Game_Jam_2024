@@ -7,7 +7,6 @@ public class BubbleSpawner : MonoBehaviour
 {
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private Vector2 startScale;
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnBubble", 0, 2f);
