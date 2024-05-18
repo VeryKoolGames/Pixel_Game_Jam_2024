@@ -23,10 +23,6 @@ namespace DefaultNamespace
             {
                 Destroy(gameObject);
             }
-        }
-
-        private void Start()
-        {
             foreach (FishSO fish in fishList)
             {
                 if (fishDictionary.ContainsKey(fish.rarity))
@@ -39,6 +35,7 @@ namespace DefaultNamespace
                 }
             }
         }
+        
 
         public void CreateFish(Fish fishOne, Fish fishTwo)
         {
@@ -92,6 +89,7 @@ namespace DefaultNamespace
         {
             FishSO fishSO = GetFishSO(rarity);
             SpawnFish(fishSO);
+            Debug.Log(fishSO + " of rarity: " + rarity);
         }
         
         private FishSO GetFishSO(int rarity)
@@ -119,6 +117,10 @@ namespace DefaultNamespace
             }
             return Random.Range(rarityOne, rarityTwo);
         }
-        
+
+        public void RandomizeSpawnPoint()
+        {
+            spawnPoint.position = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+        }
     }
 }

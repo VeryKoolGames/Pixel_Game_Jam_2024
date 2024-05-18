@@ -5353,7 +5353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFishHunger: 55
   fishLifeSpan: 50
-  fishReproductionCooldown: 2
+  fishReproductionCooldown: 10
   detectionRadius: 10
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
