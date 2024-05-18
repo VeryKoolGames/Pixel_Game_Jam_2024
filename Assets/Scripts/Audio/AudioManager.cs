@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         PlayOneShot(FmodEvents.Instance.waterAmbiance, Vector3.zero);
+        PlayOneShot(FmodEvents.Instance.mainMusic, Vector3.zero);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPosition)

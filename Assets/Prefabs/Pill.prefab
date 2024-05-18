@@ -103,7 +103,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.1
+  m_GravityScale: 0.07
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,6 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   particleEffect: {fileID: 4840855146695127438}
+  onWaterClean: {fileID: 11400000, guid: 016922c636e1e4a3490ae87e64882eea, type: 2}
 --- !u!61 &8735364777134728676
 BoxCollider2D:
   m_ObjectHideFlags: 0

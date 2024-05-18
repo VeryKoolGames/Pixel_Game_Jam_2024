@@ -11,6 +11,8 @@ public class WaterPillHandler : MonoBehaviour
     private bool hasHitWater;
     [SerializeField] private LayerMask waterLayer;
     [SerializeField] private GameObject particleEffect;
+
+    [SerializeField] private OnFilthRemoved onWaterClean;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,8 @@ public class WaterPillHandler : MonoBehaviour
             Invoke("activateParticleEffect", 0.2f);
             transform.DOScale(Vector2.zero, 1.5f).SetEase(Ease.OutQuad).OnComplete(() => Destroy(gameObject));
             float gravity = GetComponent<Rigidbody2D>().gravityScale;
-            GetComponent<Rigidbody2D>().gravityScale = gravity * 0.1f;
+            GetComponent<Rigidbody2D>().gravityScale = gravity * 0.05f;
+            onWaterClean.Raise();
         }
     }
     
