@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Bank" id="{4cc7286c-9bab-44f2-a947-1369a25d0414}">
+		<property name="name">
+			<value>Aquadex</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6cefe0a5-20d2-4089-bf6f-25c0b19018c5}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -19,8 +19,8 @@ public class FoodBehavior : ValidatedMonoBehaviour
     {
         if (other.gameObject.CompareTag("Water") && gameObject.CompareTag("Finish"))
         {
-            Debug.Log("Entered water");
             isInWater = true;
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.waterDrop, transform.position);
             ApplyWaterDrag();
         }
     }
