@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using DG.Tweening;
+using FMOD.Studio;
 using KBCore.Refs;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,11 +23,17 @@ public class DragNDrop : ValidatedMonoBehaviour
     [SerializeField] private Sprite upsideDownSprite;
     [SerializeField] private Sprite highlightSprite;
     private Sprite baseSprite;
+    private EventInstance shakeSound;
+    private bool isSoundPlaying = false;
+    [SerializeField] private float checkInterval = 0.2f; // Time interval to check for movement
+    private Vector3 lastPosition;
 
     private void Start()
     {
         baseSprite = spriteRenderer.sprite;
         startPosition = transform.position;
+        shakeSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.boxShake);
+        StartCoroutine(CheckMovement());
     }
 
 
@@ -121,11 +129,45 @@ public class DragNDrop : ValidatedMonoBehaviour
         mouseScreenPosition.z = Camera.main.nearClipPlane; // Ensure proper conversion to world space
         return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
     }
+    
+    private IEnumerator CheckMovement()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(checkInterval);
+            DetectMovement();
+        }
+    }
+
+    private void DetectMovement()
+    {
+        Vector3 currentPosition = transform.position;
+        Debug.Log("Dectecting movement");
+        if (currentPosition != lastPosition && isDragging)
+        {
+            playSound();
+        }
+        else
+        {
+            stopSound();
+        }
+        lastPosition = currentPosition;
+    }
 
     void DetectShake()
     {
         Vector3 currentMousePosition = GetMouseWorldPosition();
         float shakeAmount = (currentMousePosition - lastMousePosition).magnitude;
+
+        // if (shakeAmount > shakeThreshold * 0.2f)
+        // {
+        //     playSound();
+        // }
+        // else if (currentMousePosition == lastMousePosition)
+        // {
+        //     Debug.Log("Stop sound");
+        //     stopSound();
+        // }
 
         if (shakeAmount > shakeThreshold && shakeTimer <= 0)
         {
@@ -134,6 +176,21 @@ public class DragNDrop : ValidatedMonoBehaviour
         }
 
         lastMousePosition = currentMousePosition;
+    }
+
+    private void playSound()
+    {
+        PLAYBACK_STATE playbackState;
+        shakeSound.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+        {
+            shakeSound.start();
+        }
+    }
+
+    private void stopSound()
+    {
+        shakeSound.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
     void SpawnObject()

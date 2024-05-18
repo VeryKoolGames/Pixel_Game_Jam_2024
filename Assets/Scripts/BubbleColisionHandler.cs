@@ -11,10 +11,12 @@ public class BubbleColisionHandler : MonoBehaviour
         {
             other.GetComponent<FishReproductionManager>().OnBubblePop();
             onBubbleKill.Raise(gameObject);
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.bubblePop, transform.position);
         }
         else if (other.CompareTag("Limit"))
         {
             onBubbleKill.Raise(gameObject);
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.bubblePop, transform.position);
         }
     }
 }
