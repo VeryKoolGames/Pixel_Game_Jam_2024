@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
+  m_Name: FishEight
+  m_EditorClassIdentifier: 
+  rarity: 1
+  name: PufferFish
+  sprite: {fileID: 0}
+  description: Ploncton
+  prefab: {fileID: 5877730983461625971, guid: d88e61d7660f7493badaaf04f428b55c, type: 3}
+  fishType: 4
+  bodyColors:
+  - {r: 0.78431374, g: 0.83137256, b: 0.3647059, a: 1}
+  - {r: 0.74509805, g: 0.79607844, b: 0.29803923, a: 1}
+  - {r: 0.7294118, g: 0.7882353, b: 0.21176471, a: 1}
+  - {r: 0.69803923, g: 0.7411765, b: 0.3137255, a: 1}
+  otherColors:
+  - {r: 0.9019608, g: 0.47058824, b: 0.22352941, a: 1}
+  - {r: 0.87058824, g: 0.32156864, b: 0.24313726, a: 1}
+  - {r: 0.91764706, g: 0.3764706, b: 0.29803923, a: 1}
+  - {r: 1, g: 0.5019608, b: 0.3764706, a: 1}
+  patternColors:
+  - {r: 0.9411765, g: 0.70980394, b: 0.25490198, a: 1}
+  topFins:
+  - {fileID: 21300000, guid: e6b4fc4c5974c4f86b7e5bb5651f2f78, type: 3}
+  - {fileID: 21300000, guid: 27610eede342f456da41967b2239da96, type: 3}
+  - {fileID: 21300000, guid: 9ded10b1ea31f409ebadc6ab8933eb4b, type: 3}
+  - {fileID: 21300000, guid: 65fc4942646b14efe8dc712f50513c3b, type: 3}
+  - {fileID: 21300000, guid: c4fd359d5e5c84d64ba0954dd9053719, type: 3}
+  bodyPatterns:
+  - {fileID: 21300000, guid: 505c40b4b49534bff93a7d26b172c28d, type: 3}
+  - {fileID: 21300000, guid: 9726db44d0b2a4803ad367eafda4de59, type: 3}
+  - {fileID: 21300000, guid: a2e457c9df9194230a799f70f8b629c4, type: 3}
+  - {fileID: 21300000, guid: 732f6027a54714e27814c9bd302dcb87, type: 3}
+  tails:
+  - {fileID: 21300000, guid: 9c787d63312af4014935adf903234838, type: 3}
+  - {fileID: 21300000, guid: 703bdb27986124973a1971ae9f65f3c5, type: 3}
+  - {fileID: 21300000, guid: 86cf276ed2e5d458098fa769b536ed2a, type: 3}
+  - {fileID: 21300000, guid: c2965ed87b279445bb19b07c171c971c, type: 3}
+  - {fileID: 21300000, guid: 684f7e27157514ec49568f57d467aaf6, type: 3}
+  eyes:
+  - {fileID: 21300000, guid: 2a112c3ad3a914c1ab53f936c9edf985, type: 3}
+  - {fileID: 21300000, guid: 6ba808fd109bd486a9e4ca2f02197271, type: 3}
+  - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
+  - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
+  - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
+  - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}

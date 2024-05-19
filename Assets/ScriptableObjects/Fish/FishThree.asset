@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
   m_Name: FishThree
   m_EditorClassIdentifier: 
-  rarity: 0
+  rarity: 1
   name: Fish three
   sprite: {fileID: 0}
   description: Fish three description
@@ -43,6 +43,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f2c294477288b43c6ae9aeef7c48c3a0, type: 3}
   - {fileID: 21300000, guid: 6b6159d8735e04c79ae307d8d4362595, type: 3}
   - {fileID: 21300000, guid: 247bddee1c2184e088f3ec73c25d4211, type: 3}
+  - {fileID: 21300000, guid: 82055575cfc67456f8c00fc119e572e3, type: 3}
   tails:
   - {fileID: 21300000, guid: 33202f42e0f3849169c938d346dd2a07, type: 3}
   - {fileID: 21300000, guid: a607f7f8b381d4d65a828fc1ad5ebec1, type: 3}
