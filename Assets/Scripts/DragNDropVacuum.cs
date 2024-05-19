@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using FMOD.Studio;
 using KBCore.Refs;
 using UnityEngine;
@@ -20,11 +18,12 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
     public EventInstance aspiSound;
     [SerializeField] private GameObject particleEffect;
 
+    private Vector3 previousMousePosition;
+
     private void Awake()
     {
         aspiSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.aspiNoise);
     }
-
 
     void Update()
     {
@@ -48,14 +47,13 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
             }
         }
 
-        // Handle mouse up manually
         if (Input.GetMouseButtonUp(0) && isDragging)
         {
             OnMouseUp();
             stopSound();
         }
 
-        if(isDragging == false)
+        if (!isDragging)
         {
             GoToStillPoint();
         }
@@ -63,15 +61,15 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
 
     void GoToStillPoint()
     {
-        foreach(GameObject tuyau in tuyaux)
+        foreach (GameObject tuyau in tuyaux)
         {
             Rigidbody2D rb = tuyau.GetComponent<Rigidbody2D>();
-            Vector2 dir =  stillPointTuyaux.transform.position - tuyau.transform.position;
+            Vector2 dir = stillPointTuyaux.transform.position - tuyau.transform.position;
             rb.velocity = dir * 3;
         }
 
         Rigidbody2D thisRb = gameObject.GetComponent<Rigidbody2D>();
-        Vector2 thisDir =  stillPointHead.transform.position - transform.position;
+        Vector2 thisDir = stillPointHead.transform.position - transform.position;
         thisRb.velocity = thisDir * 10;
     }
 
@@ -81,6 +79,7 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         isDragging = true;
         offset = transform.position - GetMouseWorldPosition();
         particleEffect.SetActive(true);
+        previousMousePosition = Input.mousePosition; // Initialize previous mouse position
     }
 
     void OnMouseUp()
@@ -88,7 +87,7 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         isDragging = false;
         particleEffect.SetActive(false);
     }
-    
+
     private void playSound()
     {
         PLAYBACK_STATE playbackState;
@@ -114,9 +113,14 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         // Constrain the new position within the drag zone
         if (dragZone.OverlapPoint(new Vector2(newPosition.x, newPosition.y)))
         {
-            //transform.position = newPosition;
             vacuumRB.velocity += dir;
-            RotateToFaceDirection(dir);
+
+            // Check if the mouse position has changed
+            if (previousMousePosition != Input.mousePosition)
+            {
+                RotateToFaceDirection(dir);
+                previousMousePosition = Input.mousePosition; // Update previous mouse position
+            }
         }
     }
 
