@@ -45,7 +45,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         onFilthInvasionListener.Response.AddListener(OnAquariumDirty);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         onFilthCleanListener.Response.RemoveListener(OnAquariumClean);
         onFilthInvasionListener.Response.RemoveListener(OnAquariumDirty);
@@ -199,6 +199,8 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     
     private void GetFishion()
     {
+        if (!gameObject)
+            return;
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
 
         foreach (var hit in hits)
