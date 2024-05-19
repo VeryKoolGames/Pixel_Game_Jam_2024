@@ -11,6 +11,7 @@ public class StartMenuManager : MonoBehaviour
 {
     [SerializeField] private int NumberOfFish;
     [SerializeField] private RectTransform canvas;
+    [SerializeField] private RectTransform target;
     [SerializeField] private Image fadeImage; 
     private void Start()
     {
@@ -24,8 +25,8 @@ public class StartMenuManager : MonoBehaviour
     public void OnGameStart()
     {
         fadeImage.transform.gameObject.SetActive(true);
-        canvas.DOScaleX(5, 1f);
-        fadeImage.DOFade(1, 1f)
-            .OnComplete((() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1)));
+        canvas.DOMove(target.position, 1f)
+        //fadeImage.DOFade(1, 1f)
+          .OnComplete((() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1)));
     }
 }
