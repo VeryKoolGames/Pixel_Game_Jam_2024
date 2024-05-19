@@ -23,14 +23,15 @@ public class WaterColorManager : ValidatedMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        baseColor = waterMaterial.material.color;
+        baseColor = waterMaterial.material.GetColor("_Color");
         SetDirtyWaterColor();
         onFilthRemovedListener.Response.AddListener(SetCleanWaterColor);
     }
 
     public void SetDirtyWaterColor()
     {
-        currentTween = waterMaterial.material.DOColor(dirtyWaterColor, waterCooldown.cooldownTime).OnComplete(() =>
+        dirtyWaterColor.a = 1.0f;
+        currentTween = waterMaterial.material.DOColor(dirtyWaterColor, "_Color", waterCooldown.cooldownTime).OnComplete(() =>
         {
             smellParticles.SetActive(true);
             onWaterDirty.Raise();
@@ -41,7 +42,7 @@ public class WaterColorManager : ValidatedMonoBehaviour
     {
         currentTween?.Kill();
         currentCleanTween?.Kill();
-        currentCleanTween = waterMaterial.material.DOColor(baseColor, 5f).OnComplete(() =>
+        currentCleanTween = waterMaterial.material.DOColor(baseColor,  5f).OnComplete(() =>
         {
             smellParticles.SetActive(false);
             SetDirtyWaterColor();

@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using KBCore.Refs;
 using UnityEngine;
 
-public class WaterPillHandler : MonoBehaviour
+public class WaterPillHandler : ValidatedMonoBehaviour
 {
     private Vector2 startPosition;
     private bool isDragging;
@@ -13,11 +14,15 @@ public class WaterPillHandler : MonoBehaviour
     [SerializeField] private GameObject particleEffect;
 
     [SerializeField] private OnFilthRemoved onWaterClean;
+    [SerializeField, Self] private Rigidbody2D rb;
+    private float originalGravityScale;
     // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
         isDragging = true;
+        originalGravityScale = rb.gravityScale;
+        rb.gravityScale = 0;
     }
 
     // Update is called once per frame
@@ -28,6 +33,7 @@ public class WaterPillHandler : MonoBehaviour
         transform.position = mouse;
         if (Input.GetMouseButtonUp(0))
         {
+            rb.gravityScale = originalGravityScale;
             RaycastHit2D hit = Physics2D.Raycast(mouse, Vector2.down, Mathf.Infinity, waterLayer);
             if (hit.collider != null && hit.collider.CompareTag("Water"))
             {

@@ -17,10 +17,10 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
     public List<GameObject> tuyaux = new List<GameObject>();
     public Transform stillPointTuyaux;
     public Transform stillPointHead;
-    private EventInstance aspiSound;
+    public EventInstance aspiSound;
     [SerializeField] private GameObject particleEffect;
 
-    private void Start()
+    private void Awake()
     {
         aspiSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.aspiNoise);
     }
@@ -135,5 +135,8 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         mouseScreenPosition.z = Camera.main.nearClipPlane; // Ensure proper conversion to world space
         return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
     }
-    
+
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    // }
 }
