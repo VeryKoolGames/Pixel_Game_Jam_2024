@@ -8,6 +8,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+    private List<EventInstance> _eventInstances = new List<EventInstance>();
+    private EventInstance aspiNoise;
 
     private void Awake()
     {
@@ -32,8 +34,29 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPosition);
     }
     
+    public void SetAmbienceParameter(EventInstance refName, string parameterName, float value)
+    {
+        refName.setParameterByName(parameterName, value);
+    }
+    
     public EventInstance CreateInstance(EventReference sound)
     {
-        return RuntimeManager.CreateInstance(sound);
+        EventInstance eventInstance = RuntimeManager.CreateInstance(sound);
+        _eventInstances.Add(eventInstance);
+        return eventInstance;
+    }
+    
+    private void CleanUp()
+    {
+        foreach (var eventInstance in _eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CleanUp();
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using FMOD.Studio;
 using UnityEngine;
 
 public class VacuumManager : MonoBehaviour
@@ -8,6 +10,7 @@ public class VacuumManager : MonoBehaviour
     [SerializeField] private float destroyDistance = .1f; 
     [SerializeField] private OnFilthRemoved onFilthRemoved;
     [SerializeField] private ObjectPool filthPool;
+    [SerializeField] private DragNDropVacuum dragNDropVacuum;
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -21,7 +24,6 @@ public class VacuumManager : MonoBehaviour
             {
                 onFilthRemoved.Raise();
                 filthPool.ReturnObject(other.gameObject);
-                // Destroy(other.gameObject);
             }
         }
 
@@ -29,8 +31,36 @@ public class VacuumManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Draw the vacuum range in the editor for visualization
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, vacuumRange);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            PLAYBACK_STATE playbackState;
+            Debug.Log("Underwater");
+            dragNDropVacuum.aspiSound.getPlaybackState(out playbackState);
+
+            if (playbackState == PLAYBACK_STATE.PLAYING)
+            {
+                AudioManager.Instance.SetAmbienceParameter(dragNDropVacuum.aspiSound, "underWater", 0.8f);
+            }
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            PLAYBACK_STATE playbackState;
+            dragNDropVacuum.aspiSound.getPlaybackState(out playbackState);
+
+            if (playbackState == PLAYBACK_STATE.PLAYING)
+            {
+                AudioManager.Instance.SetAmbienceParameter(dragNDropVacuum.aspiSound, "underWater", 1f);
+            }
+        }
     }
 }
