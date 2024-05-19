@@ -7,16 +7,17 @@ using UnityEngine;
 public class FmodEvents : MonoBehaviour
 {
     public static FmodEvents Instance;
-    [SerializeField] public EventReference boxShake;
-    [SerializeField] public EventReference waterDrop;
-    [SerializeField] public EventReference bubblePop;
-    [SerializeField] public EventReference waterAmbiance;
-    [SerializeField] public EventReference mainMusic;
-    [SerializeField] public EventReference shortShakeSound;
-    [SerializeField] public EventReference pillPotClose;
-    [SerializeField] public EventReference pillPotOpen;
-    [SerializeField] public EventReference effervecense;
-    [SerializeField] public EventReference aspiNoise;
+    public EventReference boxShake;
+    public EventReference waterDrop;
+    public EventReference bubblePop;
+    public EventReference waterAmbiance;
+    public EventReference mainMusic;
+    public EventReference shortShakeSound;
+    public EventReference pillPotClose;
+    public EventReference pillPotOpen;
+    public EventReference effervecense;
+    public EventReference aspiNoise;
+    public EventReference chestSound;
 
     private void Awake()
     {

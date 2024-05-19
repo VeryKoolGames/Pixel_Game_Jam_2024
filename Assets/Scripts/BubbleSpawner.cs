@@ -1,22 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using KBCore.Refs;
 using UnityEngine;
 
-public class BubbleSpawner : MonoBehaviour
+public class BubbleSpawner : ValidatedMonoBehaviour
 {
     [SerializeField] private ObjectPool objectPool;
-    [SerializeField] private Vector2 startScale;
+    [SerializeField, Self] private Animator chestAnimator;
+    [SerializeField] private Transform spawnPoint;
     void Start()
     {
-        InvokeRepeating("SpawnBubble", 0, 2f);
+        InvokeRepeating("SpawnBubble", 1, 5f);
     }
 
     private void SpawnBubble()
     {
-        GameObject bubblePrefab = objectPool.GetObject();
-        bubblePrefab.transform.localScale = Vector2.zero;
-        bubblePrefab.transform.position = transform.position;
-        bubblePrefab.transform.DOScale(startScale, 1f);
+        StartCoroutine(animateChest());
+    }
+
+    private IEnumerator animateChest()
+    {
+        chestAnimator.Play("chestOpen");
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.chestSound, transform.position);
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject bubblePrefab = objectPool.GetObject();
+            bubblePrefab.transform.position = spawnPoint.position;
+            yield return new WaitForSeconds(.4f);
+        }
+        chestAnimator.Play("chestClose");
     }
 }
