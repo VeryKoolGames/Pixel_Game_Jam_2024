@@ -49,6 +49,13 @@ public class Flock : ValidatedMonoBehaviour
         agents.Add(newAgent); 
     }
 
+    public void AddAgentFromFish(FlockAgent newAgent)
+    {
+        newAgent.Initialize(this);
+        newAgent.name = "Agent" + i++;
+        agents.Add(newAgent); 
+    }
+
     void Start()
     {
         squareMaxSpeed = maxSpeed * maxSpeed;

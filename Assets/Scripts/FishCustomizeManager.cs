@@ -9,6 +9,8 @@ public class FishCustomizeManager : MonoBehaviour
     [SerializeField] private SpriteRenderer finRenderer;
     [SerializeField] private SpriteRenderer eyeRenderer;
     [SerializeField] private SpriteRenderer patternRenderer;
+    [SerializeField] private SpriteRenderer accessoryRenderer;
+    [SerializeField] private Sprite[] accessorySprites;
     
     public void CustomizeFish(FishCustomization fishCustomization)
     {
@@ -23,5 +25,15 @@ public class FishCustomizeManager : MonoBehaviour
         }
         finRenderer.color = fishCustomization.otherColor;
         tailRenderer.color = fishCustomization.otherColor;
+    }
+    
+    public void ModifyFishAccessory()
+    {
+        if (accessorySprites.Length == 0)
+        {
+            return;
+        }
+        Sprite accessorySprite = accessorySprites[Random.Range(0, accessorySprites.Length)];
+        accessoryRenderer.sprite = accessorySprite;
     }
 }

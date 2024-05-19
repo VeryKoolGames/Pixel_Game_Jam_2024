@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DG.Tweening;
 using KBCore.Refs;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FishReproductionManager : ValidatedMonoBehaviour
 {
@@ -18,11 +20,16 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public float currentReproductionRate;
     private bool hasEaten = true;
     private float checkSexTimer;
-    private float checkSexInterval = 5f;
+    private float checkFishionTimer;
+    [SerializeField] private Cooldown checkSexInterval;
+    [SerializeField] private Cooldown checkFishionInterval;
     [SerializeField, Self] public FlockAgent _flockAgent;
     [SerializeField, Self] private OnFilthCleanListener onFilthCleanListener;
     [SerializeField, Self] private OnFilthInvasionListener onFilthInvasionListener;
+    [SerializeField, Self] private FishCustomizeManager fishCustomizeManager;
+    private Flock chosenFlock;
     public Fish fish;
+    private int sexCount = 0;
     
     // STATES
     public StateMachine stateMachine;
@@ -38,7 +45,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         onFilthInvasionListener.Response.AddListener(OnAquariumDirty);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         onFilthCleanListener.Response.RemoveListener(OnAquariumClean);
         onFilthInvasionListener.Response.RemoveListener(OnAquariumDirty);
@@ -71,6 +78,11 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     {
         stateMachine.Update();
     }
+    
+    public void SetChosenFlock(Flock flock)
+    {
+        chosenFlock = flock;
+    }
 
     private void OnAquariumClean()
     {
@@ -98,12 +110,13 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         if (currentHunger <= 50)
         {
             hasEaten = false;
-            // stateMachine.ChangeState(idleState);
         }
     }
 
     public void FishLifeHandler()
     {
+        if (sexCount < 2)
+            return;
         currentLifeSpan += Time.deltaTime;
         if (currentLifeSpan >= fishLifeSpan)
         {
@@ -116,7 +129,6 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         currentReproductionRate += Time.deltaTime;
         if (currentReproductionRate >= fishReproductionCooldown && stateMachine.CurrentState != reproducingState)
         {
-            Debug.Log("Ready to reproduce");
             stateMachine.ChangeState(readyToReproduceState);
         }
     }
@@ -134,7 +146,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void UpdateCheckSexTimer()
     {
         checkSexTimer += Time.deltaTime;
-        if (checkSexTimer >= checkSexInterval)
+        if (checkSexTimer >= checkSexInterval.cooldownTime)
         {
             CheckNearbyFishForSex();
             checkSexTimer = 0f;
@@ -166,8 +178,45 @@ public class FishReproductionManager : ValidatedMonoBehaviour
                     stateMachine.ChangeState(reproducingState);
                     otherFish.reproducingState.SetVariables(this, middlePoint);
                     otherFish.stateMachine.ChangeState(reproducingState);
+                    sexCount++;
+                    otherFish.sexCount++;
                     break;
                 }
+            }
+        }
+    }
+    
+    public void CheckForFishion()
+    {
+        checkFishionTimer += Time.deltaTime;
+        if (checkFishionTimer >= checkFishionInterval.cooldownTime)
+        {
+            checkFishionTimer = 0f;
+            if (Random.Range(0, 100) < 50)
+                GetFishion();
+        }
+    }
+    
+    private void GetFishion()
+    {
+        if (!gameObject)
+            return;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Fishion") && hit.gameObject != this.gameObject)
+            {
+                chosenFlock.RemoveAgentWithoutDestroy(_flockAgent);
+                var sequence = DOTween.Sequence();
+                sequence.Append(transform.DOMove(hit.gameObject.transform.position, 2f));
+                sequence.Append(transform.DOScale(0, 2f));
+                sequence.Append(transform.DOScale(1, 2f));
+                sequence.OnComplete(() =>
+                {
+                    fishCustomizeManager.ModifyFishAccessory();
+                    chosenFlock.AddAgentFromFish(_flockAgent);
+                });
             }
         }
     }

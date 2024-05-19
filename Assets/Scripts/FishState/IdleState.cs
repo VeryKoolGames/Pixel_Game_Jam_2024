@@ -4,10 +4,11 @@ public class IdleState : FishState
     
     public override void Update()
     {
+        if (!fishManager) return;
         fishManager.FishLifeHandler();
         fishManager.FishFeedHandler();
         fishManager.FishSexHandler();
-        // fishManager.UpdateCheckSexTimer();
+        fishManager.CheckForFishion();
     }
     
     public override void Exit() { }

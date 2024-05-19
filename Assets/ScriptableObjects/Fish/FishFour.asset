@@ -39,7 +39,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8dbf5d7fc606749d597965bfa56955cb, type: 3}
   - {fileID: 21300000, guid: d2f212850e16f4fe4acaa464838917ca, type: 3}
   - {fileID: 21300000, guid: 70015b439d723466698f130d576fed46, type: 3}
-  bodyPatterns: []
+  bodyPatterns:
+  - {fileID: 21300000, guid: 82055575cfc67456f8c00fc119e572e3, type: 3}
   tails:
   - {fileID: 21300000, guid: b5b236300f1b24d07b3b39bf838b7207, type: 3}
   - {fileID: 21300000, guid: 73fcef30af7884badb515488184427c4, type: 3}
@@ -53,3 +54,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
   - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
   - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}
+  accessories: []

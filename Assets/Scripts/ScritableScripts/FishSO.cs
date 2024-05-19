@@ -20,4 +20,5 @@ public class FishSO : ScriptableObject
     public Sprite[] bodyPatterns;
     public Sprite[] tails;
     public Sprite[] eyes;
+    public Sprite[] accessories;
 }

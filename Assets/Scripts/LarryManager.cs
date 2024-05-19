@@ -14,6 +14,9 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] private OnFilthInvasionListener onFilthInvasionListener;
     [SerializeField] private OnFilthCleanListener onWaterColorClean; 
     [SerializeField] private Cooldown coolDownBeforeSpeaking;
+    [SerializeField, Self] private OnLarryHouseSpawnListener onLarryHouseSpawn;
+    [SerializeField] private OnFilthInvasionListener onWaterDirty;
+    [SerializeField] private OnGameEvent onHouseArrival;
     private float timeSinceLastSpeak = 0;
     
     // STATES
@@ -33,9 +36,7 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image labelText;
-    [SerializeField, Self] private OnLarryHouseSpawnListener onLarryHouseSpawn;
     [SerializeField] private Flock flock;
-    [SerializeField] private OnFilthInvasionListener onWaterDirty; 
 
     private void OnEnable()
     {
@@ -163,10 +164,26 @@ public class LarryManager : ValidatedMonoBehaviour
     private void OnLarryHouseSpawned(Transform housePosition)
     {
         flock.RemoveAgentWithoutDestroy(GetComponent<FlockAgent>());
-        transform.DOMove(housePosition.position, 4f).SetEase(Ease.OutQuad).OnComplete(() =>
-        {
-            transform.localScale = Vector2.zero;
-            stateMachine.ChangeState(inHouseState);
-        });
+        Vector3 direction = (housePosition.position - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Perform the move and rotation
+        transform.DORotate(new Vector3(0, 0, angle), 2f)
+            .SetEase(Ease.OutQuart);
+
+        transform.DOMove(housePosition.position, 2f)
+            .SetEase(Ease.OutQuart)
+            .OnComplete(() =>
+            {
+                transform.DOScale(0f, 1f).OnComplete(() =>
+                {
+                    stateMachine.ChangeState(inHouseState);
+                    onHouseArrival.Raise();
+                    var transform1 = transform;
+                    Vector2 newPos = transform1.position;
+                    newPos.y += 0.2f;
+                    transform1.position = newPos;
+                });
+            });
     }
 }
