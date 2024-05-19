@@ -1,21 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.U2D;
 
 [Serializable]
 class Reward
 {
     public string rewardName;
     public GameObject rewardPrefab;
-    public Transform rewardSpawnLocation;
     
     public Reward(string rewardName, GameObject rewardPrefab, Transform rewardSpawnLocation)
     {
         this.rewardName = rewardName;
         this.rewardPrefab = rewardPrefab;
-        this.rewardSpawnLocation = rewardSpawnLocation;
     }
 }
 
@@ -24,7 +24,7 @@ public class RewardManager : ValidatedMonoBehaviour
     [SerializeField] private List<Reward> rewards = new List<Reward>();
     [SerializeField, Self] private OnRewardUnlockedListener onRewardUnlockedListener;
     private int currentRewardIndex = 0;
-    [SerializeField] private Dictionary<int, Reward> rewardDictionary = new Dictionary<int, Reward>();
+    private Dictionary<int, Reward> rewardDictionary = new Dictionary<int, Reward>();
 
     private void Awake()
     {
@@ -45,7 +45,9 @@ public class RewardManager : ValidatedMonoBehaviour
         if (currentRewardIndex < rewards.Count)
         {
             Reward reward = rewardDictionary[rarity];
-            Instantiate(reward.rewardPrefab, reward.rewardSpawnLocation.position, Quaternion.identity);
+            reward.rewardPrefab.SetActive(true);
+            reward.rewardPrefab.transform.localScale = Vector3.zero;
+            reward.rewardPrefab.transform.DOScale(1, 1f);
             currentRewardIndex++;
         }
     }

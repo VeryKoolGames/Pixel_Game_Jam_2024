@@ -364,7 +364,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5578310304757704649}
@@ -377,7 +377,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4850823191576471604}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -452,7 +452,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -505,7 +505,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -559,7 +559,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.9433962, g: 0.6630473, b: 0.9321831, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1206,7 +1206,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1823,7 +1823,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 605a96a866afe424fb7cfc2a566cdc7f, type: 3}
+    - sprite: {fileID: 21300000, guid: b1807ee0fab044cad83ca3092404cf90, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -5358,9 +5358,12 @@ MonoBehaviour:
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
   currentReproductionRate: 0
+  checkSexInterval: {fileID: 11400000, guid: cc59cc7632b5a4d6c9fc3a7749132017, type: 2}
+  checkFishionInterval: {fileID: 11400000, guid: d9714a1b94b0e4b5cb3195d38e0fa09b, type: 2}
   _flockAgent: {fileID: 6065115914862394921}
   onFilthCleanListener: {fileID: 3178519523308840820}
   onFilthInvasionListener: {fileID: 3844841111087299576}
+  fishCustomizeManager: {fileID: 625646975647408201}
 --- !u!114 &3844841111087299576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,6 +5413,8 @@ MonoBehaviour:
   finRenderer: {fileID: 1788989915477415126}
   eyeRenderer: {fileID: 4950338070067366010}
   patternRenderer: {fileID: 208090277425096384}
+  accessoryRenderer: {fileID: 0}
+  accessorySprites: []
 --- !u!1 &7995379668983099222
 GameObject:
   m_ObjectHideFlags: 0

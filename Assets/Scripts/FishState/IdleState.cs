@@ -7,6 +7,7 @@ public class IdleState : FishState
         fishManager.FishLifeHandler();
         fishManager.FishFeedHandler();
         fishManager.FishSexHandler();
+        fishManager.CheckForFishion();
         // fishManager.UpdateCheckSexTimer();
     }
     
