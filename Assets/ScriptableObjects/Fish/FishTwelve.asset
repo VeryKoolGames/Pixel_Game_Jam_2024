@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 2
   name: Azur Fish
-  sprite: {fileID: 0}
-  description: Crunchy
+  sprite: {fileID: 21300000, guid: 6a348c066fbc049318278b22019fb1b9, type: 3}
+  description: Azur Fish
   prefab: {fileID: 5877730983461625971, guid: 0c8d9c4541dd0456c95815bca7231499, type: 3}
-  fishType: 4
+  fishType: 8
   bodyColors:
   - {r: 0.34117648, g: 0.92156863, b: 0.92156863, a: 1}
   - {r: 0.18039216, g: 1, b: 1, a: 1}

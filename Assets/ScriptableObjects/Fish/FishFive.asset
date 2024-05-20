@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   name: Sardine
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 777dfb91d7d154ce7b2044d71d23b5e9, type: 3}
   description: Sardine
   prefab: {fileID: 5877730983461625971, guid: 724052475236f47578b083e33b17f4df, type: 3}
-  fishType: 4
+  fishType: 1
   bodyColors:
   - {r: 0.40784314, g: 0.43529412, b: 0.6, a: 1}
   - {r: 0.53333336, g: 0.5529412, b: 0.68235296, a: 1}

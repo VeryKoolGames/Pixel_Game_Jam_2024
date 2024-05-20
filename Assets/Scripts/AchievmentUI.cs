@@ -5,12 +5,14 @@ using DefaultNamespace;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AchievmentUI : MonoBehaviour
 {
     [SerializeField] private RectTransform targetTransform;
     [SerializeField] private RectTransform achievmentTransform;
     [SerializeField] private TextMeshProUGUI textFishName;
+    [SerializeField] private Image fishImage;
     private Vector3 _startPosition;
 
     private void Start()
@@ -26,7 +28,8 @@ public class AchievmentUI : MonoBehaviour
 
     private void UpdateUIContent(Fish fish)
     {
-        textFishName.text = fish.FishName + " unlocked!";
+        textFishName.text = fish.FishName;
+        fishImage.sprite = fish.FishSprite;
     }
 
     private void UpdateUIPosition()

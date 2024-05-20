@@ -97,6 +97,10 @@ namespace DefaultNamespace
         private void OnFishDeath(FlockAgent arg0)
         {
             fishListInGame--;
+            if (fishListInGame == 0)
+            {
+                OnGameSceneStart();
+            }
         }
         
 
