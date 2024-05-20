@@ -13,49 +13,45 @@ MonoBehaviour:
   m_Name: FishOne
   m_EditorClassIdentifier: 
   rarity: 0
-  name: Fish One
+  name: GoldFish
   sprite: {fileID: 0}
   description: Petit poisson d'eau douce
   prefab: {fileID: 5877730983461625971, guid: 1c0cd11da72c2410ea829bed699286f2, type: 3}
   fishType: 0
   bodyColors:
-  - {r: 0.9019608, g: 0.47058824, b: 0.22352941, a: 1}
-  - {r: 0.9411765, g: 0.70980394, b: 0.25490198, a: 1}
-  - {r: 1, g: 0.93333334, b: 0.5137255, a: 1}
-  - {r: 0.6784314, g: 0.18431373, b: 0.27058825, a: 1}
+  - {r: 1, g: 0.3764706, b: 0.3019608, a: 1}
+  - {r: 0.9647059, g: 0.2784314, b: 0.20392157, a: 1}
+  - {r: 1, g: 0.18039216, b: 0.09019608, a: 1}
+  - {r: 0.93333334, g: 0.1764706, b: 0.09019608, a: 1}
   otherColors:
-  - {r: 0.27058825, g: 0.11372549, b: 0.25882354, a: 1}
-  - {r: 0.38039216, g: 0.11764706, b: 0.2901961, a: 1}
-  - {r: 0.5058824, g: 0.1254902, b: 0.30980393, a: 1}
-  - {r: 0.6784314, g: 0.18431373, b: 0.27058825, a: 1}
+  - {r: 1, g: 0.3764706, b: 0.3019608, a: 1}
+  - {r: 0.9647059, g: 0.44313726, b: 0.38039216, a: 1}
+  - {r: 1, g: 0.54509807, b: 0.49019608, a: 1}
+  - {r: 1, g: 0.61960787, b: 0.57254905, a: 1}
   patternColors:
-  - {r: 0.27058825, g: 0.1137255, b: 0.25882354, a: 1}
-  - {r: 0.37647063, g: 0.121568635, b: 0.2901961, a: 1}
-  - {r: 0.5058824, g: 0.1254902, b: 0.30980393, a: 1}
-  - {r: 0.6784314, g: 0.18039216, b: 0.27058825, a: 1}
+  - {r: 1, g: 0.37647063, b: 0.3019608, a: 1}
+  - {r: 0.96470594, g: 0.4431373, b: 0.3803922, a: 1}
+  - {r: 1, g: 0.5411765, b: 0.4901961, a: 1}
+  - {r: 1, g: 0.61960787, b: 0.57254905, a: 1}
   topFins:
-  - {fileID: 21300000, guid: 760a2e7e1f8014d7487522bacd5b9ca6, type: 3}
-  - {fileID: 21300000, guid: f9e2b6e71babb4ad7915f65eee28e56c, type: 3}
-  - {fileID: 21300000, guid: 2c4183ad6f9394908852dffcde822e26, type: 3}
-  - {fileID: 21300000, guid: 3cff771a0c5a94c4d8b4b60bfee82c9e, type: 3}
-  - {fileID: 21300000, guid: c74f864e46ca649768e99d64c50b5906, type: 3}
+  - {fileID: 21300000, guid: 00f3e82d3f5974badbe24726f0a942bd, type: 3}
+  - {fileID: 21300000, guid: fc7dde9a4d21b40b082b03b59e23ae9a, type: 3}
+  - {fileID: 21300000, guid: df3483134278642359c18e931381000a, type: 3}
+  - {fileID: 21300000, guid: 4f9721df96c4442ab8ed3c46717a8c3c, type: 3}
   bodyPatterns:
   - {fileID: 21300000, guid: 3fcbe2b1bb5b746e0ad7e30eebdfccb0, type: 3}
-  - {fileID: 21300000, guid: f25fda1c5319649c6a5b725ffd390a1f, type: 3}
-  - {fileID: 21300000, guid: 4dea783fc488845258fae38ed2eaa1c8, type: 3}
-  - {fileID: 21300000, guid: 150077b4aea104caa97b7f168cb29e0b, type: 3}
-  - {fileID: 21300000, guid: 82055575cfc67456f8c00fc119e572e3, type: 3}
   tails:
   - {fileID: 21300000, guid: cffb037b13cb54ca3b05417735ba88c7, type: 3}
   - {fileID: 21300000, guid: e19584425e6f94bc49b68b2236400490, type: 3}
   - {fileID: 21300000, guid: 57eaf02e286204fbda32001d4108ab73, type: 3}
   - {fileID: 21300000, guid: d95c9fbb25ecc40bca72e02785161a3a, type: 3}
-  - {fileID: 21300000, guid: 9024605a2221741eca69c715e0af9cf3, type: 3}
   eyes:
   - {fileID: 21300000, guid: 2a112c3ad3a914c1ab53f936c9edf985, type: 3}
   - {fileID: 21300000, guid: 6ba808fd109bd486a9e4ca2f02197271, type: 3}
   - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
   - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
   - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
-  - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}
+  - {fileID: 21300000, guid: 0e75776160bac4d9fae0a5eee24db34d, type: 3}
+  - {fileID: 21300000, guid: 142261ef0160b48458a8e921ad330f1f, type: 3}
+  - {fileID: 21300000, guid: 582c18a26c2814592acf6665a68966b7, type: 3}
   accessories: []

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
+  m_Name: FishTen
+  m_EditorClassIdentifier: 
+  rarity: 2
+  name: StickFish
+  sprite: {fileID: 0}
+  description: Crunchy
+  prefab: {fileID: 5877730983461625971, guid: ede983286103b4a37a36cc9824055523, type: 3}
+  fishType: 4
+  bodyColors:
+  - {r: 0.9019608, g: 0.47058824, b: 0.22352941, a: 1}
+  - {r: 0.94509804, g: 0.5058824, b: 0.2509804, a: 1}
+  - {r: 0.9529412, g: 0.5529412, b: 0.3254902, a: 1}
+  - {r: 0.9529412, g: 0.4509804, b: 0.3254902, a: 1}
+  otherColors:
+  - {r: 0.87058824, g: 0.32156864, b: 0.24313726, a: 1}
+  - {r: 0.8901961, g: 0.3647059, b: 0.2901961, a: 1}
+  - {r: 0.9254902, g: 0.30588236, b: 0.21568628, a: 1}
+  - {r: 0.91764706, g: 0.16078432, b: 0.16078432, a: 1}
+  patternColors:
+  - {r: 0.9411765, g: 0.70980394, b: 0.25490198, a: 1}
+  topFins:
+  - {fileID: 21300000, guid: 82055575cfc67456f8c00fc119e572e3, type: 3}
+  bodyPatterns:
+  - {fileID: 21300000, guid: 132b80de0e29545df801a71f455c3e8b, type: 3}
+  tails:
+  - {fileID: 21300000, guid: 75f145f657eac471ca7a2ae74b0b039b, type: 3}
+  - {fileID: 21300000, guid: 5fc3719b20ec94aeeadf65b94bce3b41, type: 3}
+  - {fileID: 21300000, guid: 5ef8d2bff773b457d8f97f9cd0434275, type: 3}
+  - {fileID: 21300000, guid: fb7051eed6b9b467db7d4cd4973cf133, type: 3}
+  - {fileID: 21300000, guid: 1b3fa7f081db04f199a0bcbded1a185b, type: 3}
+  eyes:
+  - {fileID: 21300000, guid: 2a112c3ad3a914c1ab53f936c9edf985, type: 3}
+  - {fileID: 21300000, guid: 6ba808fd109bd486a9e4ca2f02197271, type: 3}
+  - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
+  - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
+  - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
+  - {fileID: 21300000, guid: 0e75776160bac4d9fae0a5eee24db34d, type: 3}
+  - {fileID: 21300000, guid: 3a5313a0a7c7c4e4490b021f6314b927, type: 3}
+  - {fileID: 21300000, guid: 142261ef0160b48458a8e921ad330f1f, type: 3}
+  accessories:
+  - {fileID: 21300000, guid: 22c9019dc5e7a40879fa41b8acc753dd, type: 3}
+  - {fileID: 21300000, guid: 49f823441bd62479bbfaa5e9b5ad4fb3, type: 3}
+  - {fileID: 21300000, guid: ad9f8e566ce0a44c9a0ed921b61af0d3, type: 3}
+  - {fileID: 21300000, guid: 3f0133c41eb674e66a2add211e4e2d60, type: 3}
+  - {fileID: 21300000, guid: bb84bd01e62664cb985f55c51df47fb7, type: 3}

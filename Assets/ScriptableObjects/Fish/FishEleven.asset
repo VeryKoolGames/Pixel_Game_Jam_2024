@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
+  m_Name: FishEleven
+  m_EditorClassIdentifier: 
+  rarity: 0
+  name: Pinky
+  sprite: {fileID: 0}
+  description: Crunchy
+  prefab: {fileID: 5877730983461625971, guid: d3e7569fc8b4e448781d7e7928970b20, type: 3}
+  fishType: 4
+  bodyColors:
+  - {r: 1, g: 0.7176471, b: 0.7176471, a: 1}
+  - {r: 1, g: 0.62352943, b: 0.62352943, a: 1}
+  - {r: 0.94509804, g: 0.67058825, b: 0.67058825, a: 1}
+  - {r: 0.972549, g: 0.67058825, b: 0.6156863, a: 1}
+  otherColors:
+  - {r: 0.972549, g: 0.67058825, b: 0.6156863, a: 1}
+  - {r: 0.9254902, g: 0.45490196, b: 0.45490196, a: 1}
+  - {r: 0.9529412, g: 0.3882353, b: 0.3882353, a: 1}
+  - {r: 0.84313726, g: 0.39215687, b: 0.39215687, a: 1}
+  patternColors:
+  - {r: 1, g: 0.7688679, b: 0.96717304, a: 1}
+  topFins:
+  - {fileID: 21300000, guid: e51a129f252e04d2fa97260252ce0da4, type: 3}
+  - {fileID: 21300000, guid: 51ed312c0a1284b3cb680e34ee58d26d, type: 3}
+  - {fileID: 21300000, guid: 1ea867fd3899747b0a50c808ea77c7a8, type: 3}
+  - {fileID: 21300000, guid: adb1bff6729964485a5500bbde7e2322, type: 3}
+  - {fileID: 21300000, guid: 9de31d77970ff4d2ea698c7d96f4395d, type: 3}
+  bodyPatterns:
+  - {fileID: 21300000, guid: 82055575cfc67456f8c00fc119e572e3, type: 3}
+  tails:
+  - {fileID: 21300000, guid: 5d615f44c2b9f4fc080b1642bb0fea94, type: 3}
+  - {fileID: 21300000, guid: ca62d55f9b0d34bc3add9dfbb059f2a4, type: 3}
+  - {fileID: 21300000, guid: ee8a2faf1536f447caf80aa649a1ad0f, type: 3}
+  - {fileID: 21300000, guid: e952238737d7a43a0af39405e92946c8, type: 3}
+  - {fileID: 21300000, guid: 07d27d1c3d44f4b5f8a0111920d6f83c, type: 3}
+  eyes:
+  - {fileID: 21300000, guid: 2a112c3ad3a914c1ab53f936c9edf985, type: 3}
+  - {fileID: 21300000, guid: 6ba808fd109bd486a9e4ca2f02197271, type: 3}
+  - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
+  - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
+  - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
+  - {fileID: 21300000, guid: 0e75776160bac4d9fae0a5eee24db34d, type: 3}
+  - {fileID: 21300000, guid: 3a5313a0a7c7c4e4490b021f6314b927, type: 3}
+  - {fileID: 21300000, guid: 142261ef0160b48458a8e921ad330f1f, type: 3}
+  accessories:
+  - {fileID: 21300000, guid: 22c9019dc5e7a40879fa41b8acc753dd, type: 3}
+  - {fileID: 21300000, guid: 49f823441bd62479bbfaa5e9b5ad4fb3, type: 3}
+  - {fileID: 21300000, guid: ad9f8e566ce0a44c9a0ed921b61af0d3, type: 3}
+  - {fileID: 21300000, guid: 3f0133c41eb674e66a2add211e4e2d60, type: 3}
+  - {fileID: 21300000, guid: bb84bd01e62664cb985f55c51df47fb7, type: 3}

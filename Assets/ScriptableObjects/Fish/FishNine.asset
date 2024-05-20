@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
   m_Name: FishNine
   m_EditorClassIdentifier: 
-  rarity: 2
-  name: Fish Nine
+  rarity: 1
+  name: PufferFish
   sprite: {fileID: 0}
   description: Ploncton
   prefab: {fileID: 5877730983461625971, guid: 9d75bf3d15bf84d77aeebd9996c07521, type: 3}
-  fishType: 8
+  fishType: 4
   bodyColors:
   - {r: 0.56078434, g: 0.3019608, b: 0.34117648, a: 1}
   - {r: 0.6117647, g: 0.3529412, b: 0.3529412, a: 1}
@@ -58,5 +58,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c7e0fb23579b346f987e88e8f0f2bf8f, type: 3}
   - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
   - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
-  - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}
-  accessories: []
+  - {fileID: 21300000, guid: 0e75776160bac4d9fae0a5eee24db34d, type: 3}
+  - {fileID: 21300000, guid: 3a5313a0a7c7c4e4490b021f6314b927, type: 3}
+  - {fileID: 21300000, guid: 142261ef0160b48458a8e921ad330f1f, type: 3}
+  accessories:
+  - {fileID: 21300000, guid: 22c9019dc5e7a40879fa41b8acc753dd, type: 3}
+  - {fileID: 21300000, guid: 49f823441bd62479bbfaa5e9b5ad4fb3, type: 3}
+  - {fileID: 21300000, guid: ad9f8e566ce0a44c9a0ed921b61af0d3, type: 3}
+  - {fileID: 21300000, guid: 3f0133c41eb674e66a2add211e4e2d60, type: 3}
+  - {fileID: 21300000, guid: bb84bd01e62664cb985f55c51df47fb7, type: 3}
