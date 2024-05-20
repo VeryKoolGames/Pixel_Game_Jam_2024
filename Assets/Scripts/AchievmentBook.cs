@@ -15,7 +15,7 @@ public class FishCardUI
     public FishTypes fishType;
 }
 
-public class AchievmentBook : ValidatedMonoBehaviour
+public class AchievmentBook : MonoBehaviour
 {
     [SerializeField] private OnRewardUnlocked onRewardUnlocked;
     [SerializeField] private List<FishCardUI> fishCarsdUILigneOne;

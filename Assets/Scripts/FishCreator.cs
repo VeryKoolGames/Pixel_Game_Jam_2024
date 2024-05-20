@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace DefaultNamespace
         private int fishListInGame;
         [SerializeField] private Counter maxFish;
         [SerializeField] private Counter startFishAmount;
+        [SerializeField] private SpriteRenderer caveSprite;
         private Dictionary<FishTypes, int> fishTypesCounter = new Dictionary<FishTypes, int>();
         [SerializeField] private GameObject UltimateFish;
         private bool canSpawnUltimateFish;
@@ -61,15 +63,25 @@ namespace DefaultNamespace
         public void OnGameSceneStart()
         {
             FishSO fishSO = GetFishSO(0);
+            caveSprite.sortingOrder = 50;
             for (int i = 0; i < startFishAmount.counter; i++)
             {
                 SpawnFishOnStart(fishSO);
             }
+
+            StartCoroutine(WaitForFishSpawn());
+        }
+
+        private IEnumerator WaitForFishSpawn()
+        {
+            yield return new WaitForSeconds(2);
+            caveSprite.sortingOrder = 2;
         }
 
         private void Start()
         {
             onFishDeath.Response.AddListener(OnFishDeath);
+            OnGameSceneStart();
         }
         
         public void SetSpawnUltimateFish(bool value)
@@ -127,6 +139,18 @@ namespace DefaultNamespace
         public void CreateFish(FishSO fishSO)
         {
             SpawnFish(fishSO);
+        }
+
+        public void RaiseFishEvent(Flock chosenFlock, GameObject obj)
+        {
+            if (chosenFlock == flockOne)
+            {
+                onFishSpawn.Raise(obj);
+            }
+            else
+            {
+                onFishSpawnOtherFlock.Raise(obj);
+            }
         }
         
         private void SpawnFish(FishSO fishSO)

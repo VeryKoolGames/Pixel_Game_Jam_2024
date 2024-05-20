@@ -233,14 +233,21 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     {
         var sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOMoveX(-5, 4f).SetEase(Ease.InOutQuad));
+        float delay = 0f;
+        Vector2 RandomspawnPoint = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+        sequence.Append(transform.DOMove(RandomspawnPoint, 4f).SetEase(Ease.InOutQuad));
 
         for (int i = 0; i < 8; i++)
         {
-            sequence.Append(transform.DOBlendableMoveBy(new Vector3(0, 0.5f, 0), 0.25f).SetEase(Ease.InOutQuad));
-            sequence.Append(transform.DOBlendableMoveBy(new Vector3(0, -0.5f, 0), 0.25f).SetEase(Ease.InOutQuad));
+            sequence.Insert(delay,transform.DOBlendableMoveBy(new Vector3(0, 0.1f, 0), 0.25f).SetEase(Ease.InOutQuad));
+            delay += 0.25f;
+            sequence.Insert(delay,transform.DOBlendableMoveBy(new Vector3(0, -0.1f, 0), 0.25f).SetEase(Ease.InOutQuad));
+            delay += 0.25f;
         }
 
-        sequence.OnComplete(() => chosenFlock.AddAgentFromFish(_flockAgent));
+        sequence.OnComplete(() =>
+        {
+            FishCreator.Instance.RaiseFishEvent(chosenFlock, gameObject);
+        });
     }
 }

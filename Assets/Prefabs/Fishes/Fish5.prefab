@@ -5497,7 +5497,7 @@ MonoBehaviour:
   finRenderer: {fileID: 1788989915477415126}
   eyeRenderer: {fileID: 4950338070067366010}
   patternRenderer: {fileID: 208090277425096384}
-  accessoryRenderer: {fileID: 0}
+  accessoryRenderer: {fileID: 1921760807819004767}
   accessorySprites: []
 --- !u!1 &7995379668983099222
 GameObject:
