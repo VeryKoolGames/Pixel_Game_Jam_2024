@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7031434ca5c64e0d976ffe7c09677ed4, type: 3}
-  m_Name: FishModel
+  m_Script: {fileID: 11500000, guid: 746223eaa967404a8dc16ce374d7e130, type: 3}
+  m_Name: OnCardCanvasZoom
   m_EditorClassIdentifier: 

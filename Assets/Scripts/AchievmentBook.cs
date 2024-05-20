@@ -10,8 +10,7 @@ using UnityEngine.UI;
 [Serializable]
 public class FishCardUI
 {
-    public TextMeshProUGUI fishDescription;
-    public Image fishSprite;
+    public GameObject fishCard;
     public TextMeshProUGUI fishName;
     public FishTypes fishType;
 }
@@ -23,10 +22,19 @@ public class AchievmentBook : ValidatedMonoBehaviour
     [SerializeField] private List<FishCardUI> fishCarsdUILigneTwo;
     [SerializeField] private List<FishCardUI> fishCarsdUILigneThree;
     private Dictionary<int, List<FishCardUI>> fishCardsUi;
+    private Dictionary<int, int> amountUnlockedPerLines;
+    [SerializeField] private List<GameObject> rewardButtons;
     private int cardUnlockedCounter;
+    private int rewardUnlockedCounter;
 
     private void Start()
     {
+        amountUnlockedPerLines = new Dictionary<int, int>
+        {
+            {0, 0},
+            {1, 0},
+            {2, 0}
+        };
         fishCardsUi = new Dictionary<int, List<FishCardUI>>
         {
             {0, fishCarsdUILigneOne},
@@ -45,26 +53,42 @@ public class AchievmentBook : ValidatedMonoBehaviour
         SetFishCardOnUi(fish);
     }
 
+    public void UnlockRewardOne()
+    {
+        onRewardUnlocked.Raise(0);
+    }
+    
+    public void UnlockRewardTwo()
+    {
+        onRewardUnlocked.Raise(1);
+    }
+    
+    public void UnlockRewardThree()
+    {
+        onRewardUnlocked.Raise(2);
+    }
+
     private void SetFishCardOnUi(Fish fish)
     {
         List<FishCardUI> fishCards = fishCardsUi[fish.FishRarety];
-        if (fishCards.Count == 0)
-        {
-            return;
-        }
 
         foreach (var card in fishCards)
         {
             if (card.fishType == fish.FishType)
             {
-                card.fishSprite.sprite = fish.FishSprite;
                 card.fishName.text = fish.FishName;
-                card.fishDescription.text = fish.FishDescription;
-                fishCardsUi[fish.FishRarety].Remove(card);
-                if (fishCardsUi[fish.FishRarety].Count == 0)
+                card.fishCard.SetActive(true);
+                amountUnlockedPerLines[fish.FishRarety]++;
+                if (amountUnlockedPerLines[fish.FishRarety] == 4)
                 {
-                    onRewardUnlocked.Raise(fish.FishRarety);
+                    rewardButtons[fish.FishRarety].SetActive(true);
+                    rewardUnlockedCounter++;
+                    if (rewardUnlockedCounter == 3)
+                    {
+                        FishCreator.Instance.SetSpawnUltimateFish(true);
+                    }
                 }
+                break;
             }
         }
     }

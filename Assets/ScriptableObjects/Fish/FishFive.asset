@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
   m_Name: FishFive
   m_EditorClassIdentifier: 
-  rarity: 0
-  name: Fish four
+  rarity: 1
+  name: Fish five
   sprite: {fileID: 0}
   description: Ploncton
   prefab: {fileID: 5877730983461625971, guid: 724052475236f47578b083e33b17f4df, type: 3}
@@ -57,3 +57,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
   - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
   - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}
+  accessories: []

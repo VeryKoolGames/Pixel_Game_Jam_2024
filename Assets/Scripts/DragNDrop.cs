@@ -142,7 +142,6 @@ public class DragNDrop : ValidatedMonoBehaviour
     private void DetectMovement()
     {
         Vector3 currentPosition = transform.position;
-        Debug.Log("Dectecting movement");
         if (currentPosition != lastPosition && isDragging)
         {
             playSound();

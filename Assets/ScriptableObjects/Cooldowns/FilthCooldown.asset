@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24137e78381841c6a6dffcafeddf3fec, type: 3}
   m_Name: FilthCooldown
   m_EditorClassIdentifier: 
-  cooldownTime: 15
+  cooldownTime: 5

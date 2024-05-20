@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   description: Clown Fish
   prefab: {fileID: 5877730983461625971, guid: 29bf5c71c4246441181e42e97b04da9c, type: 3}
-  fishType: 4
+  fishType: 3
   bodyColors:
   - {r: 0.13725491, g: 0.23137255, b: 0.21176471, a: 1}
   - {r: 0.16470589, g: 0.34901962, b: 0.30980393, a: 1}
