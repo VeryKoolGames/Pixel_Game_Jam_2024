@@ -32,6 +32,35 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
         rectTransform.DOMove(baseTransform, .7f);
         rectTransform.DOScale(baseScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(false));
     }
+    
+    void Update()
+    {
+        if (isZoomed && Input.GetMouseButtonDown(0))
+        {
+            if (!IsPointerOverUIObject(rectTransform))
+            {
+                CloseZoom();
+            }
+        }
+    }
+
+    private bool IsPointerOverUIObject(RectTransform rectTransform)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)
+        };
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == rectTransform.gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -56,5 +85,10 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
         isZoomed = true;
         rectTransform.DOMove(targetTransform.transform.position, .7f);
         rectTransform.DOScale(targetScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(true));
+    }
+    
+    public void PlaySoundOnButtonClick()
+    {
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.chestSound, transform.position);
     }
 }

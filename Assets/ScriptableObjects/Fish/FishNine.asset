@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 1
   name: PufferFish
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f1fe9365cd7d9497faeeffe96c0d5e2f, type: 3}
   description: Ploncton
   prefab: {fileID: 5877730983461625971, guid: 9d75bf3d15bf84d77aeebd9996c07521, type: 3}
-  fishType: 4
+  fishType: 5
   bodyColors:
   - {r: 0.56078434, g: 0.3019608, b: 0.34117648, a: 1}
   - {r: 0.6117647, g: 0.3529412, b: 0.3529412, a: 1}

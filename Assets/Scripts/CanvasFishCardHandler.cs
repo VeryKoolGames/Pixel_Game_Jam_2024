@@ -44,6 +44,7 @@ public class CanvasFishCardHandler : ValidatedMonoBehaviour, IPointerEnterHandle
             baseTransform = cardTransform.transform.position;
             isPointerOver = true;
             tween = cardTransform.DOMoveY(baseTransform.y - 10f, 1f).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
+            AudioManager.Instance.PlayOneShot(FmodEvents.Instance.bubblePop, transform.position);
         }
     }
 }

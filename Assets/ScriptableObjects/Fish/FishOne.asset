@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rarity: 0
   name: GoldFish
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 75feff909d1a94500be98237650d5404, type: 3}
   description: Petit poisson d'eau douce
   prefab: {fileID: 5877730983461625971, guid: 1c0cd11da72c2410ea829bed699286f2, type: 3}
   fishType: 0
