@@ -228,4 +228,19 @@ public class FishReproductionManager : ValidatedMonoBehaviour
         stateMachine.ChangeState(idleState);
         otherFish.stateMachine.ChangeState(idleState);
     }
+
+    public void OnGameStart()
+    {
+        var sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOMoveX(-5, 4f).SetEase(Ease.InOutQuad));
+
+        for (int i = 0; i < 8; i++)
+        {
+            sequence.Append(transform.DOBlendableMoveBy(new Vector3(0, 0.5f, 0), 0.25f).SetEase(Ease.InOutQuad));
+            sequence.Append(transform.DOBlendableMoveBy(new Vector3(0, -0.5f, 0), 0.25f).SetEase(Ease.InOutQuad));
+        }
+
+        sequence.OnComplete(() => chosenFlock.AddAgentFromFish(_flockAgent));
+    }
 }

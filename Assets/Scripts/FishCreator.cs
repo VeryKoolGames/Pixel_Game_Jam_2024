@@ -17,6 +17,7 @@ namespace DefaultNamespace
         [SerializeField] private Flock flockTwo;
         private Dictionary<int, List<FishSO>> fishDictionary = new Dictionary<int, List<FishSO>>();
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Transform startGameSpawnPoint;
         private int fishListInGame;
         [SerializeField] private Counter maxFish;
         [SerializeField] private Counter startFishAmount;
@@ -48,14 +49,26 @@ namespace DefaultNamespace
             }
         }
 
-        private void Start()
+        public void OnStartSceneStart()
         {
-            FishSO fishSO = GetFishSO(0);
             for (int i = 0; i < startFishAmount.counter; i++)
             {
                 CreateFish(0);
                 RandomizeSpawnPoint();
             }
+        }
+
+        public void OnGameSceneStart()
+        {
+            FishSO fishSO = GetFishSO(0);
+            for (int i = 0; i < startFishAmount.counter; i++)
+            {
+                SpawnFishOnStart(fishSO);
+            }
+        }
+
+        private void Start()
+        {
             onFishDeath.Response.AddListener(OnFishDeath);
         }
         
@@ -95,19 +108,12 @@ namespace DefaultNamespace
             {
                 Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
                 FishCustomization fishAttributes = GetFishAttributes(fishSO);
-                GameObject obj = Instantiate(fishSO.prefab, spawnPoint.position, Quaternion.identity);
+                GameObject obj = Instantiate(fishSO.prefab, startGameSpawnPoint.position, Quaternion.identity);
                 obj.GetComponent<FishCustomizeManager>().CustomizeFish(fishAttributes);
                 obj.GetComponent<FishReproductionManager>().SetFish(fish);
                 Flock chosenFlock = GetRandomEvent();
-                if (chosenFlock == flockOne)
-                {
-                    onFishSpawn.Raise(obj);
-                }
-                else
-                {
-                    onFishSpawnOtherFlock.Raise(obj);
-                }
                 obj.GetComponent<FishReproductionManager>().SetChosenFlock(chosenFlock);
+                obj.GetComponent<FishReproductionManager>().OnGameStart();
                 CountFishTypes(fish);
                 fishListInGame++;
             }
