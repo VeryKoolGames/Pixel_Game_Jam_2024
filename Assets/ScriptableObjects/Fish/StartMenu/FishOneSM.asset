@@ -16,7 +16,7 @@ MonoBehaviour:
   name: Bernard
   sprite: {fileID: 0}
   description: Petit poisson d'eau douce
-  prefab: {fileID: 5877730983461625971, guid: c4453103e6cde4b52b857d11f21b3c1d, type: 3}
+  prefab: {fileID: 5877730983461625971, guid: 346f8516ddb654498a28d8a8c3c32341, type: 3}
   fishType: 0
   bodyColors:
   - {r: 0.9019608, g: 0.47058824, b: 0.22352941, a: 1}

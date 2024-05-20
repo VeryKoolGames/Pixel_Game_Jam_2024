@@ -18,11 +18,10 @@ public class StartGameManager : MonoBehaviour
     public void OnGameStart()
     {
         fadeImage.transform.gameObject.SetActive(true);
-        canvas.DOMoveX(-100, 1f);
-        fadeImage.DOFade(0, 1f).OnComplete((() =>
+        canvas.DOMoveX(-100, 1f).OnComplete((() =>
         {
             FishCreator.Instance.OnGameSceneStart();
             gameObject.SetActive(false);
-        }));
+        }));;
     }
 }
