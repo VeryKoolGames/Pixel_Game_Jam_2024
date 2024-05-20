@@ -9,9 +9,9 @@ using Random = UnityEngine.Random;
 
 public class FishReproductionManager : ValidatedMonoBehaviour
 {
-    [SerializeField] private float maxFishHunger;
+    [SerializeField] private Counter maxFishHunger;
+    [SerializeField] private Counter foodBeforeStarving;
     [SerializeField] private float fishLifeSpan;
-    [SerializeField] private float fishReproductionCooldown;
     [SerializeField] private float detectionRadius = 5f;
     public OnFishDeath onFishDeath;
     public GameObject loveParticle;
@@ -21,6 +21,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     private bool hasEaten = true;
     private float checkSexTimer;
     private float checkFishionTimer;
+    [SerializeField] private Cooldown fishReproductionCooldown;
     [SerializeField] private Cooldown checkSexInterval;
     [SerializeField] private Cooldown checkFishionInterval;
     [SerializeField, Self] public FlockAgent _flockAgent;
@@ -53,7 +54,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
 
     private void Start()
     {
-        currentHunger = maxFishHunger;
+        currentHunger = 0;
         stateMachine = new StateMachine();
 
         idleState = new IdleState();
@@ -106,8 +107,9 @@ public class FishReproductionManager : ValidatedMonoBehaviour
 
     public void FishFeedHandler()
     {
-        currentHunger -= Time.deltaTime;
-        if (currentHunger <= 50)
+        if (currentHunger > 0)
+            currentHunger -= Time.deltaTime;
+        if (currentHunger <= foodBeforeStarving.counter)
         {
             hasEaten = false;
         }
@@ -127,7 +129,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void FishSexHandler()
     {
         currentReproductionRate += Time.deltaTime;
-        if (currentReproductionRate >= fishReproductionCooldown && stateMachine.CurrentState != reproducingState)
+        if (currentReproductionRate >= fishReproductionCooldown.cooldownTime && stateMachine.CurrentState != reproducingState)
         {
             stateMachine.ChangeState(readyToReproduceState);
         }
@@ -137,7 +139,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     {
         if (other.CompareTag("FoodEat"))
         {
-            currentHunger = maxFishHunger;
+            currentHunger = maxFishHunger.counter;
             hasEaten = true;
             Destroy(other.transform.parent.gameObject);
         }
@@ -155,7 +157,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
 
     public void OnBubblePop()
     {
-        currentHunger = maxFishHunger;
+        currentHunger = maxFishHunger.counter;
         hasEaten = true;
         stateMachine.ChangeState(readyToReproduceState);
     }

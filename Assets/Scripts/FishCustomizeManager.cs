@@ -11,7 +11,7 @@ public class FishCustomizeManager : MonoBehaviour
     [SerializeField] private SpriteRenderer patternRenderer;
     [SerializeField] private SpriteRenderer accessoryRenderer;
     [SerializeField] private Sprite[] accessorySprites;
-    private static int currentLayer = 0;
+    private static int currentLayer = 10;
     
     public void CustomizeFish(FishCustomization fishCustomization)
     {
@@ -27,6 +27,16 @@ public class FishCustomizeManager : MonoBehaviour
         finRenderer.color = fishCustomization.otherColor;
         tailRenderer.color = fishCustomization.otherColor;
         accessorySprites = fishCustomization.accessorySprites;
+        bodyRenderer.sortingOrder = currentLayer++;
+        patternRenderer.sortingOrder = currentLayer++;
+        finRenderer.sortingOrder = currentLayer++;
+        tailRenderer.sortingOrder = currentLayer++;
+        eyeRenderer.sortingOrder = currentLayer++;
+        accessoryRenderer.sortingOrder = currentLayer++;
+        if (currentLayer > 1000)
+        {
+            currentLayer = 0;
+        }
         RandomizeAccessory();
     }
     
