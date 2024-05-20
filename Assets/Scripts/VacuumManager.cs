@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class VacuumManager : MonoBehaviour
 {
-    [SerializeField] private float vacuumForce = 10f; // The force with which objects are pulled towards the tube
     [SerializeField] private float vacuumRange = 1f; // The range within which objects are affected
     [SerializeField] private float vacuumSpeed = 1f; // The range within which objects are affected
     [SerializeField] private float destroyDistance = .1f; 

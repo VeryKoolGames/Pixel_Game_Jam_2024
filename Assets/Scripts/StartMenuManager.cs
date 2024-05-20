@@ -18,6 +18,7 @@ public class StartMenuManager : MonoBehaviour
     {
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.waterAmbiance, Vector3.zero);
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.mainMusic, Vector3.zero);
+        FishCreator.Instance.OnStartSceneStart();
     }
 
     public void OnGameStart()
@@ -31,14 +32,12 @@ public class StartMenuManager : MonoBehaviour
             Vector3 pos = elem.GetComponent<RectTransform>().position;
             pos.x += 60;
 
-            // Insert the move and fade tweens with a delay between each start
             sequence.Insert(delay, elem.GetComponent<RectTransform>().DOMove(pos, 0.2f));
             sequence.Insert(delay, elem.GetComponent<Image>().DOFade(0, 0.2f));
 
-            delay += 0.1f; // Increase the delay for the next element
+            delay += 0.1f;
         }
 
-        // Insert the final canvas move with the accumulated delay
         sequence.Insert(delay, canvas.DOMove(target.position, 1f).SetEase(Ease.InCubic));
         sequence.OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
     }

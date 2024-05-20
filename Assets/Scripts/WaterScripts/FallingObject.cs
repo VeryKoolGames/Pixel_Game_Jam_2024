@@ -9,10 +9,6 @@ public class FallingObject : MonoBehaviour
     [SerializeField]
     private float forceAmount;
     private float timeElapsed;
-    private bool isMoving = false;
-    void Start()
-    {
-    }
 
     void Update() { 
         

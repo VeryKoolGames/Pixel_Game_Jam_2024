@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
 using UnityEngine;
@@ -17,9 +18,11 @@ namespace DefaultNamespace
         [SerializeField] private Flock flockTwo;
         private Dictionary<int, List<FishSO>> fishDictionary = new Dictionary<int, List<FishSO>>();
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Transform startGameSpawnPoint;
         private int fishListInGame;
         [SerializeField] private Counter maxFish;
         [SerializeField] private Counter startFishAmount;
+        [SerializeField] private SpriteRenderer caveSprite;
         private Dictionary<FishTypes, int> fishTypesCounter = new Dictionary<FishTypes, int>();
         [SerializeField] private GameObject UltimateFish;
         private bool canSpawnUltimateFish;
@@ -48,15 +51,37 @@ namespace DefaultNamespace
             }
         }
 
-        private void Start()
+        public void OnStartSceneStart()
         {
-            FishSO fishSO = GetFishSO(0);
             for (int i = 0; i < startFishAmount.counter; i++)
             {
                 CreateFish(0);
                 RandomizeSpawnPoint();
             }
+        }
+
+        public void OnGameSceneStart()
+        {
+            FishSO fishSO = GetFishSO(0);
+            caveSprite.sortingOrder = 50;
+            for (int i = 0; i < startFishAmount.counter; i++)
+            {
+                SpawnFishOnStart(fishSO);
+            }
+
+            StartCoroutine(WaitForFishSpawn());
+        }
+
+        private IEnumerator WaitForFishSpawn()
+        {
+            yield return new WaitForSeconds(2);
+            caveSprite.sortingOrder = 2;
+        }
+
+        private void Start()
+        {
             onFishDeath.Response.AddListener(OnFishDeath);
+            OnGameSceneStart();
         }
         
         public void SetSpawnUltimateFish(bool value)
@@ -95,19 +120,12 @@ namespace DefaultNamespace
             {
                 Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
                 FishCustomization fishAttributes = GetFishAttributes(fishSO);
-                GameObject obj = Instantiate(fishSO.prefab, spawnPoint.position, Quaternion.identity);
+                GameObject obj = Instantiate(fishSO.prefab, startGameSpawnPoint.position, Quaternion.identity);
                 obj.GetComponent<FishCustomizeManager>().CustomizeFish(fishAttributes);
                 obj.GetComponent<FishReproductionManager>().SetFish(fish);
                 Flock chosenFlock = GetRandomEvent();
-                if (chosenFlock == flockOne)
-                {
-                    onFishSpawn.Raise(obj);
-                }
-                else
-                {
-                    onFishSpawnOtherFlock.Raise(obj);
-                }
                 obj.GetComponent<FishReproductionManager>().SetChosenFlock(chosenFlock);
+                obj.GetComponent<FishReproductionManager>().OnGameStart();
                 CountFishTypes(fish);
                 fishListInGame++;
             }
@@ -121,6 +139,18 @@ namespace DefaultNamespace
         public void CreateFish(FishSO fishSO)
         {
             SpawnFish(fishSO);
+        }
+
+        public void RaiseFishEvent(Flock chosenFlock, GameObject obj)
+        {
+            if (chosenFlock == flockOne)
+            {
+                onFishSpawn.Raise(obj);
+            }
+            else
+            {
+                onFishSpawnOtherFlock.Raise(obj);
+            }
         }
         
         private void SpawnFish(FishSO fishSO)

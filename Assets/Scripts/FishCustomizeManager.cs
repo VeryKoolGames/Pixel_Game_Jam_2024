@@ -25,6 +25,8 @@ public class FishCustomizeManager : MonoBehaviour
         }
         finRenderer.color = fishCustomization.otherColor;
         tailRenderer.color = fishCustomization.otherColor;
+        accessorySprites = fishCustomization.accessorySprites;
+        RandomizeAccessory();
     }
     
     public void ModifyFishAccessory()
@@ -35,5 +37,13 @@ public class FishCustomizeManager : MonoBehaviour
         }
         Sprite accessorySprite = accessorySprites[Random.Range(0, accessorySprites.Length)];
         accessoryRenderer.sprite = accessorySprite;
+    }
+    
+    private void RandomizeAccessory()
+    {
+        if (Random.Range(0f, 1f) > 0.9f)
+        {
+            ModifyFishAccessory();
+        }
     }
 }
