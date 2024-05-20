@@ -18,7 +18,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     private float currentLifeSpan;
     private float currentHunger;
     public float currentReproductionRate;
-    private bool hasEaten = true;
+    private bool hasEaten = false;
     private float checkSexTimer;
     private float checkFishionTimer;
     [SerializeField] private Cooldown fishReproductionCooldown;
@@ -129,7 +129,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void FishSexHandler()
     {
         currentReproductionRate += Time.deltaTime;
-        if (currentReproductionRate >= fishReproductionCooldown.cooldownTime && stateMachine.CurrentState != reproducingState)
+        if (hasEaten && currentReproductionRate >= fishReproductionCooldown.cooldownTime && stateMachine.CurrentState != reproducingState)
         {
             stateMachine.ChangeState(readyToReproduceState);
         }
