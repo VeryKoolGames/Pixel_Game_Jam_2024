@@ -14,6 +14,7 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
     private Vector3 targetScale;
     private bool isPointerOver = false; // Flag to track pointer state
     private bool isZoomed = false; // Flag to track zoom state
+    [SerializeField] private OnCardCanvasZoom onCardCanvasZoom;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +25,18 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
         targetScale.x = 9;
         targetScale.y = 9;
     }
+    
+    public void CloseZoom()
+    {
+        isZoomed = false;
+        rectTransform.DOMove(baseTransform, .7f);
+        rectTransform.DOScale(baseScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(false));
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!isPointerOver && !isZoomed)
         {
-            Debug.Log("Pointer Enter");
             isPointerOver = true;
             rectTransform.DOMoveY(baseTransform.y - 40f, .2f);
         }
@@ -48,6 +55,6 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
     {
         isZoomed = true;
         rectTransform.DOMove(targetTransform.transform.position, .7f);
-        rectTransform.DOScale(targetScale, .7f);
+        rectTransform.DOScale(targetScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(true));
     }
 }

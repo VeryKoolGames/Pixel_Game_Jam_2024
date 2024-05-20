@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86781c179d824649837cdd02888fcc77, type: 3}
   m_Name: FishSeven
   m_EditorClassIdentifier: 
-  rarity: 2
-  name: PufferFish
+  rarity: 1
+  name: Fish Seven
   sprite: {fileID: 0}
   description: Ploncton
   prefab: {fileID: 5877730983461625971, guid: 1af5db16652c541f89e24350f5369a0b, type: 3}
-  fishType: 4
+  fishType: 6
   bodyColors:
   - {r: 0.16862746, g: 0.07450981, b: 1, a: 1}
   - {r: 0.07450981, g: 0.21568628, b: 1, a: 1}
@@ -54,3 +54,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ceaf6ea84fa9148b0b792bc161ebc0c4, type: 3}
   - {fileID: 21300000, guid: 31232bb5cb90b41b88b3e3d706261691, type: 3}
   - {fileID: 21300000, guid: 44f61c40d1da64fb1b02b5ca2b59b8a7, type: 3}
+  accessories: []

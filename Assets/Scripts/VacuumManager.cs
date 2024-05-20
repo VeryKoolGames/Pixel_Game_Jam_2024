@@ -16,7 +16,6 @@ public class VacuumManager : MonoBehaviour
         // Check if the object should be vacuumed
         if (other.CompareTag("Vacuumable"))
         {
-            Debug.Log("Vacuuming");
             other.transform.position = Vector2.MoveTowards(other.transform.position, transform.position, vacuumSpeed * Time.deltaTime);
 
             float distanceToVacuum = Vector2.Distance(transform.position, other.transform.position);
@@ -39,7 +38,6 @@ public class VacuumManager : MonoBehaviour
         if (other.CompareTag("Water"))
         {
             PLAYBACK_STATE playbackState;
-            Debug.Log("Underwater");
             dragNDropVacuum.aspiSound.getPlaybackState(out playbackState);
 
             if (playbackState == PLAYBACK_STATE.PLAYING)

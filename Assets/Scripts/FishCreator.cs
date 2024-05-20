@@ -1,24 +1,30 @@
 using System;
 using System.Collections.Generic;
+using KBCore.Refs;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
-    public class FishCreator : MonoBehaviour
+    public class FishCreator : ValidatedMonoBehaviour
     {
         public static FishCreator Instance { get; private set; }
         [SerializeField] private List<FishSO> fishList = new List<FishSO>();
         [SerializeField] private OnFishSpawn onFishSpawn;
         [SerializeField] private OnFishSpawn onFishSpawnOtherFlock;
+        [SerializeField, Self] private OnFishDeathListener onFishDeath;
         [SerializeField] private Flock flockOne;
         [SerializeField] private Flock flockTwo;
         private Dictionary<int, List<FishSO>> fishDictionary = new Dictionary<int, List<FishSO>>();
         [SerializeField] private Transform spawnPoint;
-        [SerializeField] private List<Fish> fishListInGame = new List<Fish>();
+        private int fishListInGame;
         [SerializeField] private Counter maxFish;
         [SerializeField] private Counter startFishAmount;
         private Dictionary<FishTypes, int> fishTypesCounter = new Dictionary<FishTypes, int>();
+        [SerializeField] private GameObject UltimateFish;
+        private bool canSpawnUltimateFish;
+        private bool hasSpawnedUltimateFish;
+        
         private void Awake()
         {
             if (Instance == null)
@@ -49,20 +55,42 @@ namespace DefaultNamespace
                 CreateFish(0);
                 RandomizeSpawnPoint();
             }
+            onFishDeath.Response.AddListener(OnFishDeath);
+        }
+        
+        public void SetSpawnUltimateFish(bool value)
+        {
+            canSpawnUltimateFish = value;
         }
 
         public Dictionary<FishTypes, int> GetFishCount()
         {
             return fishTypesCounter;
         }
+
+        private void OnFishDeath(FlockAgent arg0)
+        {
+            fishListInGame--;
+        }
         
 
         public void CreateFish(Fish fishOne, Fish fishTwo)
         {
-            int rarity = GetFishRarity(fishOne.FishRarety, fishTwo.FishRarety);
-            FishSO fishSO = GetFishSO(rarity);
-            Debug.Log(fishSO + " of rarity: " + rarity);
-            SpawnFish(fishSO);
+            if (canSpawnUltimateFish && !hasSpawnedUltimateFish && Random.Range(0, 100) < 30)
+            {
+                SpawnUltimateFish();
+            }
+            else
+            {
+                int rarity = GetFishRarity(fishOne.FishRarety, fishTwo.FishRarety);
+                FishSO fishSO = GetFishSO(rarity);
+                SpawnFish(fishSO);
+            }
+        }
+
+        private void SpawnUltimateFish()
+        {
+            UltimateFish.SetActive(true);
         }
         
         public void CreateFish(FishSO fishSO)
@@ -72,7 +100,7 @@ namespace DefaultNamespace
         
         private void SpawnFish(FishSO fishSO)
         {
-            if (fishSO != null && fishListInGame.Count < maxFish.counter)
+            if (fishSO != null && fishListInGame < maxFish.counter)
             {
                 Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
                 FishCustomization fishAttributes = GetFishAttributes(fishSO);
@@ -90,7 +118,7 @@ namespace DefaultNamespace
                 }
                 obj.GetComponent<FishReproductionManager>().SetChosenFlock(chosenFlock);
                 CountFishTypes(fish);
-                fishListInGame.Add(fish);
+                fishListInGame++;
             }
         }
 
@@ -132,7 +160,6 @@ namespace DefaultNamespace
         {
             FishSO fishSO = GetFishSO(rarity);
             SpawnFish(fishSO);
-            Debug.Log(fishSO + " of rarity: " + rarity);
         }
         
         private FishSO GetFishSO(int rarity)
@@ -165,5 +192,11 @@ namespace DefaultNamespace
         {
             spawnPoint.position = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
         }
+
+        public Dictionary<FishTypes, int> GetEndingData()
+        {
+            return fishTypesCounter;
+        }
+
     }
 }
