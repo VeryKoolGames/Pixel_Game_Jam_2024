@@ -7,7 +7,7 @@ using DefaultNamespace;
 public class FishSO : ScriptableObject
 {
     public int rarity;
-    public string name;
+    public new string name;
     public Sprite sprite;
     public string description;
     public GameObject prefab;

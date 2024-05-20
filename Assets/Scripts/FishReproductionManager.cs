@@ -232,6 +232,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void OnGameStart()
     {
         var sequence = DOTween.Sequence();
+        sequence.AppendInterval(Random.Range(0, 1f));
 
         float delay = 0f;
         sequence.Append(transform.DOMoveX(-0.5f, 4f).SetEase(Ease.InOutQuad));

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f816bf49eb9f466a9ab6cb969bbe73ea, type: 3}
   m_Name: MaxFish
   m_EditorClassIdentifier: 
-  counter: 20
+  counter: 50
