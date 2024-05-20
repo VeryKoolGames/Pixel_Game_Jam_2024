@@ -65,10 +65,10 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _color1: {r: 0.61574405, g: 0.9020099, b: 0.9528302, a: 1}
-    - _color2: {r: 0.6745283, g: 1, b: 0.9901364, a: 1}
+    - _color1: {r: 0.5896226, g: 0.96534264, b: 1, a: 1}
+    - _color2: {r: 0.5518868, g: 0.89671993, b: 1, a: 1}
     - _speed: {r: -0.5, g: 0.4, b: 0, a: 0}
-    - _tiling: {r: 80.32, g: 36.4, b: 0, a: 0}
+    - _tiling: {r: 60, g: 28.9, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1100525994585115592
 MonoBehaviour:
