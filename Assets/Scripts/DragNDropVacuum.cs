@@ -20,7 +20,7 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
 
     private Vector3 previousMousePosition;
 
-    private void Awake()
+    private void Start()
     {
         aspiSound = AudioManager.Instance.CreateInstance(FmodEvents.Instance.aspiNoise);
     }
