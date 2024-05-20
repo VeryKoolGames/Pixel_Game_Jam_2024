@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class StartGameManager : MonoBehaviour
 {
     [SerializeField] private RectTransform canvas;
-    [SerializeField] private Image fadeImage; 
+    [SerializeField] private RectTransform targetTransform;
+    [SerializeField] private Image fadeImage;
     private void Start()
     {
         OnGameStart();
@@ -17,8 +18,7 @@ public class StartGameManager : MonoBehaviour
 
     public void OnGameStart()
     {
-        fadeImage.transform.gameObject.SetActive(true);
-        canvas.DOMoveX(-100, 1f).OnComplete((() =>
+        canvas.DOMove(targetTransform.position, 2f).SetEase(Ease.InOutQuad).OnComplete((() =>
         {
             FishCreator.Instance.OnGameSceneStart();
             gameObject.SetActive(false);
