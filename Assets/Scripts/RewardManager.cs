@@ -29,16 +29,12 @@ public class RewardManager : ValidatedMonoBehaviour
     private void Awake()
     {
         onRewardUnlockedListener.Response.AddListener(UnlockReward);
-    }
-    
-    private void Start()
-    {
         foreach (var reward in rewards)
         {
             rewardDictionary.Add(rewards.IndexOf(reward), reward);
         }
     }
-
+    
     // Start is called before the first frame update
     public void UnlockReward(int rarity)
     {

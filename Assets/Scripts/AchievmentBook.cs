@@ -27,7 +27,7 @@ public class AchievmentBook : ValidatedMonoBehaviour
     private int cardUnlockedCounter;
     private int rewardUnlockedCounter;
 
-    private void Start()
+    private void Awake()
     {
         amountUnlockedPerLines = new Dictionary<int, int>
         {

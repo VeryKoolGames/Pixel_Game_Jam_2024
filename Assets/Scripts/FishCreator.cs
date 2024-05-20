@@ -50,6 +50,7 @@ namespace DefaultNamespace
 
         private void Start()
         {
+            FishSO fishSO = GetFishSO(0);
             for (int i = 0; i < startFishAmount.counter; i++)
             {
                 CreateFish(0);
@@ -85,6 +86,30 @@ namespace DefaultNamespace
                 int rarity = GetFishRarity(fishOne.FishRarety, fishTwo.FishRarety);
                 FishSO fishSO = GetFishSO(rarity);
                 SpawnFish(fishSO);
+            }
+        }
+
+        private void SpawnFishOnStart(FishSO fishSO)
+        {
+            if (fishSO != null && fishListInGame < maxFish.counter)
+            {
+                Fish fish = new Fish(fishSO.fishType, fishSO.name, fishSO.rarity, fishSO.description, fishSO.sprite);
+                FishCustomization fishAttributes = GetFishAttributes(fishSO);
+                GameObject obj = Instantiate(fishSO.prefab, spawnPoint.position, Quaternion.identity);
+                obj.GetComponent<FishCustomizeManager>().CustomizeFish(fishAttributes);
+                obj.GetComponent<FishReproductionManager>().SetFish(fish);
+                Flock chosenFlock = GetRandomEvent();
+                if (chosenFlock == flockOne)
+                {
+                    onFishSpawn.Raise(obj);
+                }
+                else
+                {
+                    onFishSpawnOtherFlock.Raise(obj);
+                }
+                obj.GetComponent<FishReproductionManager>().SetChosenFlock(chosenFlock);
+                CountFishTypes(fish);
+                fishListInGame++;
             }
         }
 

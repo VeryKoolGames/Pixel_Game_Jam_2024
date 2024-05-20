@@ -30,6 +30,7 @@ public class ButtonEvents : MonoBehaviour
         image.color = hoverColor;
 
         rectTransform.DOMove(targetRectTransform.position, speed);
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.hoverUISound, startRectTransform.position);
     }
 
     public void Exit()

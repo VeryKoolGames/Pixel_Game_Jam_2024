@@ -18,6 +18,7 @@ public class FmodEvents : MonoBehaviour
     public EventReference effervecense;
     public EventReference aspiNoise;
     public EventReference chestSound;
+    public EventReference hoverUISound;
 
     private void Awake()
     {
