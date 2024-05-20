@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4337111908358368910}
   - component: {fileID: 3823522436397340347}
   - component: {fileID: -3613190944113740067}
+  - component: {fileID: 5335731305128308427}
   m_Layer: 0
   m_Name: Filth
   m_TagString: Vacuumable
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0167da83c679640e785f3d919b78cea3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3ef103d754a9043f0be5e3c39ce1be6c, type: 3}
+  m_Color: {r: 0.27058825, g: 0.2901961, b: 0.41176474, a: 0.6039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,14 +124,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.13, y: 0.07}
+    oldSize: {x: 0.03, y: 0.03}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13330942, y: 0.086155295}
+  m_Size: {x: 0.113754116, y: 0.0950686}
   m_EdgeRadius: 0
 --- !u!50 &3823522436397340347
 Rigidbody2D:
@@ -171,3 +172,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b36c377c7974e378fbb8c2646c7400f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5335731305128308427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207813161269690038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f39c679217e4166929fbdc0042dac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: e1b56851ed93b4f2f98d1b12978a185c, type: 3}
+  - {fileID: 21300000, guid: d3bceea682e244d8c80dd5b47e8bdbfe, type: 3}
+  - {fileID: 21300000, guid: 3ef103d754a9043f0be5e3c39ce1be6c, type: 3}
+  - {fileID: 21300000, guid: 8d984c5de247b423dab1d9070d8b9a47, type: 3}
+  - {fileID: 21300000, guid: 5c3d53cb43b0d4a5dac8396e3c54ad9a, type: 3}
+  - {fileID: 21300000, guid: 9ea1802b8ed4c4536a23d6e67376968d, type: 3}
