@@ -81,7 +81,6 @@ namespace DefaultNamespace
         private void Start()
         {
             onFishDeath.Response.AddListener(OnFishDeath);
-            OnGameSceneStart();
         }
         
         public void SetSpawnUltimateFish(bool value)
