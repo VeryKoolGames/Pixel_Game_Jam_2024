@@ -27,6 +27,7 @@ namespace DefaultNamespace
         [SerializeField] private GameObject UltimateFish;
         private bool canSpawnUltimateFish;
         private bool hasSpawnedUltimateFish;
+        private bool shouldSpawnRarerFish;
         
         private void Awake()
         {
@@ -68,8 +69,14 @@ namespace DefaultNamespace
             {
                 SpawnFishOnStart(fishSO);
             }
-
+            StartCoroutine(AfterFishSpawn());
             StartCoroutine(WaitForFishSpawn());
+        }
+        
+        private IEnumerator AfterFishSpawn()
+        {
+            yield return new WaitForSeconds(30f);
+            shouldSpawnRarerFish = true;
         }
 
         private IEnumerator WaitForFishSpawn()
@@ -231,6 +238,10 @@ namespace DefaultNamespace
         
         private int GetFishRarity(int rarityOne, int rarityTwo)
         {
+            if (shouldSpawnRarerFish && Random.Range(0, 1f) < 0.2f)
+            {
+                return 2;
+            }
             if (rarityOne == rarityTwo)
             {
                 if (Random.Range(0f, 1f) < 0.8f)
