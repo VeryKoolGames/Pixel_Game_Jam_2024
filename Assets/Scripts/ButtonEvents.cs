@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
 using DG.Tweening;
-using UnityEditor.ShaderGraph.Internal;
 
 public class ButtonEvents : MonoBehaviour
 {

@@ -24,7 +24,6 @@ public class DragNDrop : ValidatedMonoBehaviour
     [SerializeField] private Sprite highlightSprite;
     private Sprite baseSprite;
     private EventInstance shakeSound;
-    private bool isSoundPlaying = false;
     [SerializeField] private float checkInterval = 0.2f; // Time interval to check for movement
     private Vector3 lastPosition;
 

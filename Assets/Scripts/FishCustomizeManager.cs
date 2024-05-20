@@ -11,6 +11,7 @@ public class FishCustomizeManager : MonoBehaviour
     [SerializeField] private SpriteRenderer patternRenderer;
     [SerializeField] private SpriteRenderer accessoryRenderer;
     [SerializeField] private Sprite[] accessorySprites;
+    private static int currentLayer = 0;
     
     public void CustomizeFish(FishCustomization fishCustomization)
     {
