@@ -5435,13 +5435,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c634337f2af44db5b1eded99c2206ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFishHunger: 55
+  maxFishHunger: {fileID: 11400000, guid: 4104cd24daf4a46e6a2c33daeb89c099, type: 2}
+  foodBeforeStarving: {fileID: 11400000, guid: 4b91286da78ee4fbeb8017f60789d05c, type: 2}
   fishLifeSpan: 50
-  fishReproductionCooldown: 2
   detectionRadius: 10
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 407254942699773554}
   currentReproductionRate: 0
+  fishReproductionCooldown: {fileID: 11400000, guid: dbe40049af9334d7ab117c80c0f9c9c5, type: 2}
   checkSexInterval: {fileID: 11400000, guid: cc59cc7632b5a4d6c9fc3a7749132017, type: 2}
   checkFishionInterval: {fileID: 11400000, guid: d9714a1b94b0e4b5cb3195d38e0fa09b, type: 2}
   _flockAgent: {fileID: 6065115914862394921}
