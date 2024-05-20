@@ -7,6 +7,7 @@ using KBCore.Refs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class LarryManager : ValidatedMonoBehaviour
 {
@@ -31,6 +32,7 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] Dialogue[] originalDialogues;
     private Dialogue[] dialogues;
     [SerializeField] private OnFishSpawn onFishSpawn;
+    private bool canChangeState;
     
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialogueUI;
@@ -81,6 +83,7 @@ public class LarryManager : ValidatedMonoBehaviour
         inHouseState.Initialize(this);
 
         stateMachine.ChangeState(earlyGameState);
+        StartCoroutine(WaitTwentySeconds());
         onFishSpawn.Raise(gameObject);
     }
 
@@ -91,12 +94,20 @@ public class LarryManager : ValidatedMonoBehaviour
 
     private void OnAquariumClean()
     {
-        stateMachine.ChangeState(idleState);
+        if (canChangeState)
+            stateMachine.ChangeState(idleState);
+    }
+    
+    private IEnumerator WaitTwentySeconds()
+    {
+        yield return new WaitForSeconds(20);
+        canChangeState = true;
     }
     
     private void OnAquariumDirty()
     {
-        stateMachine.ChangeState(grumpyState);
+        if (stateMachine.CurrentState != inHouseState && canChangeState)
+            stateMachine.ChangeState(grumpyState);
     }
     
     public void SetDialogueType(DialogueTypes dialogueType)
@@ -108,6 +119,10 @@ public class LarryManager : ValidatedMonoBehaviour
     {
         timeSinceLastSpeak += Time.deltaTime;
         if (timeSinceLastSpeak < coolDownBeforeSpeaking.cooldownTime)
+        {
+            return;
+        }
+        if (Random.Range(0f, 1f) > 0.8f && stateMachine.CurrentState != earlyGameState)
         {
             return;
         }
@@ -167,7 +182,6 @@ public class LarryManager : ValidatedMonoBehaviour
         Vector3 direction = (housePosition.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Perform the move and rotation
         transform.DORotate(new Vector3(0, 0, angle), 2f)
             .SetEase(Ease.OutQuart);
 

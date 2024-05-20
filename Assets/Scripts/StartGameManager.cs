@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using DG.Tweening;
-using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.UI;
 

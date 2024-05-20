@@ -33,7 +33,6 @@ public class WaterColorManager : ValidatedMonoBehaviour
         dirtyWaterColor.a = 1.0f;
         currentTween = waterMaterial.material.DOColor(dirtyWaterColor, "_Color", waterCooldown.cooldownTime).OnComplete(() =>
         {
-            smellParticles.SetActive(true);
             onWaterDirty.Raise();
         });
     }
@@ -44,7 +43,6 @@ public class WaterColorManager : ValidatedMonoBehaviour
         currentCleanTween?.Kill();
         currentCleanTween = waterMaterial.material.DOColor(baseColor,  5f).OnComplete(() =>
         {
-            smellParticles.SetActive(false);
             SetDirtyWaterColor();
             onWaterClean.Raise();
         });
