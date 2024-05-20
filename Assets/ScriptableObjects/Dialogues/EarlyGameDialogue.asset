@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueType: 0
   sentences:
+  - Please give us some food
+  - And keep this place clean
   - Another one "helping us" ?
-  - Where did they find you this time ?
   - The last one lasted 2 days

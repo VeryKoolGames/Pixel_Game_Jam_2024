@@ -14,7 +14,8 @@ public class LarryManager : ValidatedMonoBehaviour
     [SerializeField] private OnFilthCleanListener onFilthCleanListener;
     [SerializeField] private OnFilthInvasionListener onFilthInvasionListener;
     [SerializeField] private OnFilthCleanListener onWaterColorClean; 
-    [SerializeField] private Cooldown coolDownBeforeSpeaking;
+    [SerializeField] private Cooldown coolDownBeforeSpeakingSO;
+    [SerializeField] private float coolDownBeforeSpeaking;
     [SerializeField, Self] private OnLarryHouseSpawnListener onLarryHouseSpawn;
     [SerializeField] private OnFilthInvasionListener onWaterDirty;
     [SerializeField] private OnGameEvent onHouseArrival;
@@ -60,6 +61,7 @@ public class LarryManager : ValidatedMonoBehaviour
 
     private void Start()
     {
+        coolDownBeforeSpeaking = coolDownBeforeSpeakingSO.cooldownTime - 5;
         dialogues = new Dialogue[originalDialogues.Length];
         for (int i = 0; i < originalDialogues.Length; i++)
         {
@@ -94,7 +96,7 @@ public class LarryManager : ValidatedMonoBehaviour
 
     private void OnAquariumClean()
     {
-        if (canChangeState)
+        if (canChangeState && stateMachine.CurrentState != inHouseState)
             stateMachine.ChangeState(idleState);
     }
     
@@ -102,6 +104,7 @@ public class LarryManager : ValidatedMonoBehaviour
     {
         yield return new WaitForSeconds(20);
         canChangeState = true;
+        coolDownBeforeSpeaking = coolDownBeforeSpeakingSO.cooldownTime;
     }
     
     private void OnAquariumDirty()
@@ -118,7 +121,7 @@ public class LarryManager : ValidatedMonoBehaviour
     public void Speak()
     {
         timeSinceLastSpeak += Time.deltaTime;
-        if (timeSinceLastSpeak < coolDownBeforeSpeaking.cooldownTime)
+        if (timeSinceLastSpeak < coolDownBeforeSpeaking)
         {
             return;
         }
