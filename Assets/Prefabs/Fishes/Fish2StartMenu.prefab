@@ -5358,9 +5358,12 @@ MonoBehaviour:
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
   currentReproductionRate: 0
+  checkSexInterval: {fileID: 11400000, guid: cc59cc7632b5a4d6c9fc3a7749132017, type: 2}
+  checkFishionInterval: {fileID: 11400000, guid: d9714a1b94b0e4b5cb3195d38e0fa09b, type: 2}
   _flockAgent: {fileID: 6065115914862394921}
   onFilthCleanListener: {fileID: 4831644605320314520}
   onFilthInvasionListener: {fileID: 946810203084249703}
+  fishCustomizeManager: {fileID: 286808015066752546}
 --- !u!114 &4831644605320314520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5410,6 +5413,8 @@ MonoBehaviour:
   finRenderer: {fileID: 1788989915477415126}
   eyeRenderer: {fileID: 4950338070067366010}
   patternRenderer: {fileID: 208090277425096384}
+  accessoryRenderer: {fileID: 0}
+  accessorySprites: []
 --- !u!1 &7995379668983099222
 GameObject:
   m_ObjectHideFlags: 0

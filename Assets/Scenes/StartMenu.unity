@@ -2986,6 +2986,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &298111733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 298111734}
+  - component: {fileID: 298111735}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &298111734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298111733}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1887061484}
+  m_Father: {fileID: 926359152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &298111735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298111733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7fcfb5c23f22499eab4c8bacb40c2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &300910013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,6 +3546,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e421f48cdcfd44edabdf27f5138ae342, type: 3}
+--- !u!114 &362327038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1774616355895894923, guid: e421f48cdcfd44edabdf27f5138ae342, type: 3}
+  m_PrefabInstance: {fileID: 362327037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db23c9df0add4498096b343c80a73176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &362327039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9027727577678697709, guid: e421f48cdcfd44edabdf27f5138ae342, type: 3}
+  m_PrefabInstance: {fileID: 362327037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db23c9df0add4498096b343c80a73176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &381383847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7874,6 +7941,7 @@ GameObject:
   - component: {fileID: 920017772}
   - component: {fileID: 920017776}
   - component: {fileID: 920017777}
+  - component: {fileID: 920017778}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8023,6 +8091,19 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!114 &920017778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920017771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &926359151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8076,9 +8157,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      propertyPath: maxFish
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e47ff9305514410c87cf15995bdd419, type: 2}
+    - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      propertyPath: flockOne
+      value: 
+      objectReference: {fileID: 362327039}
+    - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      propertyPath: flockTwo
+      value: 
+      objectReference: {fileID: 362327038}
+    - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1768000380}
+    - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      propertyPath: onFishDeath
+      value: 
+      objectReference: {fileID: 926359154}
+    - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      propertyPath: startFishAmount
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e2b975bc368b484580f0bc4550153d7, type: 2}
     - target: {fileID: 5402917307889945895, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
       propertyPath: fishList.Array.data[0]
       value: 
@@ -8097,9 +8198,42 @@ PrefabInstance:
     - {fileID: 4652629138832257181, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
     - {fileID: 8213228710510199254, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
     - {fileID: 2630587411589760088, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    - {fileID: 8606716907990002854, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5194685155368367105, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298111734}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8387352533337229571, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 926359154}
   m_SourcePrefab: {fileID: 100100000, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+--- !u!4 &926359152 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5194685155368367105, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+  m_PrefabInstance: {fileID: 926359151}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &926359153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8387352533337229571, guid: 9d9e9b09cdfdf4470a7439594da19e06, type: 3}
+  m_PrefabInstance: {fileID: 926359151}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &926359154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926359153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2968debdd5a4a38acb6cca3f22d20b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &929593938
 GameObject:
   m_ObjectHideFlags: 0
@@ -15034,6 +15168,134 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1887061483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1887061484}
+  - component: {fileID: 1887061485}
+  m_Layer: 0
+  m_Name: FmodEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887061484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887061483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 298111734}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1887061485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887061483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfca255fdbed4a4785420a147c5dc4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxShake:
+    Guid:
+      Data1: -1375776462
+      Data2: 1219360107
+      Data3: -2050339167
+      Data4: 1380160749
+    Path: event:/ShakingSound
+  waterDrop:
+    Guid:
+      Data1: -416860137
+      Data2: 1289916301
+      Data3: -774864730
+      Data4: 648688602
+    Path: event:/waterDrops
+  bubblePop:
+    Guid:
+      Data1: 1349566862
+      Data2: 1131624593
+      Data3: 1193809069
+      Data4: -636830817
+    Path: event:/bubblePop
+  waterAmbiance:
+    Guid:
+      Data1: -1800825150
+      Data2: 1137565082
+      Data3: 201127843
+      Data4: 1721839484
+    Path: event:/waterAmbiance
+  mainMusic:
+    Guid:
+      Data1: -973619176
+      Data2: 1145619124
+      Data3: -1018080621
+      Data4: -1139822536
+    Path: event:/MainMusic
+  shortShakeSound:
+    Guid:
+      Data1: 562498060
+      Data2: 1333757302
+      Data3: 1735466897
+      Data4: -1939592524
+    Path: event:/shortShakingSound
+  pillPotClose:
+    Guid:
+      Data1: 1576108260
+      Data2: 1312835637
+      Data3: 895659142
+      Data4: -800839524
+    Path: event:/pillPottOpeningT
+  pillPotOpen:
+    Guid:
+      Data1: 361630350
+      Data2: 1320005561
+      Data3: 31094202
+      Data4: 1994259922
+    Path: event:/pillPottOpening
+  effervecense:
+    Guid:
+      Data1: 2042697284
+      Data2: 1263544027
+      Data3: -779110487
+      Data4: 472767473
+    Path: event:/effervescence
+  aspiNoise:
+    Guid:
+      Data1: 177940157
+      Data2: 1215147667
+      Data3: 1415853240
+      Data4: 1009572896
+    Path: event:/aspirateur
+  chestSound:
+    Guid:
+      Data1: -1419237787
+      Data2: 1083277440
+      Data3: 131856546
+      Data4: -400081193
+    Path: event:/chest
+  hoverUISound:
+    Guid:
+      Data1: -698831059
+      Data2: 1212933029
+      Data3: -1597970803
+      Data4: 1010474564
+    Path: event:/hoverUISound
 --- !u!1 &1901465199
 GameObject:
   m_ObjectHideFlags: 0
@@ -16023,6 +16285,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberOfFish: 50
   canvas: {fileID: 2064481526}
+  elementsToMove:
+  - {fileID: 40310889}
+  - {fileID: 1474709670}
+  - {fileID: 1721475672}
+  - {fileID: 1716535077}
   target: {fileID: 22721744}
   fadeImage: {fileID: 745396845}
 --- !u!4 &2059004072
