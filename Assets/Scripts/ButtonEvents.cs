@@ -21,6 +21,7 @@ public class ButtonEvents : MonoBehaviour
     {
         image = GetComponent<Image>();
         startColor = image.color;
+        startColor.a = 1;
         rectTransform = GetComponent<RectTransform>();
 
     }
@@ -47,6 +48,14 @@ public class ButtonEvents : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+     public void Credits()
+    {
+        image.color = hoverColor;
+
+        rectTransform.DOMove(targetRectTransform.position, speed);
+        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.hoverUISound, startRectTransform.position);
     }
     
 }
