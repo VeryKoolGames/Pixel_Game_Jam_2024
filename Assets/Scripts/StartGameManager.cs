@@ -15,10 +15,11 @@ public class StartGameManager : MonoBehaviour
 
     public void OnGameStart()
     {
-        canvas.DOMove(targetTransform.position, 2f).SetEase(Ease.InOutQuad).OnComplete((() =>
-        {
-            FishCreator.Instance.OnGameSceneStart();
+        // canvas.DOMove(targetTransform.position, 2f).SetEase(Ease.InOutQuad).OnComplete((() =>
+        // {
+            
+        // }));;
+        FishCreator.Instance.OnGameSceneStart();
             gameObject.SetActive(false);
-        }));;
     }
 }

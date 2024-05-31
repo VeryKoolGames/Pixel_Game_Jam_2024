@@ -71,6 +71,7 @@ public class DragNDropVacuum : ValidatedMonoBehaviour
         Rigidbody2D thisRb = gameObject.GetComponent<Rigidbody2D>();
         Vector2 thisDir = stillPointHead.transform.position - transform.position;
         thisRb.velocity = thisDir * 10;
+        transform.rotation = Quaternion.Euler(0,0,0);
     }
 
     void OnMouseDown()

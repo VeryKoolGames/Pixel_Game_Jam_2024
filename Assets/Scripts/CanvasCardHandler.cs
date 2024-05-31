@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using KBCore.Refs;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField, Self] private RectTransform rectTransform;
     [SerializeField] private RectTransform targetTransform;
+    [SerializeField] private Sprite outlinedIndex;
+    [SerializeField] private Sprite Index;
     private Vector3 baseTransform;
     private Vector3 baseScale;
     private Vector3 targetScale;
@@ -30,7 +34,8 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
     {
         isZoomed = false;
         rectTransform.DOMove(baseTransform, .7f);
-        rectTransform.DOScale(baseScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(false));
+        // rectTransform.DOScale(baseScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(false));
+        gameObject.GetComponent<UnityEngine.UI.Image>().sprite = Index;
     }
     
     void Update()
@@ -67,7 +72,8 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
         if (!isPointerOver && !isZoomed)
         {
             isPointerOver = true;
-            rectTransform.DOMoveY(baseTransform.y - 40f, .2f);
+            rectTransform.DOMoveY(baseTransform.y - 80f, .2f);
+            gameObject.GetComponent<UnityEngine.UI.Image>().sprite = outlinedIndex;
         }
     }
 
@@ -77,6 +83,7 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
         {
             isPointerOver = false;
             rectTransform.DOMove(baseTransform, .2f);
+            gameObject.GetComponent<UnityEngine.UI.Image>().sprite = Index;
         }
     }
 
@@ -84,7 +91,7 @@ public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, I
     {
         isZoomed = true;
         rectTransform.DOMove(targetTransform.transform.position, .7f);
-        rectTransform.DOScale(targetScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(true));
+        // rectTransform.DOScale(targetScale, .7f).OnComplete(() => onCardCanvasZoom.Raise(true));
     }
     
     public void PlaySoundOnButtonClick()
