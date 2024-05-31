@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class StartMenuManager : MonoBehaviour
 {
     [SerializeField] private int NumberOfFish;
@@ -21,7 +22,7 @@ public class StartMenuManager : MonoBehaviour
     {
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.waterAmbiance, Vector3.zero);
         AudioManager.Instance.PlayOneShot(FmodEvents.Instance.mainMusic, Vector3.zero);
-        FishCreator.Instance.OnStartSceneStart();
+        MainMenuFishCreator.Instance.OnStartSceneStart();
     }
 
     public void OnGameStart()
