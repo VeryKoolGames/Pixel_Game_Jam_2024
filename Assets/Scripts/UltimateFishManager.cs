@@ -19,29 +19,30 @@ public class UltimateFishManager : MonoBehaviour
     [SerializeField] private GameObject buttonIndexCanvas;
 
     [SerializeField] private GameObject canvas;
+    private RectTransform canvasTrasform;
 
     [SerializeField] private GameObject endingCanvas;
     Tweener moveTween;
     // Start is called before the first frame update
     void Start()
     {
-        moveTween = transform.DOLocalMoveY(.001f, .5f).SetLoops(-1, LoopType.Yoyo);
+        canvasTrasform = canvas.GetComponent<RectTransform>();
+        moveTween = transform.DOLocalMoveY(.0001f, 1f).SetLoops(-1, LoopType.Yoyo);
         ReadDialogue();
-    }
-    
-    private void MoveUpAndDown()
-    {
-        transform.DOLocalMoveY(.2f, .5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void ReadDialogue()
     {
         transform.localScale = Vector2.zero;
+        canvasTrasform.localScale = Vector2.zero;
         var sequence = DOTween.Sequence();
         sequence.Append(transform.DOScale(1, 1f));
-        sequence.AppendInterval(1f);
+        sequence.AppendInterval(2f);
+        sequence.Append(canvasTrasform.DOScale(1, 1f));
+        sequence.AppendInterval(2f);
         sequence.Append(dialogText.DOFade(0, 1f).OnComplete((() => dialogText.text = dialog)));
         sequence.Append(dialogText.DOFade(1, 1f));
+        sequence.AppendInterval(2f);
         sequence.Append(canvas.transform.DOScale(0, 1f)).OnComplete((() =>
         {
             canvas.SetActive(false);
@@ -53,7 +54,7 @@ public class UltimateFishManager : MonoBehaviour
     {
         moveTween.Kill();
         var sequence = DOTween.Sequence();
-        sequence.Append(transform.DOMove(location.position, 1f));
+        sequence.Append(transform.DOMove(location.position, 3f));
         sequence.AppendInterval(.2f);
         sequence.Append(transform.DOScale(0, 1f));
         sequence.Append(headSprite.DOFade(0, 1f).OnComplete((() => headSprite.sprite = bothHeadSprite)));
