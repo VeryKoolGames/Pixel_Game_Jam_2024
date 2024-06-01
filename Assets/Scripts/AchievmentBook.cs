@@ -56,16 +56,29 @@ public class AchievmentBook : MonoBehaviour
     public void UnlockRewardOne()
     {
         onRewardUnlocked.Raise(0);
+        CheckRewardUnlocked();
     }
     
     public void UnlockRewardTwo()
     {
         onRewardUnlocked.Raise(1);
+        CheckRewardUnlocked();
+
     }
     
     public void UnlockRewardThree()
     {
         onRewardUnlocked.Raise(2);
+        CheckRewardUnlocked();
+    }
+    
+    private void CheckRewardUnlocked()
+    {
+        rewardUnlockedCounter++;
+        if (rewardUnlockedCounter == 3)
+        {
+            FishCreator.Instance.SetSpawnUltimateFish(true);
+        }
     }
 
     private void SetFishCardOnUi(Fish fish)
@@ -82,11 +95,6 @@ public class AchievmentBook : MonoBehaviour
                 if (amountUnlockedPerLines[fish.FishRarety] == 4)
                 {
                     rewardButtons[fish.FishRarety].SetActive(true);
-                    rewardUnlockedCounter++;
-                    if (rewardUnlockedCounter == 3)
-                    {
-                        FishCreator.Instance.SetSpawnUltimateFish(true);
-                    }
                 }
                 break;
             }

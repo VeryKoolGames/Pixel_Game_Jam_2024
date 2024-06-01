@@ -20,8 +20,10 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private GameObject[] clickCreditsEnter;
     private void Start()
     {
-        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.waterAmbiance, Vector3.zero);
-        AudioManager.Instance.PlayOneShot(FmodEvents.Instance.mainMusic, Vector3.zero);
+        var waterSounds = AudioManager.Instance.CreateInstance(FmodEvents.Instance.waterAmbiance);
+        var mainMusic = AudioManager.Instance.CreateInstance(FmodEvents.Instance.mainMusic);
+        waterSounds.start();
+        mainMusic.start();
         MainMenuFishCreator.Instance.OnStartSceneStart();
     }
 
@@ -89,10 +91,12 @@ public class StartMenuManager : MonoBehaviour
     {
         var sequence = DOTween.Sequence();
         float delay = 0f;
+        bool isFirst = true;
 
         foreach (var elem in clickCreditsEnter)
         {
             elem.SetActive(true);
+            Vector3 basePos = elem.GetComponent<RectTransform>().position;
             Vector3 targetPos = elem.GetComponent<RectTransform>().position;
             targetPos.x += 60;
             Image thisButton = elem.GetComponent<Image>();
@@ -100,6 +104,9 @@ public class StartMenuManager : MonoBehaviour
 
             sequence.Insert(delay, elem.GetComponent<RectTransform>().DOMove(targetPos, 0.2f));
             sequence.Insert(delay, elem.GetComponent<Image>().DOFade(0, 0.2f));
+            if (!isFirst)
+                sequence.Append(elem.GetComponent<RectTransform>().DOMove(basePos, 0.1f));
+            isFirst = false;
 
             delay += 0.1f;
         }

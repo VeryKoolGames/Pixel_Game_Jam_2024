@@ -28,6 +28,12 @@ public class EndCanvasManager : MonoBehaviour
         SetDataOnCanvas();
         canvas.DOScale(1, 1f);
     }
+    
+    public void openCanvas()
+    {
+        canvas.transform.localScale = Vector2.zero;
+        canvas.DOScale(1, .1f);
+    }
 
     public void closeCanvas()
     {

@@ -56,7 +56,7 @@ namespace DefaultNamespace
         {
             for (int i = 0; i < startFishAmount.counter; i++)
             {
-                CreateFish(0);
+                CreateFish(Random.Range(0, 3));
                 RandomizeSpawnPoint();
             }
         }

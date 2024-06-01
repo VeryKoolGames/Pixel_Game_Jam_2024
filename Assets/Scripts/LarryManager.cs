@@ -59,6 +59,12 @@ public class LarryManager : ValidatedMonoBehaviour
         onWaterColorClean.Response.RemoveListener(OnAquariumClean);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, .2f);
+    }
+
     private void Start()
     {
         coolDownBeforeSpeaking = coolDownBeforeSpeakingSO.cooldownTime - 5;
