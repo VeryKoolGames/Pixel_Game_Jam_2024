@@ -13,12 +13,14 @@ public class CanvasFishCardHandler : ValidatedMonoBehaviour, IPointerEnterHandle
     private Vector3 baseTransform;
     private bool isPointerOver = false; // Flag to track pointer state
     private Tween tween;
+    private RectTransform baseFishTransform;
 
     private bool isZoomed;
     // Start is called before the first frame update
     void Start()
     {
         onCardCanvasZoom.Response.AddListener(SetIsZoomed);
+        baseFishTransform = cardTransform;
     }
 
     private void SetIsZoomed(bool isZoomed)
@@ -30,14 +32,15 @@ public class CanvasFishCardHandler : ValidatedMonoBehaviour, IPointerEnterHandle
     {
         if (isPointerOver && isZoomed)
         {
-            isPointerOver = false;
-            cardTransform.DOMove(baseTransform, .2f);
             tween?.Kill();
+            isPointerOver = false;
+            cardTransform.transform.position = baseTransform;
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log(isPointerOver + " " + isZoomed);
         if (!isPointerOver && isZoomed)
         {
             newPopUp.gameObject.SetActive(false);

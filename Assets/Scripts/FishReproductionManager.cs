@@ -12,7 +12,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     [SerializeField] private Counter maxFishHunger;
     [SerializeField] private Counter foodBeforeStarving;
     [SerializeField] private float fishLifeSpan;
-    [SerializeField] private float detectionRadius = 5f;
+    private float detectionRadius = .4f;
     public OnFishDeath onFishDeath;
     public GameObject loveParticle;
     private float currentLifeSpan;
@@ -31,6 +31,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     private Flock chosenFlock;
     public Fish fish;
     private int sexCount = 0;
+    private bool hasAccessories = false;
     
     // STATES
     public StateMachine stateMachine;
@@ -191,7 +192,7 @@ public class FishReproductionManager : ValidatedMonoBehaviour
     public void CheckForFishion()
     {
         checkFishionTimer += Time.deltaTime;
-        if (checkFishionTimer >= checkFishionInterval.cooldownTime)
+        if (checkFishionTimer >= checkFishionInterval.cooldownTime && !hasAccessories)
         {
             checkFishionTimer = 0f;
             if (Random.Range(0, 100) < 50)
@@ -212,12 +213,14 @@ public class FishReproductionManager : ValidatedMonoBehaviour
                 chosenFlock.RemoveAgentWithoutDestroy(_flockAgent);
                 var sequence = DOTween.Sequence();
                 sequence.Append(transform.DOMove(hit.gameObject.transform.position, 2f));
-                sequence.Append(transform.DOScale(0, 2f));
+                sequence.Append(transform.DOScale(0, 2f).OnComplete((() => fishCustomizeManager.ModifyFishAccessory())));
+                sequence.AppendInterval(1f);
                 sequence.Append(transform.DOScale(1, 2f));
+                sequence.AppendInterval(1f);
                 sequence.OnComplete(() =>
                 {
-                    fishCustomizeManager.ModifyFishAccessory();
                     chosenFlock.AddAgentFromFish(_flockAgent);
+                    hasAccessories = true;
                 });
             }
         }

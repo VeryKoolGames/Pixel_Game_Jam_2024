@@ -524,7 +524,6 @@ MonoBehaviour:
   maxFishHunger: {fileID: 11400000, guid: 4104cd24daf4a46e6a2c33daeb89c099, type: 2}
   foodBeforeStarving: {fileID: 11400000, guid: 4b91286da78ee4fbeb8017f60789d05c, type: 2}
   fishLifeSpan: 50
-  detectionRadius: 10
   onFishDeath: {fileID: 11400000, guid: 6f7da7e7dd69e4ebfaeb595888c44d04, type: 2}
   loveParticle: {fileID: 4850823191576471604}
   currentReproductionRate: 0
