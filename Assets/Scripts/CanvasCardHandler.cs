@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using KBCore.Refs;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class CanvasCardHandler : ValidatedMonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
